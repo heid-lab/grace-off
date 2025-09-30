@@ -6,8 +6,8 @@
 </p>
 
 
-| Model | Name   | Content                                           | # Structures           |
-|:-----:|:-------|:--------------------------------------------------|------------------------|
-| A     | a_wpS  | water + pubSolv                                   | 14,934                 |
-| B     | b_off  | SPICE (w/o ions, charged, only 10 elements)       | —                      |
-| C     | c_all  | all                                               | 1,998,126 / 2,008,126 |
+| Model | Name   | Content                                           | # elements | # Structures           |
+|:-----:|:-------|:--------------------------------------------------|------------|------------------------|
+| A     | a_wpS  | water + pubSolv                                   |            | 14,934                 |
+| B     | b_off  | SPICE (w/o ions, charged, only 10 elements)       |    10      | —                      |
+| C     | c_all  | all                                               |    17      |1,998,126 / 2,008,126 |
