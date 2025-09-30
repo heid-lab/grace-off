@@ -1,0 +1,593 @@
+BondLength:
+  __cls__: tensorpotential.instructions.compute.BondLength
+  instruction_with_bonds: null
+  name: BondLength
+ScaledBondVector:
+  __cls__: tensorpotential.instructions.compute.ScaledBondVector
+  name: ScaledBondVector
+  bond_length:
+    _instruction_: true
+    name: BondLength
+RadialBasis:
+  __cls__: tensorpotential.instructions.compute.RadialBasis
+  name: RadialBasis
+  bonds:
+    _instruction_: true
+    name: BondLength
+  basis_type: Cheb
+  nfunc: 8
+  p: 5
+  normalized: false
+  rcut: 6.0
+R:
+  __cls__: tensorpotential.instructions.compute.MLPRadialFunction
+  basis:
+    _instruction_: true
+    name: RadialBasis
+  input_shape: null
+  hidden_layers:
+  - 64
+  - 64
+  norm: false
+  name: R
+  activation: tanh
+  no_weight_decay: true
+  chemical_embedding_i: null
+  chemical_embedding_j: null
+  n_rad_max: 32
+  lmax: 4
+Y:
+  __cls__: tensorpotential.instructions.compute.SphericalHarmonic
+  vhat:
+    _instruction_: true
+    name: ScaledBondVector
+  lmax: 4
+  name: Y
+Z:
+  __cls__: tensorpotential.instructions.compute.ScalarChemicalEmbedding
+  is_trainable: true
+  init: random
+  element_map:
+    Br: 0
+    C: 1
+    Cl: 2
+    F: 3
+    H: 4
+    I: 5
+    N: 6
+    O: 7
+    P: 8
+    S: 9
+  embedding_size: 128
+  name: Z
+A:
+  __cls__: tensorpotential.instructions.compute.SingleParticleBasisFunctionScalarInd
+  indicator:
+    _instruction_: true
+    name: Z
+  indicator_l_depend: false
+  sum_neighbors: true
+  avg_n_neigh: 36.02227160927201
+  radial:
+    _instruction_: true
+    name: R
+  angular:
+    _instruction_: true
+    name: Y
+  name: A
+A1:
+  __cls__: tensorpotential.instructions.compute.FCRight2Left
+  left_coefs: true
+  is_central_atom_type_dependent: null
+  number_of_atom_types: null
+  init_vars: random
+  norm_out: true
+  left:
+    _instruction_: true
+    name: A
+  right:
+    _instruction_: true
+    name: A
+  name: A1
+  n_out: 32
+AA:
+  __cls__: tensorpotential.instructions.compute.ProductFunction
+  is_left_right_equal: null
+  lmax_left: null
+  lmax_right: null
+  lmax_hist: null
+  lmax_hist_left: null
+  lmax_hist_right: null
+  history_drop_list: null
+  max_sum_l: null
+  keep_parity:
+  - - 0
+    - 1
+  - - 1
+    - -1
+  - - 2
+    - 1
+  - - 3
+    - -1
+  - - 4
+    - 1
+  - - 5
+    - -1
+  - - 6
+    - 1
+  normalize: true
+  left:
+    _instruction_: true
+    name: A1
+  right:
+    _instruction_: true
+    name: A1
+  name: AA
+  lmax: 4
+  Lmax: 4
+AA1:
+  __cls__: tensorpotential.instructions.compute.FCRight2Left
+  left_coefs: true
+  is_central_atom_type_dependent: null
+  number_of_atom_types: null
+  init_vars: random
+  norm_out: true
+  left:
+    _instruction_: true
+    name: AA
+  right:
+    _instruction_: true
+    name: A
+  name: AA1
+  n_out: 32
+AAA:
+  __cls__: tensorpotential.instructions.compute.ProductFunction
+  is_left_right_equal: null
+  lmax_left: null
+  lmax_right: null
+  lmax_hist: null
+  lmax_hist_left: null
+  lmax_hist_right: null
+  history_drop_list: null
+  max_sum_l: null
+  keep_parity:
+  - - 0
+    - 1
+  - - 1
+    - -1
+  - - 2
+    - 1
+  - - 3
+    - -1
+  - - 4
+    - 1
+  - - 5
+    - -1
+  - - 6
+    - 1
+  normalize: true
+  left:
+    _instruction_: true
+    name: AA1
+  right:
+    _instruction_: true
+    name: A
+  name: AAA
+  lmax: 4
+  Lmax: 1
+AA2:
+  __cls__: tensorpotential.instructions.compute.FCRight2Left
+  left_coefs: true
+  is_central_atom_type_dependent: null
+  number_of_atom_types: null
+  init_vars: random
+  norm_out: true
+  left:
+    _instruction_: true
+    name: AA
+  right:
+    _instruction_: true
+    name: A
+  name: AA2
+  n_out: 32
+AAAA:
+  __cls__: tensorpotential.instructions.compute.ProductFunction
+  is_left_right_equal: null
+  lmax_left: null
+  lmax_right: null
+  lmax_hist: null
+  lmax_hist_left: null
+  lmax_hist_right: null
+  history_drop_list: null
+  max_sum_l: null
+  keep_parity:
+  - - 0
+    - 1
+  - - 1
+    - -1
+  - - 2
+    - 1
+  - - 3
+    - -1
+  - - 4
+    - 1
+  - - 5
+    - -1
+  - - 6
+    - 1
+  normalize: true
+  left:
+    _instruction_: true
+    name: AA2
+  right:
+    _instruction_: true
+    name: AA2
+  name: AAAA
+  lmax: 4
+  Lmax: 0
+I0:
+  __cls__: tensorpotential.instructions.compute.FunctionReduceN
+  out_norm: false
+  is_central_atom_type_dependent: true
+  number_of_atom_types: 10
+  init_vars: random
+  init_target_value: zeros
+  simplify: false
+  scale: 1.0
+  name: I0
+  instructions:
+  - _instruction_: true
+    name: A
+  - _instruction_: true
+    name: AA
+  - _instruction_: true
+    name: AAA
+  - _instruction_: true
+    name: AAAA
+  ls_max:
+  - 1
+  - 1
+  - 1
+  - 0
+  n_out: 16
+  allowed_l_p:
+  - - 0
+    - 1
+  - - 1
+    - -1
+I:
+  __cls__: tensorpotential.instructions.compute.FunctionReduceN
+  out_norm: false
+  is_central_atom_type_dependent: false
+  number_of_atom_types: null
+  init_vars: random
+  init_target_value: zeros
+  simplify: false
+  scale: 1.0
+  name: I
+  instructions:
+  - _instruction_: true
+    name: I0
+  ls_max:
+  - 1
+  n_out: 32
+  allowed_l_p:
+  - - 0
+    - 1
+  - - 1
+    - -1
+R1:
+  __cls__: tensorpotential.instructions.compute.MLPRadialFunction
+  basis:
+    _instruction_: true
+    name: RadialBasis
+  input_shape: null
+  hidden_layers:
+  - 64
+  - 64
+  norm: false
+  name: R1
+  activation: tanh
+  no_weight_decay: true
+  chemical_embedding_i: null
+  chemical_embedding_j: null
+  n_rad_max: 32
+  lmax: 4
+B0:
+  __cls__: tensorpotential.instructions.compute.SingleParticleBasisFunctionScalarInd
+  indicator:
+    _instruction_: true
+    name: Z
+  indicator_l_depend: false
+  sum_neighbors: true
+  avg_n_neigh: 36.02227160927201
+  radial:
+    _instruction_: true
+    name: R1
+  angular:
+    _instruction_: true
+    name: Y
+  name: B0
+YI:
+  __cls__: tensorpotential.instructions.compute.SingleParticleBasisFunctionEquivariantInd
+  radial:
+    _instruction_: true
+    name: R1
+  radial_basis: null
+  hidden_layers: null
+  keep_parity:
+  - - 0
+    - 1
+  - - 1
+    - -1
+  - - 2
+    - 1
+  - - 3
+    - -1
+  - - 4
+    - 1
+  - - 5
+    - -1
+  - - 6
+    - 1
+  history_drop_list: null
+  l_max_ind: null
+  max_sum_l: null
+  sum_neighbors: true
+  avg_n_neigh: 36.02227160927201
+  normalize: true
+  angular:
+    _instruction_: true
+    name: Y
+  indicator:
+    _instruction_: true
+    name: I
+  name: YI
+  lmax: 4
+  Lmax: 4
+B:
+  __cls__: tensorpotential.instructions.compute.FunctionReduceN
+  out_norm: false
+  is_central_atom_type_dependent: false
+  number_of_atom_types: null
+  init_vars: random
+  init_target_value: zeros
+  simplify: false
+  scale: 1.0
+  instructions:
+  - _instruction_: true
+    name: YI
+  - _instruction_: true
+    name: B0
+  name: B
+  ls_max: 4
+  n_out: 32
+  allowed_l_p:
+  - - 0
+    - 1
+  - - 1
+    - -1
+  - - 2
+    - 1
+  - - 3
+    - -1
+  - - 4
+    - 1
+  - - 5
+    - -1
+  - - 6
+    - 1
+B1:
+  __cls__: tensorpotential.instructions.compute.FCRight2Left
+  left_coefs: true
+  is_central_atom_type_dependent: false
+  number_of_atom_types: null
+  init_vars: random
+  norm_out: true
+  left:
+    _instruction_: true
+    name: B
+  right:
+    _instruction_: true
+    name: B
+  name: B1
+  n_out: 32
+BB:
+  __cls__: tensorpotential.instructions.compute.ProductFunction
+  is_left_right_equal: null
+  lmax_left: null
+  lmax_right: null
+  lmax_hist: null
+  lmax_hist_left: null
+  lmax_hist_right: null
+  history_drop_list: null
+  max_sum_l: null
+  keep_parity:
+  - - 0
+    - 1
+  - - 1
+    - -1
+  - - 2
+    - 1
+  - - 3
+    - -1
+  - - 4
+    - 1
+  - - 5
+    - -1
+  - - 6
+    - 1
+  normalize: true
+  left:
+    _instruction_: true
+    name: B1
+  right:
+    _instruction_: true
+    name: B1
+  name: BB
+  lmax: 4
+  Lmax: 4
+BB1:
+  __cls__: tensorpotential.instructions.compute.FCRight2Left
+  left_coefs: true
+  is_central_atom_type_dependent: false
+  number_of_atom_types: null
+  init_vars: random
+  norm_out: true
+  left:
+    _instruction_: true
+    name: BB
+  right:
+    _instruction_: true
+    name: B
+  name: BB1
+  n_out: 32
+BBB:
+  __cls__: tensorpotential.instructions.compute.ProductFunction
+  is_left_right_equal: null
+  lmax_left: null
+  lmax_right: null
+  lmax_hist: null
+  lmax_hist_left: null
+  lmax_hist_right: null
+  history_drop_list: null
+  max_sum_l: null
+  keep_parity:
+  - - 0
+    - 1
+  - - 1
+    - -1
+  - - 2
+    - 1
+  - - 3
+    - -1
+  - - 4
+    - 1
+  - - 5
+    - -1
+  - - 6
+    - 1
+  normalize: true
+  left:
+    _instruction_: true
+    name: BB1
+  right:
+    _instruction_: true
+    name: B
+  name: BBB
+  lmax: 4
+  Lmax: 0
+BB2:
+  __cls__: tensorpotential.instructions.compute.FCRight2Left
+  left_coefs: true
+  is_central_atom_type_dependent: false
+  number_of_atom_types: null
+  init_vars: random
+  norm_out: true
+  left:
+    _instruction_: true
+    name: BB
+  right:
+    _instruction_: true
+    name: B
+  name: BB2
+  n_out: 32
+BBBB:
+  __cls__: tensorpotential.instructions.compute.ProductFunction
+  is_left_right_equal: null
+  lmax_left: null
+  lmax_right: null
+  lmax_hist: null
+  lmax_hist_left: null
+  lmax_hist_right: null
+  history_drop_list: null
+  max_sum_l: null
+  keep_parity:
+  - - 0
+    - 1
+  - - 1
+    - -1
+  - - 2
+    - 1
+  - - 3
+    - -1
+  - - 4
+    - 1
+  - - 5
+    - -1
+  - - 6
+    - 1
+  normalize: true
+  left:
+    _instruction_: true
+    name: BB2
+  right:
+    _instruction_: true
+    name: BB2
+  name: BBBB
+  lmax: 4
+  Lmax: 0
+I_out:
+  __cls__: tensorpotential.instructions.compute.FunctionReduceN
+  out_norm: false
+  is_central_atom_type_dependent: true
+  number_of_atom_types: 10
+  init_vars: random
+  init_target_value: zeros
+  simplify: false
+  scale: 1.0
+  name: I_out
+  instructions:
+  - _instruction_: true
+    name: A
+  - _instruction_: true
+    name: AA
+  - _instruction_: true
+    name: AAA
+  - _instruction_: true
+    name: AAAA
+  - _instruction_: true
+    name: B
+  - _instruction_: true
+    name: BB
+  - _instruction_: true
+    name: BBB
+  - _instruction_: true
+    name: BBBB
+  ls_max: 0
+  n_out: 13
+  allowed_l_p:
+  - - 0
+    - 1
+atomic_energy:
+  __cls__: tensorpotential.instructions.output.CreateOutputTarget
+  initial_value: 0.0
+  l: 0
+  name: atomic_energy
+LinMLPOut2ScalarTarget:
+  __cls__: tensorpotential.instructions.output.LinMLPOut2ScalarTarget
+  hidden_layers:
+  - 64
+  name: LinMLPOut2ScalarTarget
+  n_out: 1
+  normalize: null
+  activation: null
+  l: 0
+  origin:
+  - _instruction_: true
+    name: I_out
+  target:
+    _instruction_: true
+    name: atomic_energy
+  full_origin_norm: false
+ConstantScaleShiftTarget:
+  __cls__: tensorpotential.instructions.output.ConstantScaleShiftTarget
+  scale: 1.2520287352091073
+  shift: 0
+  atomic_shift_map: null
+  chemical_embedding: null
+  name: ConstantScaleShiftTarget
+  l: 0
+  target:
+    _instruction_: true
+    name: atomic_energy

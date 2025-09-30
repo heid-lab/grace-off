@@ -1,0 +1,68 @@
+seed: 1
+cutoff: 6.0
+
+data:
+  filename: ../../data/a_wpS_train.pkl.gz
+  test_size: 0.05
+  reference_energy: 0
+  # reference_energy: {B: -24.671520535482145, Br: -2574.1167240829964, C: -37.87264507233593,Ca: -676.9528465198214, Cl: -460.1988762285739, F: -99.78611622985483, H: -0.4987605100487531, I: -297.76228914445625,K: -599.8025677513111,Li: -7.285254714046546, Mg: -199.2688420040449,  N: -54.62327513368922,Na: -162.11366478783253, O: -75.11317840410095, P: -341.3059197024934, S: -398.1599636677874, Si: -289.4131352299586}
+  # save_dataset: False
+  # stress_units: eV/A3 # eV/A3 (default) or GPa or kbar or -kbar
+
+
+potential:
+   # If elements not provided - determined automatically from data
+  preset: GRACE_2LAYER # LINEAR, FS, GRACE_1LAYER, GRACE_2LAYER
+
+  ## For custom model from model.py::custom_model
+  #  custom: model.custom_model
+
+  # keywords-arguments that will be passed to preset or custom function
+  kwargs: {lmax: 3, n_rad_max: 20, max_order: 3, n_mlp_dens: 10}
+
+  #shift: False # True/False
+  scale: True # False/True or float
+fit:
+  loss: {
+    energy: { weight: 1, type: huber , delta: 0.01 },
+    forces: { weight: 5, type: huber , delta: 0.01 },
+    
+    switch: { after_iter: 300, learning_rate: 0.001, energy: { weight: 5 }, forces: { weight: 2 }, }
+  }
+
+  
+
+  maxiter: 500 # Number of epochs / iterations
+
+  optimizer: Adam
+  opt_params: {
+            learning_rate: 0.01,
+            amsgrad: True,
+            use_ema: True,
+            ema_momentum: 0.99,
+            weight_decay: null,
+            clipvalue: 1.0,
+        }
+
+  # for learning-rate reduction
+  learning_rate_reduction: { patience: 5, factor: 0.98, min: 5.0e-4, stop_at_min: True, resume_lr: True, }
+
+  #  optimizer: L-BFGS-B
+  #  opt_params: { "maxcor": 100, "maxls": 20 }
+
+  ## needed for low-energy tier metrics and for "convex_hull"-based distance of energy-based weighting scheme
+  compute_convex_hull: False
+  batch_size: 32 # Important hyperparameter for Adam and irrelevant (but must be) for L-BFGS-B
+  test_batch_size: 64 # test batch size (optional)
+
+  jit_compile: True
+  eval_init_stats: False # to evaluate initial metrics
+
+  train_max_n_buckets: 10 # max number of buckets (group of batches of same shape) in train set
+  test_max_n_buckets: 5 # same for test
+
+  checkpoint_freq: 50 # frequency for **REGULAR** checkpoints.
+  # save_all_regular_checkpoints: True # to store ALL regular checkpoints
+  progressbar: True # show batch-evaluation progress bar
+  train_shuffle: True # shuffle train batches on every epoch
+
