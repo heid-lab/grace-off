@@ -1,2 +1,13 @@
-# grace-off
-Custom trained GRACE-OFFF models
+<p align="center">
+  <img width="128" height="128" alt="grace-off icon"
+       src="https://github.com/user-attachments/assets/8408bc39-d666-4682-9ed8-0996b057b9e4" />
+  <br/>
+  <sub><b>grace-off</b> — ML potentials for liquids</sub>
+</p>
+
+
+| Model | Name   | Content                                           | # Structures           |
+|:-----:|:-------|:--------------------------------------------------|------------------------|
+| A     | a_wpS  | water + pubSolv                                   | 14,934                 |
+| B     | b_off  | SPICE (w/o ions, charged, only 10 elements)       | —                      |
+| C     | c_all  | all                                               | 1,998,126 / 2,008,126 |
