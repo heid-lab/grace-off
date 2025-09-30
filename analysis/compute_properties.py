@@ -128,10 +128,10 @@ theory = "Experiment"
 print(f"{'Property':35} {'Model':10} {'Value':>10} {'Unit':>25}")
 print("-" * 85)
 print(f"{'Heat capacity':35} {theory:<10} {round(1.00, 2):>10} {str(unit.cal / unit.mole / unit.kelvin):>25}")
-print(f"{'Thermal expansion (*1e2)':35} {theory:<10} {round(0.03, 2):>10} {str(1 / unit.kelvin):>25}")
 print(f"{'Isothermal compressibility (*1e4)':35} {theory:<10} {round(0.45, 2):>10} {str(1 / unit.bar):>25}")
+print(f"{'Thermal expansion (*1e2)':35} {theory:<10} {round(0.03, 2):>10} {str(1 / unit.kelvin):>25}")
 # print(f"{'Heat of vaporization':35} {theory:<10} {round(hov.magnitude, 2):>10} {str(hov.units):>25}")
-print(f"{'Density':35} {theory:<10} {round(0.99, 2):>10} {str((unit.gram / unit.milliliter)):>25}")
+print(f"{'Density':35} {theory:<10} {round(0.997, 3):>10} {str((unit.gram / unit.milliliter)):>25}")
 print("-" * 85)
 
 
@@ -204,8 +204,8 @@ for model in models:
     print(f"{'Property':35} {'Model':10} {'Value':>10} {'Unit':>25}")
     print("-" * 85)
     print(f"{'Heat capacity':35} {theory:<10} {round(heat_capacity.magnitude, 2):>10} {str(heat_capacity.units):>25}")
-    print(f"{'Thermal expansion (*1e2)':35} {theory:<10} {round(thermal_expansion.magnitude*1e2, 2):>10} {str(thermal_expansion.units):>25}")
     print(f"{'Isothermal compressibility (*1e4)':35} {theory:<10} {round(iso_comp.magnitude*1e4, 2):>10} {str(iso_comp.units):>25}")
+    print(f"{'Thermal expansion (*1e2)':35} {theory:<10} {round(thermal_expansion.magnitude*1e2, 2):>10} {str(thermal_expansion.units):>25}")
     # print(f"{'Heat of vaporization':35} {theory:<10} {round(hov.magnitude, 2):>10} {str(hov.units):>25}")
     print(f"{'Density':35} {theory:<10} {round(density, 2):>10} {str((unit.gram / unit.milliliter)):>25}")
     print("-" * 85)
