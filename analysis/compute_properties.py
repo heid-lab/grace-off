@@ -146,7 +146,7 @@ models = ['2l_a_wpS_small', '1l_a_wpS_small']
 
 for model in models:
     liquid = pd.read_csv(f'../data/traj/{model}/wat_300.log', sep="\s+")
-    vol_data = pd.read_csv("../data/traj/2l_a_wpS_medium/wat_300_density.csv")
+    vol_data = pd.read_csv(f"../data/traj/{model}/wat_300_density.csv")
     density = vol_data['density_g_cm3'].to_numpy().mean()
     box_count = 572
     molar_mass = 18.015 * unit.gram / unit.mole
