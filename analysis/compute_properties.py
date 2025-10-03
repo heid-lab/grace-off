@@ -142,12 +142,17 @@ print("-" * 85)
 
 skip_size = 0.1  # skip the first 10% of the trajectory
 
-models = ['2l_a_wpS_small', '1l_a_wpS_small']
+models = ['2l_a_wpS_small', '1l_a_wpS_small', 'mace']
 
 for model in models:
-    liquid = pd.read_csv(f'../data/traj/{model}/wat_300.log', sep="\s+")
-    vol_data = pd.read_csv(f"../data/traj/{model}/wat_300_density.csv")
-    density = vol_data['density_g_cm3'].to_numpy().mean()
+    if model == "mace":
+        liquid = pd.read_csv(f'../data/mace/traj_wat/wat_300.log', sep="\s+")
+        vol_data = pd.read_csv(f"../data/mace/traj_wat/wat300_density.csv")
+        density = vol_data['density_g_cm3'].to_numpy().mean()
+    else:
+        liquid = pd.read_csv(f'../data/traj_wat/{model}/wat_300.log', sep="\s+")
+        vol_data = pd.read_csv(f"../data/traj_wat/{model}/wat_300_density.csv")
+        density = vol_data['density_g_cm3'].to_numpy().mean()
     box_count = 572
     molar_mass = 18.015 * unit.gram / unit.mole
 
