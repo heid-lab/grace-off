@@ -96,7 +96,7 @@ def log_density_csv():
     V = at.get_volume()
     rho = AMU_TO_G__A3_TO_CM3 * mass_amu / V
     t_ps = dyn.get_time() * 1e-3
-    dens_csv.write(f"{t_ps:.3f},{V:.3f},{rho:.5f}\n")
+    dens_csv.write(f"{t_ps:.4f},{V:.3f},{rho:.5f}\n")
 
 dyn.attach(log_density_csv, interval=log_interval)
 
