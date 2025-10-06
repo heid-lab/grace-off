@@ -1,0 +1,9 @@
+REMARK  THIS MINI CHARMM SCRIPT WRITES A PSF AND CRD FILE FOR A SINGLE WATER MOLECULE 
+REMARK  GEOMETRICAL ARRANGEMENT FOR OPTIMIZED GEOMETRY                                
+REMARK  ANNA PICHA, UNIVERSITY OF VIENNA, JULY 2024                                   
+REMARK   DATE:     7/ 3/24     15:26:35      CREATED BY USER: anna                    
+ATOM      1  OH2 TIP3    1       0.000  -0.000   0.000  1.00  0.00      WAT1
+ATOM      2  H1  TIP3    1       0.000   0.957  -0.000  1.00  0.00      WAT1
+ATOM      3  H2  TIP3    1       0.000  -0.240  -0.927  1.00  0.00      WAT1
+TER       4      TIP3     1
+END
