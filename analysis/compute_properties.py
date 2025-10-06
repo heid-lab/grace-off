@@ -138,7 +138,7 @@ print("-" * 85)
 
 ############## COMPUTE PROPERTIES FROM WATER DATA #############################
 
-
+eV_to_kjmol = 1.602176634e-19 * 6.02214076e23 / 1000
 
 
 skip_size = 0.1  # skip the first 10% of the trajectory
@@ -176,12 +176,14 @@ for model in models:
     vol = vol_data['volume_A3'].to_numpy()*10**-3
 
 
-    k_B = 8.617333e-5  # Boltzmann constant in eV/K
-    beta = 1.0 / (k_B * temp.mean())  # beta in eV^-1
-    total_energy_kj_mol = en_tot * beta
-    potential_energy_kj_mol = en_pot * beta
+    # k_B = 8.617333e-5  # Boltzmann constant in eV/K
+    # beta = 1.0 / (k_B * temp.mean())  # beta in eV^-1
+    # total_energy_kj_mol = en_tot * beta
+    # potential_energy_kj_mol = en_pot * beta
+    total_energy_kj_mol = en_tot * eV_to_kjmol
+    potential_energy_kj_mol = en_pot * eV_to_kjmol 
     # if model != "mace":
-    gas_kj_mol = gas * beta
+    gas_kj_mol = gas * eV_to_kjmol # * beta
     skip_part_gas = int(round(gas_kj_mol.size * skip_size, 0))
     gas_cut = gas_kj_mol[skip_part_gas-1:-1]
 
