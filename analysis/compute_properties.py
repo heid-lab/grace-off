@@ -104,7 +104,7 @@ def calc_isothermal_compressibility(
 def calc_heat_of_vaporization(
     pot_energy: NDArray[np.float64],
     pot_energy_mono: NDArray[np.float64],
-    temp_traj: NDArray[np.float64],
+    temp: float,
     box_count: int,
     printing: bool
 ) -> Quantity:
@@ -116,8 +116,9 @@ def calc_heat_of_vaporization(
     """
     pot_mean = pot_energy.mean() * unit.kilojoule / unit.mole / box_count
     pot_mono_mean = pot_energy_mono.mean() * unit.kilojoule / unit.mole
-    temp_mean = temp_traj.mean() * unit.kelvin
-    val = pot_mono_mean - pot_mean + CONSTANTS.GAS_CONSTANT * temp_mean
+    # temp_mean = temp_traj.mean() * unit.kelvin
+    T = temp * unit.kelvin
+    val = pot_mono_mean - pot_mean + CONSTANTS.GAS_CONSTANT * T
     if printing:
         print("heat of vaporozation: ", val)
     return val
@@ -130,7 +131,7 @@ print("-" * 85)
 print(f"{'Heat capacity':35} {theory:<10} {round(1.00, 2):>10} {str(unit.cal / unit.mole / unit.kelvin):>25}")
 print(f"{'Isothermal compressibility (*1e4)':35} {theory:<10} {round(0.45, 2):>10} {str(1 / unit.bar):>25}")
 print(f"{'Thermal expansion (*1e2)':35} {theory:<10} {round(0.03, 2):>10} {str(1 / unit.kelvin):>25}")
-# print(f"{'Heat of vaporization':35} {theory:<10} {round(hov.magnitude, 2):>10} {str(hov.units):>25}")
+print(f"{'Heat of vaporization':35} {theory:<10} {round(43.99, 2):>10} {str(unit.kilojoule / unit.mole):>25}")
 print(f"{'Density':35} {theory:<10} {round(0.997, 3):>10} {str((unit.gram / unit.milliliter)):>25}")
 print("-" * 85)
 
@@ -153,28 +154,39 @@ for model in models:
         liquid = pd.read_csv(f'../data/traj_wat/{model}/wat_300.log', sep="\s+")
         vol_data = pd.read_csv(f"../data/traj_wat/{model}/wat_300_density.csv")
         density = vol_data['density_g_cm3'].to_numpy().mean()
+        gas_data = pd.read_csv(f'../data/traj_wat/{model}/gas_wat_300.log', sep="\s+")
+        gas = gas_data["Epot[eV]"].to_numpy()
     box_count = 572
     molar_mass = 18.015 * unit.gram / unit.mole
 
 
 
+
     print(f"\nCOMPUTING CONDENSED PHASE PROPERTIES for {model}\n")
 
-    # gas = get_gas_traj(theory)
+    
 
-    # skip_part_gas = int(round(gas["Potential Energy (kJ/mole)"].count()*skip_size,0))
-    # gas_cut = gas[skip_part_gas-1:-1] # skip the first 10%
+    
 
     en_tot = liquid["Etot[eV]"].to_numpy()
+    en_pot = liquid["Epot[eV]"].to_numpy()
     temp = liquid['T[K]'].to_numpy()
     vol = vol_data['volume_A3'].to_numpy()*10**-3
+
 
     k_B = 8.617333e-5  # Boltzmann constant in eV/K
     beta = 1.0 / (k_B * temp.mean())  # beta in eV^-1
     total_energy_kj_mol = en_tot * beta
+    potential_energy_kj_mol = en_pot * beta
+    if model != "mace":
+        gas_kj_mol = gas * beta
+        skip_part_gas = int(round(gas_kj_mol.size * skip_size, 0))
+        gas_cut = gas_kj_mol[skip_part_gas-1:-1]
 
     skip_part_liquid = int(round(liquid["Etot[eV]"].count()*skip_size,0))
     liquid_cut = liquid[skip_part_liquid-1:-1] # skip the first 10%
+
+    
 
     heat_capacity = calc_heat_capacity_units(
         total_energy_kj_mol, 
@@ -196,13 +208,14 @@ for model in models:
         temp.mean(), 
         False
     )
-    # hov = calc_heat_of_vaporization (
-    #     liquid_cut["Potential Energy (kJ/mole)"].to_numpy(), 
-    #     gas_cut["Potential Energy (kJ/mole)"].to_numpy(), 
-    #     liquid_cut["Temperature (K)"].to_numpy(), 
-    #     box_count, 
-    #     False
-    # )
+    if model != "mace":
+        hov = calc_heat_of_vaporization (
+            potential_energy_kj_mol, 
+            gas_cut, 
+            temp.mean(), 
+            box_count, 
+            False
+        )
 
     density = vol_data['density_g_cm3'].mean()
     theory = model
@@ -211,7 +224,8 @@ for model in models:
     print(f"{'Heat capacity':35} {theory:<10} {round(heat_capacity.magnitude, 2):>10} {str(heat_capacity.units):>25}")
     print(f"{'Isothermal compressibility (*1e4)':35} {theory:<10} {round(iso_comp.magnitude*1e4, 2):>10} {str(iso_comp.units):>25}")
     print(f"{'Thermal expansion (*1e2)':35} {theory:<10} {round(thermal_expansion.magnitude*1e2, 2):>10} {str(thermal_expansion.units):>25}")
-    # print(f"{'Heat of vaporization':35} {theory:<10} {round(hov.magnitude, 2):>10} {str(hov.units):>25}")
+    if model != "mace":
+        print(f"{'Heat of vaporization':35} {theory:<10} {round(hov.magnitude, 2):>10} {str(hov.units):>25}")
     print(f"{'Density':35} {theory:<10} {round(density, 2):>10} {str((unit.gram / unit.milliliter)):>25}")
     print("-" * 85)
 
