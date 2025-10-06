@@ -4,6 +4,7 @@ from ase.optimize import BFGS
 from ase.md.velocitydistribution import MaxwellBoltzmannDistribution
 from ase import units
 from ase.md.langevin import Langevin
+from ase.md.nose_hoover_chain import NoseHooverChainNVT
 import numpy as np
 from ase.md.npt import NPT
 import sys
@@ -55,7 +56,7 @@ log_interval = 100
 temperature = 300
 # name = model.split(".")[0].lower()
 if sol == "wat":
-    mol = read("../data/mace_s_cptequil.pdb")
+    mol = read("../data/mace_nvt_equil.pdb")
 else:
     mol = read(f"../data/{sol}_mace_npt_equil.pdb")
 mol.calc = TPCalculator(model=f"{model_path}", device="cuda")
@@ -75,7 +76,7 @@ print(f"Initial NPT energy: {E_initial:.6f} eV")
 opt = BFGS(mol)
 opt.run(steps=10)
 
-dyn = Langevin(
+dyn = NoseHooverChainNVT(
     mol, 
     timestep,
     temperature_K=temperature,
