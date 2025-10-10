@@ -71,7 +71,7 @@ dyn = Langevin(
     mol,
     timestep,
     temperature_K=temperature,
-    friction=0.0007,  # Damping factor (in fs⁻¹) – adjust as needed
+    friction=0.0001,  # Damping factor (in fs⁻¹) – adjust as needed
     logfile=f"{path}/gas_{sol}_{temperature}.log",
     trajectory=f"{path}/gas_{sol}_{temperature}.traj",
     loginterval=log_interval,
