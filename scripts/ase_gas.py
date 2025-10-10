@@ -2,7 +2,7 @@ from ase.io import read, write, Trajectory
 from ase.optimize import BFGS
 from ase.md.velocitydistribution import MaxwellBoltzmannDistribution
 from ase import units
-from ase.md.Langevin import Langevin
+from ase.md import Langevin
 from ase.constraints import FixCom
 
 import argparse
@@ -55,7 +55,7 @@ elif model_type.upper() == "MACE":
     mol.calc = MACECalculator(model_paths=model_path, device="cuda")
 
 
-mol.set_pbc([True, True, True])
+mol.set_pbc([False, False, False])
 mol.set_constraint(FixCom()) # remove center of mass motion
 
 # set initial velocities

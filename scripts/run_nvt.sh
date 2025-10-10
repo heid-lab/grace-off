@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --partition=GPU-a40s       # select a partition i.e. "GPU-a100"
+#SBATCH --partition=GPU-a40       # select a partition i.e. "GPU-a100"
 #SBATCH --gres=gpu:1                # Use GPU
 #SBATCH --nodes=1                   # select number of nodes
 #SBATCH --ntasks-per-node=12        # select number of tasks per node

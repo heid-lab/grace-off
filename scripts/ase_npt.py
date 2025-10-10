@@ -8,8 +8,8 @@ from ase.constraints import FixCom
 import argparse
 import os
 
-from tensorpotential.calculator import TPCalculator
 from mace.calculators import MACECalculator
+from tensorpotential.calculator import TPCalculator
 
 parser = argparse.ArgumentParser(
     description="Run an OpenMM simulation with MLPotential."
