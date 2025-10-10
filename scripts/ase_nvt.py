@@ -21,6 +21,9 @@ parser.add_argument(
     "--model_type", type=str, required=True, help="Architecture (either GRACE or MACE)."
 )
 parser.add_argument(
+    "--dataset", type=str, required=False, help="Dataset for GRACE training (either a_wpS or b_off)."
+)
+parser.add_argument(
     "--sol", type=str, required=True, help="Solvent box."
 )
 
@@ -30,14 +33,14 @@ model_type = args.model_type
 model_size = args.model_size
 sol = args.sol
 
-path = f"../output/{sol}_{model_type}_{model_size}"
-
-os.makedirs(path, exist_ok=True)
-
 if model_type.upper() == "GRACE":
-    model_path = f"../models/GRACE/{model_size}.model"
+    model_path = f"../models/2l/{args.dataset}_{model_size}/seed/1/saved_model"
+    path = f"../output/{sol}_{model_type}_{model_size}_{args.dataset}"
 elif model_type.upper() == "MACE":
     model_path = f"../models/{model_type.upper()}-OFF23_{model_size}.model"
+    path = f"../output/{sol}_{model_type}_{model_size}"
+
+os.makedirs(path, exist_ok=True)
 
 # Constants for NVT dynamics
 timestep = 0.5 * units.fs  # fs
