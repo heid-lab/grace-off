@@ -2,14 +2,14 @@ from ase.io import read, write, Trajectory
 from ase.optimize import BFGS
 from ase.md.velocitydistribution import MaxwellBoltzmannDistribution
 from ase import units
-from ase.md.nose_hoover_chain import NoseHooverChainNVT
+from ase.md.npt import NPT
 from ase.constraints import FixCom
 
 import argparse
 import os
 
-from mace.calculators import MACECalculator
 from tensorpotential.calculator import TPCalculator
+from mace.calculators import MACECalculator
 
 parser = argparse.ArgumentParser(
     description="Run an OpenMM simulation with MLPotential."
@@ -39,10 +39,13 @@ if model_type.upper() == "GRACE":
 elif model_type.upper() == "MACE":
     model_path = f"../models/{model_type.upper()}-OFF23_{model_size}.model"
 
-# Constants for NVT dynamics
+# Constants for NPT dynamics
+temperature = 300  # K
 timestep = 0.5 * units.fs  # fs
+ttime = 25 * units.fs
+ptime=75 * units.fs
+B_water = 2.2 * units.GPa  # ≃ 0.0137 eV/Å³
 log_interval = 100
-temperature = 300
 
 mol = read("../data/mace_nvt_equil.pdb")
 
@@ -51,10 +54,8 @@ if model_type.upper() == "GRACE":
 elif model_type.upper() == "MACE":
     mol.calc = MACECalculator(model_paths=model_path, device="cuda")
 
-
 mol.set_pbc([True, True, True])
 mol.set_constraint(FixCom()) # remove center of mass motion
-
 
 # Precompute total mass (amu) once
 mass_amu = mol.get_masses().sum()
@@ -67,19 +68,22 @@ print(f"Initial NPT energy: {E_initial:.6f} eV")
 
 # short Geometry optimization
 opt = BFGS(mol)
-opt.run(steps=2)
+opt.run(steps=5)
 
-dyn = NoseHooverChainNVT(
-    mol, 
+# NPT dynamics
+dyn = NPT(
+    mol,
     timestep,
     temperature_K=temperature,
-    tdamp=100*units.fs,
-    logfile=f"{path}/{sol}_{temperature}_nvt.log",
-    trajectory=f"{path}/{sol}_{temperature}_nvt.traj",
+    externalstress=1.0 * units.bar,
+    ttime=ttime,
+    pfactor=ptime**2 * B_water,
+    logfile=f"{path}/{sol}_{temperature}_npt.log",
+    trajectory=f"{path}/{sol}_{temperature}_npt.traj",
     loginterval=log_interval,
 )
 
-dens_csv = open(f"{path}/{sol}_{temperature}_nvt_density.csv", "w", buffering=1)
+dens_csv = open(f"{path}/{sol}_{temperature}_npt_density.csv", "w", buffering=1)
 dens_csv.write("time_ps,volume_A3,density_g_cm3\n")
 
 def log_density_csv():
@@ -92,4 +96,8 @@ def log_density_csv():
 dyn.attach(log_density_csv, interval=log_interval)
 
 n_steps = 2_200_000
+dyn.set_fraction_traceless(0) # By setting this to zero, the volume may change but the shape may not (https://ase-lib.org/ase/md.html#ase.md.npt.NPT.set_fraction_traceless)
 dyn.run(n_steps)
+
+
+
