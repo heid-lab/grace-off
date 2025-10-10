@@ -66,11 +66,11 @@ AMU_TO_G__A3_TO_CM3 = 1.66053906660  # g/cm^3 = 1.6605 * amu / Å^3
 # set initial velocities
 MaxwellBoltzmannDistribution(mol, temperature_K=temperature)
 E_initial = mol.get_potential_energy()
-print(f"Initial NPT energy: {E_initial:.6f} eV")
+print(f"Initial NVT energy: {E_initial:.6f} eV")
 
 # short Geometry optimization
 opt = BFGS(mol)
-opt.run(steps=2)
+opt.run(steps=50)
 
 dyn = NoseHooverChainNVT(
     mol, 

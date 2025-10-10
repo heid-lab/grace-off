@@ -61,11 +61,11 @@ mol.set_constraint(FixCom()) # remove center of mass motion
 # set initial velocities
 MaxwellBoltzmannDistribution(mol, temperature_K=temperature)
 E_initial = mol.get_potential_energy()
-print(f"Initial NPT energy: {E_initial:.6f} eV")
+print(f"Initial energy: {E_initial:.6f} eV")
 
 # short Geometry optimization
 opt = BFGS(mol)
-opt.run(steps=10)
+opt.run(steps=50)
 
 dyn = Langevin(
     mol,
