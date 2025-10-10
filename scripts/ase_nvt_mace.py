@@ -1,25 +1,26 @@
 from ase.io import read, write, Trajectory
 from ase.optimize import BFGS
-# from mace.calculators import MACECalculator
+from mace.calculators import MACECalculator
 from ase.md.velocitydistribution import MaxwellBoltzmannDistribution
 from ase import units
 from ase.md.langevin import Langevin
 from ase.md.nose_hoover_chain import NoseHooverChainNVT
 from ase.constraints import FixCom
+
 import numpy as np
 from ase.md.npt import NPT
 import sys
 import argparse
 import os
 
-from tensorpotential.calculator import TPCalculator
+# from tensorpotential.calculator import TPCalculator
 
 parser = argparse.ArgumentParser(
     description="Run an OpenMM simulation with MLPotential."
 )
-parser.add_argument(
-    "--layers", type=str, required=True, help="Layers of grace model."
-)
+# parser.add_argument(
+#     "--layers", type=str, required=True, help="Layers of grace model."
+# )
 parser.add_argument(
     "--model", type=str, required=True, help="Name of grace-off model."
 )
@@ -30,16 +31,17 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-layers = args.layers # 1l
+# layers = args.layers # 1l
 model = args.model # a_wpS_small
 sol = args.sol # wat or moh
 
-path = f"../data/traj_{sol}/nvt_{layers}_{model}"
+path = f"../data/traj_{sol}/nvt_{model}"
 
 os.makedirs(path, exist_ok=True)
 
 # model_path = "/share/theochem/johannes.karwounopoulos/4d_test/foundation_models"
-model_path = f"../models/{layers}/{model}/seed/1/saved_model"
+# model_path = f"../models/{layers}/{model}/seed/1/saved_model"
+model_path = f"../models/MACE-OFF23_small.model"
 # Constants for NPT dynamics
 temperature = 300  # K
 timestep = 0.5 * units.fs  # fs
@@ -56,19 +58,22 @@ log_interval = 100
 
 temperature = 300
 # name = model.split(".")[0].lower()
-if sol == "wat":
-    mol = read("../data/mace_nvt_equil.pdb")
-else:
-    mol = read(f"../data/{sol}_mace_npt_equil.pdb")
-mol.calc = TPCalculator(model=f"{model_path}", device="cuda")
-# mol.calc = MACECalculator(model_paths=f"{model_path}/{model}", device="cuda")
+
+mol = read("../data/mace_nvt_equil.pdb")
+
+# mol.calc = TPCalculator(model=f"{model_path}", device="cuda")
+mol.calc = MACECalculator(model_paths=model_path, device="cuda")
 mol.set_pbc([True, True, True])
+
+
 
 
 #########################################################################
 # remove center of mass motion
 mol.set_constraint(FixCom())
 #########################################################################
+
+
 
 
 # Precompute total mass (amu) once
