@@ -71,7 +71,7 @@ print(f"Initial NPT energy: {E_initial:.6f} eV")
 
 # short Geometry optimization
 opt = BFGS(mol)
-opt.run(steps=5)
+opt.run(steps=50)
 
 # NPT dynamics
 dyn = NPT(
