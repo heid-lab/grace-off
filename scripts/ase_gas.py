@@ -3,6 +3,7 @@ from ase.optimize import BFGS
 from ase.md.velocitydistribution import MaxwellBoltzmannDistribution
 from ase import units
 from ase.md import Langevin
+from ase.md.nose_hoover_chain import NoseHooverChainNVT
 from ase.constraints import FixCom
 
 import argparse
@@ -67,11 +68,21 @@ print(f"Initial energy: {E_initial:.6f} eV")
 opt = BFGS(mol)
 opt.run(steps=50)
 
-dyn = Langevin(
-    mol,
+# dyn = Langevin(
+#     mol,
+#     timestep,
+#     temperature_K=temperature,
+#     friction=0.0001,  # Damping factor (in fs⁻¹) – adjust as needed
+#     logfile=f"{path}/gas_{sol}_{temperature}.log",
+#     trajectory=f"{path}/gas_{sol}_{temperature}.traj",
+#     loginterval=log_interval,
+# )
+
+dyn = NoseHooverChainNVT(
+    mol, 
     timestep,
     temperature_K=temperature,
-    friction=0.0001,  # Damping factor (in fs⁻¹) – adjust as needed
+    tdamp=100*units.fs,
     logfile=f"{path}/gas_{sol}_{temperature}.log",
     trajectory=f"{path}/gas_{sol}_{temperature}.traj",
     loginterval=log_interval,
