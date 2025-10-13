@@ -55,7 +55,7 @@ if model_type.upper() == "GRACE":
 elif model_type.upper() == "MACE":
     mol.calc = MACECalculator(model_paths=model_path, device="cuda")
 
-mol.set_cell([100.0, 100.0, 100.0])
+# mol.set_cell([100.0, 100.0, 100.0])
 mol.set_pbc([False, False, False])
 mol.set_constraint(FixCom()) # remove center of mass motion
 
