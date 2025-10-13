@@ -82,7 +82,7 @@ dyn = NoseHooverChainNVT(
     mol, 
     timestep,
     temperature_K=temperature,
-    tdamp=100*units.fs,
+    tdamp=25*units.fs,
     logfile=f"{path}/gas_{sol}_{temperature}.log",
     trajectory=f"{path}/gas_{sol}_{temperature}.traj",
     loginterval=log_interval,
