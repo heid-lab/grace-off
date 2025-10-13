@@ -90,7 +90,7 @@ dyn = NPT(
 _perf = {"start_wall": None, "last_wall": None, "last_t_int": None}  # t_int = ASE internal time
 
 dens_csv = open(f"{path}/{sol}_{temperature}_npt_density.csv", "w", buffering=1)
-dens_csv.write("time_ps,volume_A3,density_g_cm3\n")
+dens_csv.write("time_ps,volume_A3,density_g_cm3,ns_per_day_cum,ns_per_day_inst\n")
 
 def log_density_csv():
     t_int = dyn.get_time()                  # internal units (Å·sqrt(u/eV))
