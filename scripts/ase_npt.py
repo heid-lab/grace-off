@@ -7,6 +7,7 @@ from ase.constraints import FixCom
 
 import argparse
 import os
+import time
 
 from mace.calculators import MACECalculator
 from tensorpotential.calculator import TPCalculator
@@ -86,15 +87,37 @@ dyn = NPT(
     loginterval=log_interval,
 )
 
+_perf = {"start_wall": None, "last_wall": None, "last_t_int": None}  # t_int = ASE internal time
+
 dens_csv = open(f"{path}/{sol}_{temperature}_npt_density.csv", "w", buffering=1)
 dens_csv.write("time_ps,volume_A3,density_g_cm3\n")
 
 def log_density_csv():
+    t_int = dyn.get_time()                  # internal units (Å·sqrt(u/eV))
+    t_fs = t_int / units.fs                 # → femtoseconds
+    t_ps = t_fs * 1e-3                      # → picoseconds
+    t_ns = t_fs * 1e-6                      # → nanoseconds
+
     at = dyn.atoms
     V = at.get_volume()
     rho = AMU_TO_G__A3_TO_CM3 * mass_amu / V
-    t_ps = dyn.get_time() * 1e-3
-    dens_csv.write(f"{t_ps:.4f},{V:.3f},{rho:.5f}\n")
+
+    # wall clock
+    now = time.time()
+    if _perf["start_wall"] is None:
+        _perf.update(start_wall=now, last_wall=now, last_t_int=t_int)
+
+    wall_days = (now - _perf["start_wall"]) / 86400.0
+    ns_per_day_cum = (t_ns / wall_days) if wall_days > 0 else float("nan")
+
+    dt_ns = (t_int - _perf["last_t_int"]) / units.fs * 1e-6
+    dday = (now - _perf["last_wall"]) / 86400.0
+    ns_per_day_inst = (dt_ns / dday) if dday > 0 else float("nan")
+
+    dens_csv.write(f"{t_ps:.4f},{V:.3f},{rho:.5f},{ns_per_day_cum:.5f},{ns_per_day_inst:.5f}\n")
+
+    _perf["last_wall"] = now
+    _perf["last_t_int"] = t_int
 
 dyn.attach(log_density_csv, interval=log_interval)
 
