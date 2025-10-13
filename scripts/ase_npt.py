@@ -2,7 +2,7 @@ from ase.io import read, write, Trajectory
 from ase.optimize import BFGS
 from ase.md.velocitydistribution import MaxwellBoltzmannDistribution
 from ase import units
-from ase.md.npt import NPT
+from ase.md.nose_hoover_chain import IsotropicMTKNPT
 from ase.constraints import FixCom
 
 import argparse
@@ -59,7 +59,7 @@ elif model_type.upper() == "MACE":
     mol.calc = MACECalculator(model_paths=model_path, device="cuda")
 
 mol.set_pbc([True, True, True])
-mol.set_constraint(FixCom()) # remove center of mass motion
+# mol.set_constraint(FixCom()) # remove center of mass motion
 
 # Precompute total mass (amu) once
 mass_amu = mol.get_masses().sum()
@@ -75,22 +75,22 @@ opt = BFGS(mol)
 opt.run(steps=50)
 
 # NPT dynamics
-dyn = NPT(
+dyn = IsotropicMTKNPT(
     mol,
     timestep,
     temperature_K=temperature,
-    externalstress=1.0 * units.bar,
-    ttime=ttime,
-    pfactor=ptime**2 * B_water,
+    pressure_au=1.01325 * units.bar,
+    tdamp=100*timestep,
+    pdamp=1000*timestep,
     logfile=f"{path}/{sol}_{temperature}_npt.log",
     trajectory=f"{path}/{sol}_{temperature}_npt.traj",
     loginterval=log_interval,
-)
+)    
 
 _perf = {"start_wall": None, "last_wall": None, "last_t_int": None}  # t_int = ASE internal time
 
 dens_csv = open(f"{path}/{sol}_{temperature}_npt_density.csv", "w", buffering=1)
-dens_csv.write("time_ps,volume_A3,density_g_cm3,ns_per_day_cum,ns_per_day_inst\n")
+dens_csv.write("time_ps,volume_A3,density_g_cm3,ns_per_day\n")
 
 def log_density_csv():
     t_int = dyn.get_time()                  # internal units (Å·sqrt(u/eV))
@@ -110,11 +110,7 @@ def log_density_csv():
     wall_days = (now - _perf["start_wall"]) / 86400.0
     ns_per_day_cum = (t_ns / wall_days) if wall_days > 0 else float("nan")
 
-    dt_ns = (t_int - _perf["last_t_int"]) / units.fs * 1e-6
-    dday = (now - _perf["last_wall"]) / 86400.0
-    ns_per_day_inst = (dt_ns / dday) if dday > 0 else float("nan")
-
-    dens_csv.write(f"{t_ps:.4f},{V:.3f},{rho:.5f},{ns_per_day_cum:.5f},{ns_per_day_inst:.5f}\n")
+    dens_csv.write(f"{t_ps:.4f},{V:.3f},{rho:.5f},{ns_per_day_cum:.5f}\n")
 
     _perf["last_wall"] = now
     _perf["last_t_int"] = t_int
@@ -122,7 +118,6 @@ def log_density_csv():
 dyn.attach(log_density_csv, interval=log_interval)
 
 n_steps = 2_200_000
-dyn.set_fraction_traceless(0) # By setting this to zero, the volume may change but the shape may not (https://ase-lib.org/ase/md.html#ase.md.npt.NPT.set_fraction_traceless)
 dyn.run(n_steps)
 
 
