@@ -144,17 +144,34 @@ eV_to_kjmol = 1.602176634e-19 * 6.02214076e23 / 1000
 
 skip_size = 0.1  # skip the first 10% of the trajectory
 
-models = ['mace_small', 'grace_small_a_wpS', 'grace_medium_a_wpS']
+models = [
+    "mace_small",
+    "1l_wat_grace_small_a_wpS",
+    "1l_wat_grace_medium_a_wpS",
+    "2l_wat_grace_small_a_wpS",
+    "2l_wat_grace_medium_a_wpS",
+]
 
 for model in models:
 
-    liquid = pd.read_csv(f"../output/wat_{model}/wat_300_npt.log", sep="\s+")
-    vol_data = pd.read_csv(f"../output/wat_{model}/wat_300_npt_density.csv")
-    density = vol_data["density_g_cm3"].to_numpy().mean()
-    gas_data = pd.read_csv(f"../output/wat_{model}/gas_wat_300.log", sep="\s+")
-    gas = gas_data["Epot[eV]"].to_numpy()
-    box_count = 572
-    molar_mass = 18.015 * unit.gram / unit.mole
+    if "grace" in model.split("_"):
+        liquid = pd.read_csv(f"../output/{model}/wat_300_npt.log", sep="\s+")
+        vol_data = pd.read_csv(f"../output/{model}/wat_300_npt_density.csv")
+        density = vol_data["density_g_cm3"].to_numpy().mean()
+        speed = vol_data["ns_per_day"].to_numpy().mean()
+        gas_data = pd.read_csv(f"../output/{model}/gas_wat_300.log", sep="\s+")
+        gas = gas_data["Epot[eV]"].to_numpy()
+        box_count = 572
+        molar_mass = 18.015 * unit.gram / unit.mole
+    else:
+        liquid = pd.read_csv(f"../output/wat_{model}/wat_300_npt.log", sep="\s+")
+        vol_data = pd.read_csv(f"../output/wat_{model}/wat_300_npt_density.csv")
+        density = vol_data["density_g_cm3"].to_numpy().mean()
+        speed = vol_data["ns_per_day"].to_numpy().mean()
+        gas_data = pd.read_csv(f"../output/wat_{model}/gas_wat_300.log", sep="\s+")
+        gas = gas_data["Epot[eV]"].to_numpy()
+        box_count = 572
+        molar_mass = 18.015 * unit.gram / unit.mole
 
     print(f"\nCOMPUTING CONDENSED PHASE PROPERTIES for {model}\n")
 
@@ -186,6 +203,7 @@ for model in models:
     )
 
     density = vol_data["density_g_cm3"].mean()
+    speed = vol_data["ns_per_day"][skip_part_liquid::].mean()
     theory = model
     print(f"{'Property':35} {'Model':10} {'Value':>10} {'Unit':>25}")
     print("-" * 85)
@@ -203,5 +221,8 @@ for model in models:
     )
     print(
         f"{'Density':35} {theory:<10} {round(density, 2):>10} {str((unit.gram / unit.milliliter)):>25}"
+    )
+    print(
+        f"{'Speed':35} {theory:<10} {round(speed, 2):>10} {str(unit.nanoseconds / unit.day):>25}"
     )
     print("-" * 85)
