@@ -25,4 +25,4 @@ python ase_npt.py --model_size $model_size --model_type $model_type --sol $sol -
 # python ase_npt.py --model_size small --model_type mace --sol $sol --default_dtype float32
 
 # for using a GRACE model trained on a_wpS dataset
-python ase_npt.py --model_size small --model_type grace --sol $sol --dataset a_wpS --layer 1 --default_dtype float32
+# python ase_npt.py --model_size small --model_type grace --sol $sol --dataset a_wpS --layer 1 --default_dtype float32

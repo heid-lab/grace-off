@@ -9,6 +9,12 @@ import argparse
 import os
 import time
 
+import os
+os.environ['XLA_FLAGS'] = (
+    '--xla_gpu_enable_latency_hiding_scheduler=true '
+)
+
+
 from mace.calculators import MACECalculator
 from tensorpotential.calculator import TPCalculator
 
@@ -65,9 +71,6 @@ os.makedirs(path, exist_ok=True)
 # Constants for NPT dynamics
 temperature = 300  # K
 timestep = 1 * units.fs  # fs
-ttime = 25 * units.fs
-ptime = 75 * units.fs
-B_water = 2.2 * units.GPa  # ≃ 0.0137 eV/Å³
 log_interval = 100
 
 mol = read("../data/mace_nvt_equil.pdb")
