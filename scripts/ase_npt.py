@@ -9,11 +9,16 @@ import argparse
 import os
 import time
 
+import os
+os.environ['XLA_FLAGS'] = (
+    '--xla_gpu_enable_latency_hiding_scheduler=true '
+)
+
 from mace.calculators import MACECalculator
 from tensorpotential.calculator import TPCalculator
 
 parser = argparse.ArgumentParser(
-    description="Run an OpenMM simulation with MLPotential."
+    description="Run an ASE simulation with MLPotential."
 )
 parser.add_argument(
     "--model_size", type=str, required=True, help="Model size (small, medium, large)."
@@ -22,21 +27,40 @@ parser.add_argument(
     "--model_type", type=str, required=True, help="Architecture (either GRACE or MACE)."
 )
 parser.add_argument(
-    "--dataset", type=str, required=False, help="Dataset for GRACE training (either a_wpS or b_off)."
+    "--dataset",
+    type=str,
+    required=False,
+    help="Dataset for GRACE training (either a_wpS or b_off).",
 )
 parser.add_argument(
-    "--sol", type=str, required=True, help="Solvent box."
+    "--layer", type=int, required=False, help="Number of layers for GRACE model."
 )
+parser.add_argument(
+    "--default_dtype",
+    type=str,
+    required=True,
+    help="Single or double precision for energies.",
+)
+parser.add_argument("--sol", type=str, required=True, help="Solvent box.")
 
 args = parser.parse_args()
 
 model_type = args.model_type
 model_size = args.model_size
+default_dtype = args.default_dtype
 sol = args.sol
 
 if model_type.upper() == "GRACE":
-    model_path = f"../models/2l/{args.dataset}_{model_size}/seed/1/saved_model"
-    path = f"../output/{sol}_{model_type}_{model_size}_{args.dataset}"
+    if default_dtype.lower() == "float64":
+        model_path = (
+            f"../models/{args.layer}l/{args.dataset}_{model_size}/seed/1/saved_model"
+        )
+    else:
+        model_path = (
+            f"../models/{args.layer}l/{args.dataset}_{model_size}/seed/1/casted_model"
+        )
+    path = f"../output/{args.layer}l_{sol}_{model_type}_{model_size}_{args.dataset}"
+    print("Selected the following GRACE model:", model_path)
 elif model_type.upper() == "MACE":
     model_path = f"../models/{model_type.upper()}-OFF23_{model_size}.model"
     path = f"../output/{sol}_{model_type}_{model_size}"
@@ -45,18 +69,19 @@ os.makedirs(path, exist_ok=True)
 
 # Constants for NPT dynamics
 temperature = 300  # K
-timestep = 0.5 * units.fs  # fs
-ttime = 25 * units.fs
-ptime=75 * units.fs
-B_water = 2.2 * units.GPa  # ≃ 0.0137 eV/Å³
+timestep = 1 * units.fs  # fs
 log_interval = 100
 
 mol = read("../data/mace_nvt_equil.pdb")
 
 if model_type.upper() == "GRACE":
-    mol.calc = TPCalculator(model=f"{model_path}", device="cuda")
+    mol.calc = TPCalculator(
+        model=f"{model_path}", device="cuda", float_dtype=default_dtype
+    )
 elif model_type.upper() == "MACE":
-    mol.calc = MACECalculator(model_paths=model_path, device="cuda")
+    mol.calc = MACECalculator(
+        model_paths=model_path, device="cuda", default_dtype=default_dtype
+    )
 
 mol.set_pbc([True, True, True])
 # mol.set_constraint(FixCom()) # remove center of mass motion
@@ -80,23 +105,28 @@ dyn = IsotropicMTKNPT(
     timestep,
     temperature_K=temperature,
     pressure_au=1.01325 * units.bar,
-    tdamp=100*timestep,
-    pdamp=1000*timestep,
+    tdamp=100 * timestep,
+    pdamp=1000 * timestep,
     logfile=f"{path}/{sol}_{temperature}_npt.log",
     trajectory=f"{path}/{sol}_{temperature}_npt.traj",
     loginterval=log_interval,
-)    
+)
 
-_perf = {"start_wall": None, "last_wall": None, "last_t_int": None}  # t_int = ASE internal time
+_perf = {
+    "start_wall": None,
+    "last_wall": None,
+    "last_t_int": None,
+}  # t_int = ASE internal time
 
 dens_csv = open(f"{path}/{sol}_{temperature}_npt_density.csv", "w", buffering=1)
 dens_csv.write("time_ps,volume_A3,density_g_cm3,ns_per_day\n")
 
+
 def log_density_csv():
-    t_int = dyn.get_time()                  # internal units (Å·sqrt(u/eV))
-    t_fs = t_int / units.fs                 # → femtoseconds
-    t_ps = t_fs * 1e-3                      # → picoseconds
-    t_ns = t_fs * 1e-6                      # → nanoseconds
+    t_int = dyn.get_time()  # internal units (Å·sqrt(u/eV))
+    t_fs = t_int / units.fs  # → femtoseconds
+    t_ps = t_fs * 1e-3  # → picoseconds
+    t_ns = t_fs * 1e-6  # → nanoseconds
 
     at = dyn.atoms
     V = at.get_volume()
@@ -115,10 +145,8 @@ def log_density_csv():
     _perf["last_wall"] = now
     _perf["last_t_int"] = t_int
 
+
 dyn.attach(log_density_csv, interval=log_interval)
 
-n_steps = 2_200_000
+n_steps = 1_200_000
 dyn.run(n_steps)
-
-
-
