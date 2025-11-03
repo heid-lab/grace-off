@@ -1540,25 +1540,27 @@
 2025-11-03 12:58:26,914 I - Sharding callback duration: 61 microseconds
 2025-11-03 12:58:26,991 I - Regular checkpointing
 2025-11-03 12:58:27,362 I - Sharding callback duration: 66 microseconds
-2025-11-03 12:36:42,389 I - ========================================
-2025-11-03 12:36:42,390 I -             Start GRACEmaker
-2025-11-03 12:36:42,390 I - ========================================
-2025-11-03 12:36:42,390 I - Tensorflow version: 2.16.2
-2025-11-03 12:36:42,390 I - Loaded input.yaml... 
-2025-11-03 12:36:42,390 I - Set seed to 1
-2025-11-03 12:36:42,390 I - Data distribution strategy: Single GPU
-2025-11-03 12:36:42,391 I - Number of replicas: 1
-2025-11-03 12:36:42,391 I - Replica ID in sync group: 0
-2025-11-03 12:36:42,391 I - Global TRAIN batch size (= minibatch size * num GPUS): 32, num. GPUS: 1, minibatch size: 32
-2025-11-03 12:36:42,391 I - Global TEST batch size (= minibatch size * num GPUS): 64, num. GPUS: 1, minibatch size: 64
-2025-11-03 12:36:42,391 I - Float dtype: float64
-2025-11-03 12:36:42,391 I - Loading model config from `seed/1/model.yaml`
-2025-11-03 12:36:43,424 I - Saving model config to seed/1/model.yaml
-2025-11-03 12:36:43,445 I - Loss function: Loss(5.0*WeightedHuberEnergyPerAtomLoss(delta=0.001)(energy) + 2.0*WeightedHuberForceLoss(delta=0.001)(forces))
-2025-11-03 12:36:43,445 I - JIT compilation: True
-2025-11-03 12:36:43,445 I - Optimization options: {'learning_rate': 0.01, 'amsgrad': True, 'use_ema': True, 'ema_momentum': 0.99, 'weight_decay': None, 'clipvalue': 1.0}
-2025-11-03 12:36:43,744 I - Setting checkpoint with trackable objects: dict_keys(['model', 'step', 'epoch', 'optimizer'])
-2025-11-03 12:36:43,745 I - Trying to load best test checkpoint
-2025-11-03 12:36:43,745 I - FAILED Loaded checkpoint from seed/1/checkpoints/checkpoint.best_test_loss (path does not exist)
-2025-11-03 12:36:43,746 I - Saving model to `saved_model` and exit.
-2025-11-03 12:36:51,184 I - Assets written to: seed/1/saved_model/assets
+2025-11-03 13:49:11,028 I - Iteration #89/100 TRAIN(TEST): total_loss: 3.064e-05 (3.086e-05) mae/depa: 6.915e-04 (6.275e-04) rmse/depa: 2.316e-03 (2.103e-03) mae/f_comp: 1.492e-02 (1.507e-02) rmse/f_comp: 4.104e-02 (4.942e-02) Time(mcs/at): 45 (10)
+2025-11-03 14:39:54,631 I - Iteration #90/100 TRAIN(TEST): total_loss: 3.063e-05 (3.085e-05) mae/depa: 6.875e-04 (6.267e-04) rmse/depa: 2.313e-03 (2.102e-03) mae/f_comp: 1.492e-02 (1.507e-02) rmse/f_comp: 4.104e-02 (4.945e-02) Time(mcs/at): 45 (10)
+2025-11-03 14:39:54,641 I - Regular checkpointing
+2025-11-03 14:39:55,251 I - Sharding callback duration: 61 microseconds
+2025-11-03 13:55:29,655 I - ========================================
+2025-11-03 13:55:29,657 I -             Start GRACEmaker
+2025-11-03 13:55:29,657 I - ========================================
+2025-11-03 13:55:29,657 I - Tensorflow version: 2.19.1
+2025-11-03 13:55:29,657 I - Loaded input.yaml... 
+2025-11-03 13:55:29,657 I - Set seed to 1
+2025-11-03 13:55:29,657 I - Data distribution strategy: Single GPU
+2025-11-03 13:55:29,657 I - Number of replicas: 1
+2025-11-03 13:55:29,658 I - Replica ID in sync group: 0
+2025-11-03 13:55:29,658 I - Global TRAIN batch size (= minibatch size * num GPUS): 32, num. GPUS: 1, minibatch size: 32
+2025-11-03 13:55:29,658 I - Global TEST batch size (= minibatch size * num GPUS): 64, num. GPUS: 1, minibatch size: 64
+2025-11-03 13:55:29,658 I - Float dtype: float64
+2025-11-03 13:55:29,658 I - Loading model config from `seed/1/model.yaml`
+2025-11-03 13:55:30,717 I - Loss function: Loss(5.0*WeightedHuberEnergyPerAtomLoss(delta=0.001)(energy) + 2.0*WeightedHuberForceLoss(delta=0.001)(forces))
+2025-11-03 13:55:30,717 I - JIT compilation: True
+2025-11-03 13:55:30,717 I - Optimization options: {'learning_rate': 0.01, 'amsgrad': True, 'use_ema': True, 'ema_momentum': 0.99, 'weight_decay': None, 'clipvalue': 1.0}
+2025-11-03 13:55:31,122 I - Trying to load best test checkpoint
+2025-11-03 13:55:31,169 I - Loaded checkpoint from seed/1/checkpoints/checkpoint.best_test_loss
+2025-11-03 13:55:31,169 I - Saving model to `saved_model` and exit.
+2025-11-03 13:55:38,023 I - Assets written to: seed/1/saved_model/assets

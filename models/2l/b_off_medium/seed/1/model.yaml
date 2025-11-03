@@ -4,7 +4,6 @@ BondLength:
   name: BondLength
 ScaledBondVector:
   __cls__: tensorpotential.instructions.compute.ScaledBondVector
-  bonds: null
   name: ScaledBondVector
   bond_length:
     _instruction_: true
@@ -35,7 +34,6 @@ R:
   no_weight_decay: true
   chemical_embedding_i: null
   chemical_embedding_j: null
-  lora_config: null
   n_rad_max: 32
   lmax: 3
 Y:
@@ -49,7 +47,6 @@ Z:
   __cls__: tensorpotential.instructions.compute.ScalarChemicalEmbedding
   is_trainable: true
   init: random
-  lora_config: null
   element_map:
     Br: 0
     C: 1
@@ -71,8 +68,6 @@ A:
   indicator_l_depend: false
   sum_neighbors: true
   avg_n_neigh: 24.115513254865462
-  lora_config: null
-  lmax: null
   radial:
     _instruction_: true
     name: R
@@ -86,9 +81,7 @@ A1:
   is_central_atom_type_dependent: null
   number_of_atom_types: null
   init_vars: random
-  normalize: true
   norm_out: true
-  lora_config: null
   left:
     _instruction_: true
     name: A
@@ -138,9 +131,7 @@ AA1:
   is_central_atom_type_dependent: null
   number_of_atom_types: null
   init_vars: random
-  normalize: true
   norm_out: true
-  lora_config: null
   left:
     _instruction_: true
     name: AA
@@ -190,9 +181,7 @@ AA2:
   is_central_atom_type_dependent: null
   number_of_atom_types: null
   init_vars: random
-  normalize: true
   norm_out: true
-  lora_config: null
   left:
     _instruction_: true
     name: AA
@@ -242,11 +231,9 @@ I0:
   is_central_atom_type_dependent: true
   number_of_atom_types: 10
   init_vars: random
-  normalize: true
   init_target_value: zeros
   simplify: false
   scale: 1.0
-  lora_config: null
   name: I0
   instructions:
   - _instruction_: true
@@ -274,11 +261,9 @@ I:
   is_central_atom_type_dependent: false
   number_of_atom_types: null
   init_vars: random
-  normalize: true
   init_target_value: zeros
   simplify: false
   scale: 1.0
-  lora_config: null
   name: I
   instructions:
   - _instruction_: true
@@ -306,7 +291,6 @@ R1:
   no_weight_decay: true
   chemical_embedding_i: null
   chemical_embedding_j: null
-  lora_config: null
   n_rad_max: 42
   lmax: 3
 B0:
@@ -317,8 +301,6 @@ B0:
   indicator_l_depend: false
   sum_neighbors: true
   avg_n_neigh: 24.115513254865462
-  lora_config: null
-  lmax: null
   radial:
     _instruction_: true
     name: R1
@@ -369,11 +351,9 @@ B:
   is_central_atom_type_dependent: false
   number_of_atom_types: null
   init_vars: random
-  normalize: true
   init_target_value: zeros
   simplify: false
   scale: 1.0
-  lora_config: null
   instructions:
   - _instruction_: true
     name: YI
@@ -403,9 +383,7 @@ B1:
   is_central_atom_type_dependent: false
   number_of_atom_types: null
   init_vars: random
-  normalize: true
   norm_out: true
-  lora_config: null
   left:
     _instruction_: true
     name: B
@@ -455,9 +433,7 @@ BB1:
   is_central_atom_type_dependent: false
   number_of_atom_types: null
   init_vars: random
-  normalize: true
   norm_out: true
-  lora_config: null
   left:
     _instruction_: true
     name: BB
@@ -507,9 +483,7 @@ BB2:
   is_central_atom_type_dependent: false
   number_of_atom_types: null
   init_vars: random
-  normalize: true
   norm_out: true
-  lora_config: null
   left:
     _instruction_: true
     name: BB
@@ -559,11 +533,9 @@ I_out:
   is_central_atom_type_dependent: true
   number_of_atom_types: 10
   init_vars: random
-  normalize: true
   init_target_value: zeros
   simplify: false
   scale: 1.0
-  lora_config: null
   name: I_out
   instructions:
   - _instruction_: true
@@ -601,7 +573,6 @@ LinMLPOut2ScalarTarget:
   normalize: null
   activation: null
   l: 0
-  lora_config: null
   origin:
   - _instruction_: true
     name: I_out
