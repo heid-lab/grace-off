@@ -35,13 +35,13 @@ R:
   chemical_embedding_i: null
   chemical_embedding_j: null
   n_rad_max: 32
-  lmax: 4
+  lmax: 3
 Y:
   __cls__: tensorpotential.instructions.compute.SphericalHarmonic
   vhat:
     _instruction_: true
     name: ScaledBondVector
-  lmax: 4
+  lmax: 3
   name: Y
 Z:
   __cls__: tensorpotential.instructions.compute.ScalarChemicalEmbedding
@@ -123,8 +123,8 @@ AA:
     _instruction_: true
     name: A1
   name: AA
-  lmax: 4
-  Lmax: 4
+  lmax: 3
+  Lmax: 3
 AA1:
   __cls__: tensorpotential.instructions.compute.FCRight2Left
   left_coefs: true
@@ -173,7 +173,7 @@ AAA:
     _instruction_: true
     name: A
   name: AAA
-  lmax: 4
+  lmax: 3
   Lmax: 1
 AA2:
   __cls__: tensorpotential.instructions.compute.FCRight2Left
@@ -223,7 +223,7 @@ AAAA:
     _instruction_: true
     name: AA2
   name: AAAA
-  lmax: 4
+  lmax: 3
   Lmax: 0
 I0:
   __cls__: tensorpotential.instructions.compute.FunctionReduceN
@@ -270,7 +270,7 @@ I:
     name: I0
   ls_max:
   - 1
-  n_out: 32
+  n_out: 42
   allowed_l_p:
   - - 0
     - 1
@@ -291,8 +291,8 @@ R1:
   no_weight_decay: true
   chemical_embedding_i: null
   chemical_embedding_j: null
-  n_rad_max: 32
-  lmax: 4
+  n_rad_max: 42
+  lmax: 3
 B0:
   __cls__: tensorpotential.instructions.compute.SingleParticleBasisFunctionScalarInd
   indicator:
@@ -343,8 +343,8 @@ YI:
     _instruction_: true
     name: I
   name: YI
-  lmax: 4
-  Lmax: 4
+  lmax: 3
+  Lmax: 3
 B:
   __cls__: tensorpotential.instructions.compute.FunctionReduceN
   out_norm: false
@@ -360,8 +360,8 @@ B:
   - _instruction_: true
     name: B0
   name: B
-  ls_max: 4
-  n_out: 32
+  ls_max: 3
+  n_out: 42
   allowed_l_p:
   - - 0
     - 1
@@ -391,7 +391,7 @@ B1:
     _instruction_: true
     name: B
   name: B1
-  n_out: 32
+  n_out: 42
 BB:
   __cls__: tensorpotential.instructions.compute.ProductFunction
   is_left_right_equal: null
@@ -425,8 +425,8 @@ BB:
     _instruction_: true
     name: B1
   name: BB
-  lmax: 4
-  Lmax: 4
+  lmax: 3
+  Lmax: 3
 BB1:
   __cls__: tensorpotential.instructions.compute.FCRight2Left
   left_coefs: true
@@ -441,7 +441,7 @@ BB1:
     _instruction_: true
     name: B
   name: BB1
-  n_out: 32
+  n_out: 42
 BBB:
   __cls__: tensorpotential.instructions.compute.ProductFunction
   is_left_right_equal: null
@@ -475,7 +475,7 @@ BBB:
     _instruction_: true
     name: B
   name: BBB
-  lmax: 4
+  lmax: 3
   Lmax: 0
 BB2:
   __cls__: tensorpotential.instructions.compute.FCRight2Left
@@ -491,7 +491,7 @@ BB2:
     _instruction_: true
     name: B
   name: BB2
-  n_out: 32
+  n_out: 42
 BBBB:
   __cls__: tensorpotential.instructions.compute.ProductFunction
   is_left_right_equal: null
@@ -525,7 +525,7 @@ BBBB:
     _instruction_: true
     name: BB2
   name: BBBB
-  lmax: 4
+  lmax: 3
   Lmax: 0
 I_out:
   __cls__: tensorpotential.instructions.compute.FunctionReduceN
@@ -555,7 +555,7 @@ I_out:
   - _instruction_: true
     name: BBBB
   ls_max: 0
-  n_out: 13
+  n_out: 11
   allowed_l_p:
   - - 0
     - 1

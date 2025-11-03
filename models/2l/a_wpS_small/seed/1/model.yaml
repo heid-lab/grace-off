@@ -217,7 +217,7 @@ I:
     name: I0
   ls_max:
   - 1
-  n_out: 20
+  n_out: 32
   allowed_l_p:
   - - 0
     - 1
@@ -238,7 +238,7 @@ R1:
   no_weight_decay: true
   chemical_embedding_i: null
   chemical_embedding_j: null
-  n_rad_max: 20
+  n_rad_max: 32
   lmax: 3
 B0:
   __cls__: tensorpotential.instructions.compute.SingleParticleBasisFunctionScalarInd
@@ -291,7 +291,7 @@ YI:
     name: I
   name: YI
   lmax: 3
-  Lmax: 3
+  Lmax: 2
 B:
   __cls__: tensorpotential.instructions.compute.FunctionReduceN
   out_norm: false
@@ -307,8 +307,8 @@ B:
   - _instruction_: true
     name: B0
   name: B
-  ls_max: 3
-  n_out: 20
+  ls_max: 2
+  n_out: 32
   allowed_l_p:
   - - 0
     - 1
@@ -338,7 +338,7 @@ B1:
     _instruction_: true
     name: B
   name: B1
-  n_out: 20
+  n_out: 32
 BB:
   __cls__: tensorpotential.instructions.compute.ProductFunction
   is_left_right_equal: null
@@ -372,8 +372,8 @@ BB:
     _instruction_: true
     name: B1
   name: BB
-  lmax: 3
-  Lmax: 3
+  lmax: 2
+  Lmax: 2
 BB1:
   __cls__: tensorpotential.instructions.compute.FCRight2Left
   left_coefs: true
@@ -388,7 +388,7 @@ BB1:
     _instruction_: true
     name: B
   name: BB1
-  n_out: 20
+  n_out: 32
 BBB:
   __cls__: tensorpotential.instructions.compute.ProductFunction
   is_left_right_equal: null
@@ -422,7 +422,7 @@ BBB:
     _instruction_: true
     name: B
   name: BBB
-  lmax: 3
+  lmax: 2
   Lmax: 0
 I_out:
   __cls__: tensorpotential.instructions.compute.FunctionReduceN
@@ -448,7 +448,7 @@ I_out:
   - _instruction_: true
     name: BBB
   ls_max: 0
-  n_out: 11
+  n_out: 9
   allowed_l_p:
   - - 0
     - 1

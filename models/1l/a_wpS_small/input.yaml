@@ -5,7 +5,7 @@ data:
   filename: ../../data/a_wpS_train.pkl.gz
   test_size: 0.05
   reference_energy: 0
-  # reference_energy: {B: -24.671520535482145, Br: -2574.1167240829964, C: -37.87264507233593,Ca: -676.9528465198214, Cl: -460.1988762285739, F: -99.78611622985483, H: -0.4987605100487531, I: -297.76228914445625,K: -599.8025677513111,Li: -7.285254714046546, Mg: -199.2688420040449,  N: -54.62327513368922,Na: -162.11366478783253, O: -75.11317840410095, P: -341.3059197024934, S: -398.1599636677874, Si: -289.4131352299586}
+  # reference_energy: {Al: -1.23, Li: -3.56}
   # save_dataset: False
   # stress_units: eV/A3 # eV/A3 (default) or GPa or kbar or -kbar
 
@@ -52,16 +52,16 @@ fit:
 
   ## needed for low-energy tier metrics and for "convex_hull"-based distance of energy-based weighting scheme
   compute_convex_hull: False
-  batch_size: 32 # Important hyperparameter for Adam and irrelevant (but must be) for L-BFGS-B
-  test_batch_size: 64 # test batch size (optional)
+  batch_size: 4 # Important hyperparameter for Adam and irrelevant (but must be) for L-BFGS-B
+  test_batch_size: 8 # test batch size (optional)
 
   jit_compile: True
   eval_init_stats: False # to evaluate initial metrics
 
-  train_max_n_buckets: 10 # max number of buckets (group of batches of same shape) in train set
-  test_max_n_buckets: 5 # same for test
+  train_max_n_buckets: 25 # max number of buckets (group of batches of same shape) in train set
+  test_max_n_buckets: 10 # same for test
 
-  checkpoint_freq: 50 # frequency for **REGULAR** checkpoints.
+  checkpoint_freq: 10 # frequency for **REGULAR** checkpoints.
   # save_all_regular_checkpoints: True # to store ALL regular checkpoints
   progressbar: True # show batch-evaluation progress bar
   train_shuffle: True # shuffle train batches on every epoch

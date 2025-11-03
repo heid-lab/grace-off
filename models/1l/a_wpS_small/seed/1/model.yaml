@@ -4,6 +4,7 @@ BondLength:
   name: BondLength
 ScaledBondVector:
   __cls__: tensorpotential.instructions.compute.ScaledBondVector
+  bonds: null
   name: ScaledBondVector
   bond_length:
     _instruction_: true
@@ -34,6 +35,7 @@ R:
   no_weight_decay: true
   chemical_embedding_i: null
   chemical_embedding_j: null
+  lora_config: null
   n_rad_max: 20
   lmax: 3
 Y:
@@ -47,6 +49,7 @@ Z:
   __cls__: tensorpotential.instructions.compute.ScalarChemicalEmbedding
   is_trainable: true
   init: random
+  lora_config: null
   element_map:
     Br: 0
     C: 1
@@ -68,6 +71,8 @@ A:
   indicator_l_depend: false
   sum_neighbors: true
   avg_n_neigh: 36.02227160927201
+  lora_config: null
+  lmax: null
   radial:
     _instruction_: true
     name: R
@@ -81,7 +86,9 @@ A1:
   is_central_atom_type_dependent: false
   number_of_atom_types: null
   init_vars: random
+  normalize: true
   norm_out: true
+  lora_config: null
   left:
     _instruction_: true
     name: A
@@ -131,7 +138,9 @@ AA1:
   is_central_atom_type_dependent: false
   number_of_atom_types: null
   init_vars: random
+  normalize: true
   norm_out: true
+  lora_config: null
   left:
     _instruction_: true
     name: AA
@@ -181,9 +190,11 @@ rho:
   is_central_atom_type_dependent: true
   number_of_atom_types: 10
   init_vars: random
+  normalize: true
   init_target_value: zeros
   simplify: false
   scale: 1.0
+  lora_config: null
   instructions:
   - _instruction_: true
     name: A
@@ -211,6 +222,7 @@ LinMLPOut2ScalarTarget:
   normalize: null
   activation: null
   l: 0
+  lora_config: null
   origin:
   - _instruction_: true
     name: rho
