@@ -458,7 +458,7 @@ if __name__ == "__main__":
         import builtins
         builtins.tqdm = tqdm_log
 
-        save_grace_errors_1l(True, True, False)
-        save_grace_errors_2l(True, True, False)
-        save_mace_errors(True, True, True)
-        save_single_torsion_scan(0, True, True, False, True, True, False)
+        save_grace_errors_1l(True, True, False) # small / medium /large
+        save_grace_errors_2l(True, True, False) # small / medium /large
+        save_mace_errors(True, True, True) # small / medium /large
+        save_single_torsion_scan(0, True, True, False, True, True, False) # mol_index / small_1l / medium_1l /large_1l / small_2l / medium_2l / large_2l
