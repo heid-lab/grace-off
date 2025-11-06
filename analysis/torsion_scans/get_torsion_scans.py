@@ -34,6 +34,11 @@ def get_data_tnet_path():
 
 ############################ compute grace scans #################################################
 def get_area_error_grace_2l(small: bool, medium: bool, large: bool):
+    """
+        Compute AUC error between DFT data and GRACE-OFF 2l models
+        input variables small, medium, large indicate for which models the error analysis is done
+    """
+
     model_path = get_model_path()
     data_tnet = h5py.File(get_data_tnet_path(), "r")
     if small:
@@ -108,6 +113,12 @@ def get_area_error_grace_2l(small: bool, medium: bool, large: bool):
 
 
 def get_area_error_grace_1l(small: bool, medium: bool, large: bool):
+    """
+        Compute AUC error between DFT data and GRACE-OFF 1l models
+        input variables small, medium, large indicate for which models the error analysis is done
+    """
+    
+
     model_path = get_model_path()
     data_tnet = h5py.File(get_data_tnet_path(), "r")
     if small:
@@ -185,6 +196,12 @@ def get_area_error_grace_1l(small: bool, medium: bool, large: bool):
 
 
 def get_area_error_mace(small: bool, medium: bool, large: bool):
+    """
+        Compute AUC error between DFT data and MACE-OFF23 models
+        input variables small, medium, large indicate for which models the error analysis is done
+    """
+    
+
     model_path = get_model_path()
     data_tnet = h5py.File(get_data_tnet_path(), "r")
     if small:
@@ -256,6 +273,14 @@ def get_area_error_mace(small: bool, medium: bool, large: bool):
 ############################ compute single torsion scan #################################################
 
 def get_single_torsion_grace(index, small_1l: bool, medium_1l: bool, large_1l: bool, small_2l: bool, medium_2l: bool, large_2l: bool):
+    """
+        Compute a complete torsion scan for a single molecule for GRACE models
+        index: the molecule from the dataset the torsion scan will be made for
+        small_1l, medium_1l, large_1l, small_2l, medium_2l, large_2l bool variables -> make torsion scans for only those models
+    """
+
+
+
     model_path = get_model_path()
     data_tnet = h5py.File(get_data_tnet_path(), "r")
     smiles = list(data_tnet.keys())[index]
