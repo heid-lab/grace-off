@@ -23,6 +23,8 @@ from ase import Atoms
 from ase.data import chemical_symbols
 from ase import units
 
+import pandas as pd
+
 
 
 def get_model_path():
@@ -347,6 +349,7 @@ def get_single_torsion_grace(index, small_1l: bool, medium_1l: bool, large_1l: b
 ##################################### compute and save torsion scan errors ########################################################
 def save_grace_errors_1l(small: bool, medium: bool, large: bool):
     error_trapez_grace_small, error_trapez_grace_medium, error_trapez_grace_large = get_area_error_grace_1l(small, medium, large)
+    print("Print data to files...")
     grace_dict = dict()
     if small:
         grace_dict['small'] = error_trapez_grace_small
@@ -367,6 +370,7 @@ def save_grace_errors_1l(small: bool, medium: bool, large: bool):
 
 def save_grace_errors_2l(small: bool, medium: bool, large: bool):
     error_trapez_grace_small, error_trapez_grace_medium, error_trapez_grace_large = get_area_error_grace_2l(small, medium, large)
+    print("Print data to files...")
     grace_dict = dict()
     if small:
         grace_dict['small'] = error_trapez_grace_small
@@ -391,6 +395,7 @@ def save_grace_errors_2l(small: bool, medium: bool, large: bool):
 
 def save_mace_errors(small: bool, medium: bool, large: bool):
     error_trapez_mace_small, error_trapez_mace_medium, error_trapez_mace_large = get_area_error_mace(small, medium, large)
+    print("Print data to files...")
     mace_dict = dict()
     if small:
         mace_dict['small'] = error_trapez_mace_small
@@ -411,6 +416,7 @@ def save_mace_errors(small: bool, medium: bool, large: bool):
 
 def save_single_torsion_scan(index, small_1l: bool, medium_1l: bool, large_1l: bool, small_2l: bool, medium_2l: bool, large_2l: bool):
     torsion_energies_small_1l, torsion_energies_medium_1l, torsion_energies_large_1l, torsion_energies_small_2l, torsion_energies_medium_2l, torsion_energies_large_2l = get_single_torsion_grace(0, small_1l, medium_1l, large_1l, small_2l, medium_2l, large_2l)
+    print("Print data to files...")
     single_torsion_dict = dict()
     if small_1l:
         single_torsion_dict['small_1l'] = torsion_energies_small_1l
