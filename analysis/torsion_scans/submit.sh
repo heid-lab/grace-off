@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -p gpu
+#SBATCH -p 4090
 
 
 # Load any required modules
