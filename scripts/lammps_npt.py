@@ -3,23 +3,19 @@ from ase.optimize import BFGS
 from ase.md.velocitydistribution import MaxwellBoltzmannDistribution
 from ase import units
 from ase.md.nose_hoover_chain import IsotropicMTKNPT
-from ase.constraints import FixCom
+
 
 import argparse
 import os
 import time
 
 import os
-os.environ['XLA_FLAGS'] = (
-    '--xla_gpu_enable_latency_hiding_scheduler=true '
-)
 
-from mace.calculators import MACECalculator
-from tensorpotential.calculator import TPCalculator
+# os.environ["XLA_FLAGS"] = "--xla_gpu_enable_latency_hiding_scheduler=true "
 
-parser = argparse.ArgumentParser(
-    description="Run an ASE simulation with MLPotential."
-)
+from ase.calculators.lammpslib import LAMMPSlib
+
+parser = argparse.ArgumentParser(description="Run an ASE simulation with MLPotential.")
 parser.add_argument(
     "--model_size", type=str, required=True, help="Model size (small, medium, large)."
 )
@@ -49,9 +45,9 @@ model_type = args.model_type
 model_size = args.model_size
 default_dtype = args.default_dtype
 sol = args.sol
-run = 1
 
 if model_type.upper() == "GRACE":
+    species = ["Br", "C", "Cl", "F", "H", "I", "N", "O", "P", "S"]
     if default_dtype.lower() == "float64":
         model_path = (
             f"../models/{args.layer}l/{args.dataset}_{model_size}/seed/1/saved_model"
@@ -60,7 +56,12 @@ if model_type.upper() == "GRACE":
         model_path = (
             f"../models/{args.layer}l/{args.dataset}_{model_size}/seed/1/casted_model"
         )
-    path = f"../output/{args.layer}l_{sol}_{model_type}_{model_size}_{args.dataset}_run{run}"
+    path = f"../output/{args.layer}l_{sol}_{model_type}_{model_size}_{args.dataset}"
+    lmpcmds = [
+        "pair_style grace padding 0.05 pair_forces",
+        "pair_coeff * * " + model_path + " " + " ".join(species),
+    ]
+    atom_types = {sym: i + 1 for i, sym in enumerate(species)}
     print("Selected the following GRACE model:", model_path)
 elif model_type.upper() == "MACE":
     model_path = f"../models/{model_type.upper()}-OFF23_{model_size}.model"
@@ -70,19 +71,17 @@ os.makedirs(path, exist_ok=True)
 
 # Constants for NPT dynamics
 temperature = 300  # K
-timestep = 0.5 * units.fs  # fs
+timestep = 1 * units.fs  # fs
 log_interval = 100
 
-mol = read(f"../data/liquids/{sol}.pdb")
+mol = read("../data/mace_nvt_equil.pdb")
 
-if model_type.upper() == "GRACE":
-    mol.calc = TPCalculator(
-        model=f"{model_path}", device="cuda", float_dtype=default_dtype
-    )
-elif model_type.upper() == "MACE":
-    mol.calc = MACECalculator(
-        model_paths=model_path, device="cuda", default_dtype=default_dtype
-    )
+mol.calc = LAMMPSlib(
+    lmpcmds=lmpcmds,
+    atom_types=atom_types,
+    log_file="grace_lammps.log",
+    keep_alive=True,
+)
 
 mol.set_pbc([True, True, True])
 # mol.set_constraint(FixCom()) # remove center of mass motion
@@ -98,7 +97,7 @@ print(f"Initial NPT energy: {E_initial:.6f} eV")
 
 # short Geometry optimization
 opt = BFGS(mol)
-opt.run(steps=50)
+opt.run(steps=10)
 
 # NPT dynamics
 dyn = IsotropicMTKNPT(
@@ -108,8 +107,8 @@ dyn = IsotropicMTKNPT(
     pressure_au=1.01325 * units.bar,
     tdamp=100 * timestep,
     pdamp=1000 * timestep,
-    logfile=f"{path}/{sol}_{temperature}_npt.log",
-    trajectory=f"{path}/{sol}_{temperature}_npt.traj",
+    logfile=f"{path}/lammps_{sol}_{temperature}_npt.log",
+    trajectory=f"{path}/lammps_{sol}_{temperature}_npt.traj",
     loginterval=log_interval,
 )
 
@@ -119,7 +118,7 @@ _perf = {
     "last_t_int": None,
 }  # t_int = ASE internal time
 
-dens_csv = open(f"{path}/{sol}_{temperature}_npt_density.csv", "w", buffering=1)
+dens_csv = open(f"{path}/lammps_{sol}_{temperature}_npt_density.csv", "w", buffering=1)
 dens_csv.write("time_ps,volume_A3,density_g_cm3,ns_per_day\n")
 
 
@@ -149,5 +148,5 @@ def log_density_csv():
 
 dyn.attach(log_density_csv, interval=log_interval)
 
-n_steps = 2_200_000
+n_steps = 1_200_000
 dyn.run(n_steps)

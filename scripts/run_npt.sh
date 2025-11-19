@@ -19,8 +19,7 @@ model_type=$2
 default_dtype=$3
 layer=$4
 dataset=$5
-
-sol="wat"
+sol=$6
 
 echo "Running NPT with model_size=$model_size, model_type=$model_type, default_dtype=$default_dtype, layer=$layer, dataset=$dataset"
 python ase_npt.py --model_size $model_size --model_type $model_type --sol $sol --default_dtype $default_dtype --layer $layer --dataset $dataset

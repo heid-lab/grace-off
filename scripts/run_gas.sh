@@ -25,14 +25,17 @@ sol="wat"
 
 # for using a GRACE model trained on a_wpS dataset
 # 1L-small
-python ase_gas.py --model_size small --model_type grace --sol $sol --dataset b_off --layer 2 --default_dtype float32
+# python ase_gas.py --model_size small --model_type grace --sol $sol --dataset b_off --layer 2 --default_dtype float32
 # 1L-medium
 # python ase_gas.py --model_size medium --model_type grace --sol $sol --dataset a_wpS --layer 1 --default_dtype float32
-# 2L-small
-# python ase_gas.py --model_size small --model_type grace --sol $sol --dataset a_wpS --layer 2 --default_dtype float32
-# 2L-medium
-# python ase_gas.py --model_size medium --model_type grace --sol $sol --dataset a_wpS --layer 2 --default_dtype float32
-
+# 2L-small - a_wpS  dataset
+python ase_gas.py --model_size small --model_type grace --sol $sol --dataset a_wpS --layer 2 --default_dtype float32
+# 2L-medium - a_wpS dataset
+python ase_gas.py --model_size medium --model_type grace --sol $sol --dataset a_wpS --layer 2 --default_dtype float32
+# 2L-small - b_off dataset
+python ase_gas.py --model_size small --model_type grace --sol $sol --dataset b_off --layer 2 --default_dtype float32
+# 2L-medium - b_off dataset
+python ase_gas.py --model_size medium --model_type grace --sol $sol --dataset b_off --layer 2 --default_dtype float32
 
 # for using a MACE model
 # python ase_gas.py --model_size small --model_type mace --sol $sol --default_dtype float32
