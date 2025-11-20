@@ -9,11 +9,6 @@ import argparse
 import os
 import time
 
-import os
-os.environ['XLA_FLAGS'] = (
-    '--xla_gpu_enable_latency_hiding_scheduler=true '
-)
-
 from mace.calculators import MACECalculator
 from tensorpotential.calculator import TPCalculator
 
@@ -42,6 +37,7 @@ parser.add_argument(
     help="Single or double precision for energies.",
 )
 parser.add_argument("--sol", type=str, required=True, help="Solvent box.")
+parser.add_argument("--run", type=int, required=False, help="Run number.")
 
 args = parser.parse_args()
 
@@ -49,7 +45,7 @@ model_type = args.model_type
 model_size = args.model_size
 default_dtype = args.default_dtype
 sol = args.sol
-run = 1
+run = args.run if args.run is not None else 1
 
 if model_type.upper() == "GRACE":
     if default_dtype.lower() == "float64":
@@ -64,7 +60,7 @@ if model_type.upper() == "GRACE":
     print("Selected the following GRACE model:", model_path)
 elif model_type.upper() == "MACE":
     model_path = f"../models/{model_type.upper()}-OFF23_{model_size}.model"
-    path = f"../output/{sol}_{model_type}_{model_size}"
+    path = f"../output/{sol}_{model_type}_{model_size}_run{run}"
 
 os.makedirs(path, exist_ok=True)
 
