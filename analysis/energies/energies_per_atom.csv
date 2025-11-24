@@ -1,0 +1,11 @@
+model,size,energy_rmse_meV,energy_mae_meV,forces_rmse_meV_per_A,forces_mae_meV_per_A
+grace,1l_small,8.67,3.46,138.7688,71.4809
+grace,1l_medium,4.27,1.78,81.1765,38.5286
+grace,1l_large,3.82,1.38,67.2768,32.0414
+grace,2l_small,2.98,1.21,57.423,24.8826
+mace,2l_small,2.54,1.26,64.0469,31.985
+grace,2l_medium,2.01,0.62,38.6641,14.8365
+mace,2l_medium,1.87,0.81,47.747,20.6761
+grace,2l_large,1.95,0.47,34.1059,12.0665
+mace,2l_large,2.73,0.79,41.4044,13.6198
+
