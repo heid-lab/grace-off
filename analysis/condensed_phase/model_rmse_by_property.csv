@@ -1,0 +1,6 @@
+Model,Compressibility,Density,Heat Capacity,Heat of Vaporization,Thermal Expansion
+GRACE (2L-L),0.41,0.06,0.74,3.11,0.02
+GRACE (2L-M),0.39,0.04,0.74,6.27,0.03
+GRACE (2L-S),0.62,0.07,0.79,5.26,0.05
+MACE (M) - OpenMM,146.18,0.15,0.96,9.14,1.54
+MACE (S) - OpenMM,1.1,0.13,1.0,3.13,0.18
