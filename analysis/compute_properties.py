@@ -148,9 +148,10 @@ models = [
     # "mace_small",
     # "1l_wat_grace_small_a_wpS",
     # "1l_wat_grace_medium_a_wpS",
-    # "2l_wat_grace_small_a_wpS",
-    # "2l_wat_grace_medium_a_wpS",
+    "2l_wat_grace_small_a_wpS",
     "2l_wat_grace_small_b_off",
+    "2l_wat_grace_medium_a_wpS",
+    "2l_wat_grace_medium_b_off",
 ]
 
 for model in models:

@@ -1,0 +1,1075 @@
+2025-10-25 15:28:01,820 I - ========================================
+2025-10-25 15:28:01,820 I -             Start GRACEmaker
+2025-10-25 15:28:01,820 I - ========================================
+2025-10-25 15:28:01,820 I - Tensorflow version: 2.19.1
+2025-10-25 15:28:01,820 I - Loaded input.yaml... 
+2025-10-25 15:28:01,820 I - Set seed to 1
+2025-10-25 15:28:01,821 I - Data distribution strategy: Single GPU
+2025-10-25 15:28:01,821 I - Number of replicas: 1
+2025-10-25 15:28:01,821 I - Replica ID in sync group: 0
+2025-10-25 15:28:01,821 I - Global TRAIN batch size (= minibatch size * num GPUS): 16, num. GPUS: 1, minibatch size: 16
+2025-10-25 15:28:01,821 I - Global TEST batch size (= minibatch size * num GPUS): 64, num. GPUS: 1, minibatch size: 64
+2025-10-25 15:28:01,821 I - Float dtype: float64
+2025-10-25 15:28:01,821 I - Loading training data from ../../data/b_off_2.0_train.pkl.gz
+2025-10-25 15:28:01,821 I - Search for dataset file(s): ['../../data/b_off_2.0_train.pkl.gz']
+2025-10-25 15:28:01,821 I - #1/1: try to load ../../data/b_off_2.0_train.pkl.gz
+2025-10-25 15:28:01,822 I - Loading dataframe from pickle file ../../data/b_off_2.0_train.pkl.gz (4.5GiB)
+2025-10-25 15:30:30,564 I -  1975993 structures found
+2025-10-25 15:30:31,497 I - Loaded dataset size: (1975993, 5)
+2025-10-25 15:30:31,497 I - Split test data from train dataset (fraction = 0.05)
+2025-10-25 15:30:33,826 I - Set 'energy_corrected' to 'energy', because reference_energy=0
+2025-10-25 15:30:35,153 I - Data (auto) scale: 1.0509016314895254
+2025-10-25 15:30:35,153 I - input::fit::compute_convex_hull is False, convex hull and 'low energy' group will not be computed 
+2025-10-25 15:30:35,153 I - Train Dataset size: 1877193
+2025-10-25 15:30:35,183 I - Test Dataset size: 98800
+2025-10-25 15:30:44,014 I - Extract elements from train and test datasets
+2025-10-25 15:30:44,014 I - Elements mapping: {'Br': 0, 'C': 1, 'Cl': 2, 'F': 3, 'H': 4, 'I': 5, 'N': 6, 'O': 7, 'P': 8, 'S': 9}
+2025-10-25 15:30:44,014 I - TRAIN WEIGHTS: energy - False, forces - False 
+2025-10-25 15:30:44,014 I - TEST WEIGHTS: energy - False, forces - False 
+2025-10-25 15:30:44,014 I - Saving current training set to seed/1/training_set.pkl.gz
+2025-10-25 15:37:11,183 I - Saving current test set to seed/1/test_set.pkl.gz
+2025-10-25 15:37:31,850 I - Train set processing
+2025-10-25 15:37:31,850 I - Train buckets: 100
+2025-10-25 15:37:31,850 I - 1/4. Converting pd.DataFrame to batch data
+2025-10-25 15:59:13,629 I - 2/4. Splitting batches into per-batch groups.
+2025-10-25 15:59:50,463 I - 3/4. Joining groups to batches
+2025-10-25 16:01:31,352 I - 4/4. Padding batches
+2025-10-25 16:04:04,700 I - [TRAIN] dataset stats: num. batches: 117325 | num. real structures: 1877193 (+6.25%) | num. real atoms: 67121994 (+20.31%) | num. real neighbours: 1618681336 (+3.02%) 
+2025-10-25 16:04:04,847 I - Average number of neighbors (computed): 24.115513254865462
+2025-10-25 16:04:04,848 I - Test set processing
+2025-10-25 16:04:04,848 I - Test buckets: 50
+2025-10-25 16:04:04,848 I - 1/4. Converting pd.DataFrame to batch data
+2025-10-25 16:05:21,447 I - 2/4. Splitting batches into per-batch groups.
+2025-10-25 16:05:45,669 I - 3/4. Joining groups to batches
+2025-10-25 16:06:11,974 I - 4/4. Padding batches
+2025-10-25 16:06:16,153 I - [TEST] dataset stats: num. batches: 1544 | num. real structures: 98800 (+1.58%) | num. real atoms: 3537779 (+2.94%) | num. real neighbours: 85372862 (+0.54%) 
+2025-10-25 16:06:29,324 I - Constructing model from config
+2025-10-25 16:06:29,337 I - Model kwargs: {'lmax': 4, 'n_rad_max': 48, 'max_order': 4, 'n_mlp_dens': 16}
+2025-10-25 16:06:32,201 I - Saving model config to seed/1/model.yaml
+2025-10-25 16:06:32,216 I - Loss function: Loss(1.0*WeightedHuberEnergyPerAtomLoss(delta=0.01)(energy) + 5.0*WeightedHuberForceLoss(delta=0.01)(forces))
+2025-10-25 16:06:32,216 I - JIT compilation: True
+2025-10-25 16:06:32,216 I - Optimization options: {'learning_rate': 0.01, 'amsgrad': True, 'use_ema': True, 'ema_momentum': 0.99, 'weight_decay': None, 'clipvalue': 1.0}
+2025-10-25 16:06:32,632 I - Convert data to tensors
+2025-10-25 16:06:32,632 I - [TRAIN] Convert to tensors
+2025-10-25 16:15:31,326 I - [TEST] Convert to tensors
+2025-10-25 16:15:42,379 I - Start Adam optimization
+2025-10-25 16:15:53,420 I - Number of trainable parameters: 1026592
+2025-10-25 16:15:53,420 I - Learning rate reduction will be used with parameters: {'patience': 5, 'factor': 0.98, 'min': 0.0005, 'stop_at_min': True, 'resume_lr': True}
+2025-10-25 17:18:13,432 I - Iteration #1/500 TRAIN(TEST): total_loss: 6.216e-03 (3.318e-03) mae/depa: 2.638e-02 (8.422e-03) rmse/depa: 7.121e-02 (2.166e-02) mae/f_comp: 1.204e-01 (6.998e-02) rmse/f_comp: 2.469e-01 (1.554e-01) Time(mcs/at): 52 (67)
+2025-10-25 17:18:13,439 I - New best test loss found (3.31811e-03), checkpointing
+2025-10-25 17:18:16,338 I - Sharding callback duration: 39 microseconds
+2025-10-25 18:04:43,931 I - Iteration #2/500 TRAIN(TEST): total_loss: 4.031e-03 (3.015e-03) mae/depa: 1.422e-02 (7.473e-03) rmse/depa: 2.470e-02 (2.000e-02) mae/f_comp: 8.065e-02 (6.404e-02) rmse/f_comp: 1.628e-01 (1.446e-01) Time(mcs/at): 41 (9)
+2025-10-25 18:04:43,939 I - New best test loss found (3.01510e-03), checkpointing
+2025-10-25 18:04:44,382 I - Sharding callback duration: 379 microseconds
+2025-10-25 18:50:33,501 I - Iteration #3/500 TRAIN(TEST): total_loss: 3.536e-03 (2.684e-03) mae/depa: 1.194e-02 (6.278e-03) rmse/depa: 2.153e-02 (1.697e-02) mae/f_comp: 7.151e-02 (5.755e-02) rmse/f_comp: 1.460e-01 (1.287e-01) Time(mcs/at): 40 (9)
+2025-10-25 18:50:33,509 I - New best test loss found (2.68369e-03), checkpointing
+2025-10-25 18:50:33,850 I - Sharding callback duration: 371 microseconds
+2025-10-25 19:36:47,517 I - Iteration #4/500 TRAIN(TEST): total_loss: 3.287e-03 (2.573e-03) mae/depa: 1.109e-02 (6.178e-03) rmse/depa: 1.996e-02 (1.498e-02) mae/f_comp: 6.699e-02 (5.536e-02) rmse/f_comp: 1.388e-01 (1.245e-01) Time(mcs/at): 41 (10)
+2025-10-25 19:36:47,526 I - New best test loss found (2.57280e-03), checkpointing
+2025-10-25 19:36:47,870 I - Sharding callback duration: 381 microseconds
+2025-10-25 20:22:46,696 I - Iteration #5/500 TRAIN(TEST): total_loss: 3.119e-03 (2.426e-03) mae/depa: 1.057e-02 (5.697e-03) rmse/depa: 1.882e-02 (1.548e-02) mae/f_comp: 6.389e-02 (5.246e-02) rmse/f_comp: 1.327e-01 (1.192e-01) Time(mcs/at): 40 (9)
+2025-10-25 20:22:46,704 I - New best test loss found (2.42634e-03), checkpointing
+2025-10-25 20:22:47,047 I - Sharding callback duration: 353 microseconds
+2025-10-25 21:08:35,946 I - Iteration #6/500 TRAIN(TEST): total_loss: 3.003e-03 (2.404e-03) mae/depa: 1.021e-02 (5.847e-03) rmse/depa: 1.824e-02 (1.627e-02) mae/f_comp: 6.174e-02 (5.199e-02) rmse/f_comp: 1.286e-01 (1.251e-01) Time(mcs/at): 40 (10)
+2025-10-25 21:08:35,955 I - New best test loss found (2.40356e-03), checkpointing
+2025-10-25 21:08:36,300 I - Sharding callback duration: 349 microseconds
+2025-10-25 21:54:10,738 I - Iteration #7/500 TRAIN(TEST): total_loss: 2.887e-03 (2.294e-03) mae/depa: 9.748e-03 (5.233e-03) rmse/depa: 1.738e-02 (1.442e-02) mae/f_comp: 5.968e-02 (4.986e-02) rmse/f_comp: 1.252e-01 (1.133e-01) Time(mcs/at): 40 (9)
+2025-10-25 21:54:10,745 I - New best test loss found (2.29375e-03), checkpointing
+2025-10-25 21:54:11,081 I - Sharding callback duration: 356 microseconds
+2025-10-25 22:40:28,199 I - Iteration #8/500 TRAIN(TEST): total_loss: 2.816e-03 (2.239e-03) mae/depa: 9.598e-03 (5.019e-03) rmse/depa: 1.658e-02 (1.300e-02) mae/f_comp: 5.834e-02 (4.880e-02) rmse/f_comp: 1.225e-01 (1.123e-01) Time(mcs/at): 41 (9)
+2025-10-25 22:40:28,210 I - New best test loss found (2.23896e-03), checkpointing
+2025-10-25 22:40:28,563 I - Sharding callback duration: 29 microseconds
+2025-10-25 23:26:19,980 I - Iteration #9/500 TRAIN(TEST): total_loss: 2.749e-03 (2.233e-03) mae/depa: 9.352e-03 (5.512e-03) rmse/depa: 1.628e-02 (1.376e-02) mae/f_comp: 5.708e-02 (4.862e-02) rmse/f_comp: 1.204e-01 (1.127e-01) Time(mcs/at): 40 (9)
+2025-10-25 23:26:19,987 I - New best test loss found (2.23344e-03), checkpointing
+2025-10-25 23:26:20,314 I - Sharding callback duration: 366 microseconds
+2025-10-26 00:12:13,063 I - Iteration #10/500 TRAIN(TEST): total_loss: 2.695e-03 (2.132e-03) mae/depa: 9.196e-03 (4.851e-03) rmse/depa: 1.602e-02 (1.241e-02) mae/f_comp: 5.611e-02 (4.667e-02) rmse/f_comp: 1.183e-01 (1.087e-01) Time(mcs/at): 40 (9)
+2025-10-26 00:12:13,072 I - New best test loss found (2.13214e-03), checkpointing
+2025-10-26 00:12:13,423 I - Sharding callback duration: 355 microseconds
+2025-10-26 00:58:34,267 I - Iteration #11/500 TRAIN(TEST): total_loss: 2.643e-03 (2.109e-03) mae/depa: 8.988e-03 (4.801e-03) rmse/depa: 1.569e-02 (1.242e-02) mae/f_comp: 5.513e-02 (4.621e-02) rmse/f_comp: 1.164e-01 (1.064e-01) Time(mcs/at): 41 (9)
+2025-10-26 00:58:34,276 I - New best test loss found (2.10920e-03), checkpointing
+2025-10-26 00:58:34,611 I - Sharding callback duration: 342 microseconds
+2025-10-26 01:44:34,490 I - Iteration #12/500 TRAIN(TEST): total_loss: 2.589e-03 (2.171e-03) mae/depa: 8.749e-03 (4.930e-03) rmse/depa: 1.492e-02 (1.234e-02) mae/f_comp: 5.420e-02 (4.744e-02) rmse/f_comp: 1.139e-01 (1.073e-01) Time(mcs/at): 41 (9)
+2025-10-26 02:30:28,337 I - Iteration #13/500 TRAIN(TEST): total_loss: 2.562e-03 (2.070e-03) mae/depa: 8.692e-03 (4.730e-03) rmse/depa: 1.483e-02 (1.212e-02) mae/f_comp: 5.368e-02 (4.543e-02) rmse/f_comp: 1.131e-01 (1.044e-01) Time(mcs/at): 40 (9)
+2025-10-26 02:30:28,345 I - New best test loss found (2.06999e-03), checkpointing
+2025-10-26 02:30:32,105 I - Sharding callback duration: 359 microseconds
+2025-10-26 02:16:15,829 I - Iteration #14/500 TRAIN(TEST): total_loss: 2.527e-03 (2.074e-03) mae/depa: 8.546e-03 (4.604e-03) rmse/depa: 1.463e-02 (1.201e-02) mae/f_comp: 5.306e-02 (4.553e-02) rmse/f_comp: 1.119e-01 (1.036e-01) Time(mcs/at): 40 (9)
+2025-10-26 03:02:16,048 I - Iteration #15/500 TRAIN(TEST): total_loss: 2.497e-03 (2.025e-03) mae/depa: 8.490e-03 (4.420e-03) rmse/depa: 1.461e-02 (1.144e-02) mae/f_comp: 5.245e-02 (4.456e-02) rmse/f_comp: 1.101e-01 (1.030e-01) Time(mcs/at): 41 (9)
+2025-10-26 03:02:16,056 I - New best test loss found (2.02457e-03), checkpointing
+2025-10-26 03:02:16,385 I - Sharding callback duration: 358 microseconds
+2025-10-26 03:47:53,488 I - Iteration #16/500 TRAIN(TEST): total_loss: 2.475e-03 (2.063e-03) mae/depa: 8.369e-03 (4.861e-03) rmse/depa: 1.427e-02 (1.153e-02) mae/f_comp: 5.208e-02 (4.530e-02) rmse/f_comp: 1.097e-01 (1.027e-01) Time(mcs/at): 40 (9)
+2025-10-26 04:33:42,681 I - Iteration #17/500 TRAIN(TEST): total_loss: 2.440e-03 (1.987e-03) mae/depa: 8.195e-03 (4.121e-03) rmse/depa: 1.391e-02 (1.104e-02) mae/f_comp: 5.146e-02 (4.384e-02) rmse/f_comp: 1.076e-01 (1.000e-01) Time(mcs/at): 40 (9)
+2025-10-26 04:33:42,689 I - New best test loss found (1.98709e-03), checkpointing
+2025-10-26 04:33:43,016 I - Sharding callback duration: 30 microseconds
+2025-10-26 05:19:35,727 I - Iteration #18/500 TRAIN(TEST): total_loss: 2.421e-03 (1.985e-03) mae/depa: 8.158e-03 (4.625e-03) rmse/depa: 1.403e-02 (1.205e-02) mae/f_comp: 5.112e-02 (4.375e-02) rmse/f_comp: 1.086e-01 (1.002e-01) Time(mcs/at): 40 (9)
+2025-10-26 05:19:35,736 I - New best test loss found (1.98506e-03), checkpointing
+2025-10-26 05:19:36,095 I - Sharding callback duration: 352 microseconds
+2025-10-26 06:05:23,704 I - Iteration #19/500 TRAIN(TEST): total_loss: 2.400e-03 (1.971e-03) mae/depa: 8.165e-03 (4.402e-03) rmse/depa: 1.398e-02 (1.112e-02) mae/f_comp: 5.070e-02 (4.348e-02) rmse/f_comp: 1.061e-01 (1.004e-01) Time(mcs/at): 40 (9)
+2025-10-26 06:05:23,712 I - New best test loss found (1.97111e-03), checkpointing
+2025-10-26 06:05:24,036 I - Sharding callback duration: 350 microseconds
+2025-10-26 06:51:11,828 I - Iteration #20/500 TRAIN(TEST): total_loss: 2.388e-03 (2.034e-03) mae/depa: 8.123e-03 (4.662e-03) rmse/depa: 1.396e-02 (1.082e-02) mae/f_comp: 5.047e-02 (4.472e-02) rmse/f_comp: 1.056e-01 (1.002e-01) Time(mcs/at): 40 (9)
+2025-10-26 07:36:54,589 I - Iteration #21/500 TRAIN(TEST): total_loss: 2.364e-03 (1.959e-03) mae/depa: 7.862e-03 (4.326e-03) rmse/depa: 1.334e-02 (1.039e-02) mae/f_comp: 5.005e-02 (4.327e-02) rmse/f_comp: 1.044e-01 (9.767e-02) Time(mcs/at): 40 (9)
+2025-10-26 07:36:54,596 I - New best test loss found (1.95936e-03), checkpointing
+2025-10-26 07:36:54,920 I - Sharding callback duration: 312 microseconds
+2025-10-26 08:22:39,846 I - Iteration #22/500 TRAIN(TEST): total_loss: 2.349e-03 (1.902e-03) mae/depa: 7.822e-03 (4.081e-03) rmse/depa: 1.355e-02 (1.056e-02) mae/f_comp: 4.977e-02 (4.212e-02) rmse/f_comp: 1.046e-01 (9.577e-02) Time(mcs/at): 40 (9)
+2025-10-26 08:22:39,854 I - New best test loss found (1.90169e-03), checkpointing
+2025-10-26 08:22:40,204 I - Sharding callback duration: 299 microseconds
+2025-10-26 09:08:39,303 I - Iteration #23/500 TRAIN(TEST): total_loss: 2.336e-03 (1.951e-03) mae/depa: 7.848e-03 (4.259e-03) rmse/depa: 1.332e-02 (1.059e-02) mae/f_comp: 4.953e-02 (4.310e-02) rmse/f_comp: 1.033e-01 (9.740e-02) Time(mcs/at): 41 (9)
+2025-10-26 09:54:29,119 I - Iteration #24/500 TRAIN(TEST): total_loss: 2.319e-03 (1.891e-03) mae/depa: 7.820e-03 (4.004e-03) rmse/depa: 1.334e-02 (1.016e-02) mae/f_comp: 4.922e-02 (4.193e-02) rmse/f_comp: 1.027e-01 (9.586e-02) Time(mcs/at): 40 (9)
+2025-10-26 09:54:29,125 I - New best test loss found (1.89147e-03), checkpointing
+2025-10-26 09:54:29,470 I - Sharding callback duration: 261 microseconds
+2025-10-26 10:40:19,491 I - Iteration #25/500 TRAIN(TEST): total_loss: 2.300e-03 (1.900e-03) mae/depa: 7.736e-03 (4.277e-03) rmse/depa: 1.310e-02 (1.089e-02) mae/f_comp: 4.888e-02 (4.206e-02) rmse/f_comp: 1.019e-01 (9.535e-02) Time(mcs/at): 40 (9)
+2025-10-26 11:25:46,005 I - Iteration #26/500 TRAIN(TEST): total_loss: 2.285e-03 (1.876e-03) mae/depa: 7.671e-03 (4.033e-03) rmse/depa: 1.310e-02 (1.061e-02) mae/f_comp: 4.862e-02 (4.161e-02) rmse/f_comp: 1.014e-01 (9.558e-02) Time(mcs/at): 40 (9)
+2025-10-26 11:25:46,011 I - New best test loss found (1.87630e-03), checkpointing
+2025-10-26 11:25:46,364 I - Sharding callback duration: 242 microseconds
+2025-10-26 12:11:49,518 I - Iteration #27/500 TRAIN(TEST): total_loss: 2.278e-03 (1.881e-03) mae/depa: 7.655e-03 (4.183e-03) rmse/depa: 1.307e-02 (1.040e-02) mae/f_comp: 4.849e-02 (4.171e-02) rmse/f_comp: 1.010e-01 (9.563e-02) Time(mcs/at): 41 (9)
+2025-10-26 12:57:24,549 I - Iteration #28/500 TRAIN(TEST): total_loss: 2.267e-03 (1.891e-03) mae/depa: 7.601e-03 (4.201e-03) rmse/depa: 1.297e-02 (1.046e-02) mae/f_comp: 4.829e-02 (4.189e-02) rmse/f_comp: 1.004e-01 (9.420e-02) Time(mcs/at): 40 (9)
+2025-10-26 13:42:51,511 I - Iteration #29/500 TRAIN(TEST): total_loss: 2.252e-03 (1.881e-03) mae/depa: 7.502e-03 (3.965e-03) rmse/depa: 1.273e-02 (1.002e-02) mae/f_comp: 4.800e-02 (4.171e-02) rmse/f_comp: 1.003e-01 (9.482e-02) Time(mcs/at): 40 (9)
+2025-10-26 14:28:48,019 I - Iteration #30/500 TRAIN(TEST): total_loss: 2.240e-03 (1.899e-03) mae/depa: 7.524e-03 (4.132e-03) rmse/depa: 1.298e-02 (1.015e-02) mae/f_comp: 4.777e-02 (4.208e-02) rmse/f_comp: 9.950e-02 (9.480e-02) Time(mcs/at): 40 (9)
+2025-10-26 15:14:47,266 I - Iteration #31/500 TRAIN(TEST): total_loss: 2.240e-03 (1.844e-03) mae/depa: 7.546e-03 (3.913e-03) rmse/depa: 1.303e-02 (9.943e-03) mae/f_comp: 4.778e-02 (4.098e-02) rmse/f_comp: 9.901e-02 (9.254e-02) Time(mcs/at): 41 (9)
+2025-10-26 15:14:47,272 I - New best test loss found (1.84358e-03), checkpointing
+2025-10-26 15:14:47,607 I - Sharding callback duration: 33 microseconds
+2025-10-26 16:00:33,639 I - Iteration #32/500 TRAIN(TEST): total_loss: 2.219e-03 (1.845e-03) mae/depa: 7.370e-03 (3.940e-03) rmse/depa: 1.251e-02 (9.970e-03) mae/f_comp: 4.742e-02 (4.102e-02) rmse/f_comp: 9.817e-02 (9.228e-02) Time(mcs/at): 40 (9)
+2025-10-26 16:46:04,177 I - Iteration #33/500 TRAIN(TEST): total_loss: 2.208e-03 (1.832e-03) mae/depa: 7.355e-03 (3.873e-03) rmse/depa: 1.249e-02 (1.053e-02) mae/f_comp: 4.719e-02 (4.074e-02) rmse/f_comp: 9.785e-02 (9.243e-02) Time(mcs/at): 40 (9)
+2025-10-26 16:46:04,184 I - New best test loss found (1.83197e-03), checkpointing
+2025-10-26 16:46:04,502 I - Sharding callback duration: 226 microseconds
+2025-10-26 17:31:48,088 I - Iteration #34/500 TRAIN(TEST): total_loss: 2.199e-03 (1.868e-03) mae/depa: 7.326e-03 (4.030e-03) rmse/depa: 1.264e-02 (9.680e-03) mae/f_comp: 4.706e-02 (4.147e-02) rmse/f_comp: 9.791e-02 (9.406e-02) Time(mcs/at): 40 (9)
+2025-10-26 18:16:59,237 I - Iteration #35/500 TRAIN(TEST): total_loss: 2.195e-03 (1.825e-03) mae/depa: 7.325e-03 (3.853e-03) rmse/depa: 1.253e-02 (1.014e-02) mae/f_comp: 4.693e-02 (4.059e-02) rmse/f_comp: 9.776e-02 (9.188e-02) Time(mcs/at): 40 (9)
+2025-10-26 18:16:59,244 I - New best test loss found (1.82467e-03), checkpointing
+2025-10-26 18:16:59,566 I - Sharding callback duration: 233 microseconds
+2025-10-26 19:02:55,225 I - Iteration #36/500 TRAIN(TEST): total_loss: 2.176e-03 (1.817e-03) mae/depa: 7.196e-03 (3.844e-03) rmse/depa: 1.224e-02 (9.588e-03) mae/f_comp: 4.662e-02 (4.044e-02) rmse/f_comp: 9.648e-02 (9.127e-02) Time(mcs/at): 40 (9)
+2025-10-26 19:02:55,230 I - New best test loss found (1.81681e-03), checkpointing
+2025-10-26 19:02:59,325 I - Sharding callback duration: 376 microseconds
+2025-10-26 19:48:53,567 I - Iteration #37/500 TRAIN(TEST): total_loss: 2.175e-03 (1.802e-03) mae/depa: 7.184e-03 (3.800e-03) rmse/depa: 1.227e-02 (1.006e-02) mae/f_comp: 4.661e-02 (4.015e-02) rmse/f_comp: 9.678e-02 (9.301e-02) Time(mcs/at): 40 (9)
+2025-10-26 19:48:53,576 I - New best test loss found (1.80215e-03), checkpointing
+2025-10-26 19:48:53,910 I - Sharding callback duration: 344 microseconds
+2025-10-26 20:34:43,374 I - Iteration #38/500 TRAIN(TEST): total_loss: 2.160e-03 (1.949e-03) mae/depa: 7.101e-03 (5.216e-03) rmse/depa: 1.230e-02 (1.064e-02) mae/f_comp: 4.634e-02 (4.295e-02) rmse/f_comp: 9.617e-02 (9.608e-02) Time(mcs/at): 40 (9)
+2025-10-26 21:20:12,457 I - Iteration #39/500 TRAIN(TEST): total_loss: 2.152e-03 (1.868e-03) mae/depa: 7.087e-03 (4.120e-03) rmse/depa: 1.194e-02 (1.056e-02) mae/f_comp: 4.618e-02 (4.145e-02) rmse/f_comp: 9.572e-02 (9.261e-02) Time(mcs/at): 40 (9)
+2025-10-26 22:05:31,982 I - Iteration #40/500 TRAIN(TEST): total_loss: 2.154e-03 (1.809e-03) mae/depa: 7.199e-03 (4.066e-03) rmse/depa: 1.238e-02 (9.473e-03) mae/f_comp: 4.616e-02 (4.027e-02) rmse/f_comp: 9.602e-02 (9.126e-02) Time(mcs/at): 40 (9)
+2025-10-26 22:50:38,218 I - Iteration #41/500 TRAIN(TEST): total_loss: 2.147e-03 (1.832e-03) mae/depa: 7.132e-03 (3.755e-03) rmse/depa: 1.240e-02 (9.570e-03) mae/f_comp: 4.607e-02 (4.076e-02) rmse/f_comp: 9.562e-02 (9.216e-02) Time(mcs/at): 40 (9)
+2025-10-26 23:35:38,598 I - Iteration #42/500 TRAIN(TEST): total_loss: 2.131e-03 (1.782e-03) mae/depa: 7.087e-03 (3.759e-03) rmse/depa: 1.227e-02 (9.221e-03) mae/f_comp: 4.581e-02 (3.975e-02) rmse/f_comp: 9.497e-02 (8.991e-02) Time(mcs/at): 40 (9)
+2025-10-26 23:35:38,606 I - New best test loss found (1.78182e-03), checkpointing
+2025-10-26 23:35:38,950 I - Sharding callback duration: 350 microseconds
+2025-10-27 00:20:27,644 I - Iteration #43/500 TRAIN(TEST): total_loss: 2.129e-03 (1.789e-03) mae/depa: 7.099e-03 (3.659e-03) rmse/depa: 1.219e-02 (9.873e-03) mae/f_comp: 4.575e-02 (3.990e-02) rmse/f_comp: 9.479e-02 (9.214e-02) Time(mcs/at): 39 (9)
+2025-10-27 01:05:27,011 I - Iteration #44/500 TRAIN(TEST): total_loss: 2.122e-03 (1.799e-03) mae/depa: 7.086e-03 (4.065e-03) rmse/depa: 1.194e-02 (9.891e-03) mae/f_comp: 4.559e-02 (4.007e-02) rmse/f_comp: 9.430e-02 (8.967e-02) Time(mcs/at): 40 (9)
+2025-10-27 01:50:19,493 I - Iteration #45/500 TRAIN(TEST): total_loss: 2.117e-03 (1.752e-03) mae/depa: 7.061e-03 (3.779e-03) rmse/depa: 1.208e-02 (9.547e-03) mae/f_comp: 4.553e-02 (3.913e-02) rmse/f_comp: 9.478e-02 (8.887e-02) Time(mcs/at): 40 (9)
+2025-10-27 01:50:19,501 I - New best test loss found (1.75158e-03), checkpointing
+2025-10-27 01:50:19,828 I - Sharding callback duration: 351 microseconds
+2025-10-27 02:35:19,425 I - Iteration #46/500 TRAIN(TEST): total_loss: 2.099e-03 (1.777e-03) mae/depa: 6.937e-03 (3.886e-03) rmse/depa: 1.181e-02 (9.694e-03) mae/f_comp: 4.522e-02 (3.965e-02) rmse/f_comp: 9.363e-02 (8.991e-02) Time(mcs/at): 40 (9)
+2025-10-27 03:19:46,796 I - Iteration #47/500 TRAIN(TEST): total_loss: 2.102e-03 (1.817e-03) mae/depa: 6.968e-03 (4.006e-03) rmse/depa: 1.189e-02 (9.747e-03) mae/f_comp: 4.526e-02 (4.043e-02) rmse/f_comp: 9.380e-02 (9.086e-02) Time(mcs/at): 39 (9)
+2025-10-27 04:04:28,302 I - Iteration #48/500 TRAIN(TEST): total_loss: 2.091e-03 (1.874e-03) mae/depa: 6.958e-03 (4.882e-03) rmse/depa: 1.183e-02 (1.246e-02) mae/f_comp: 4.507e-02 (4.147e-02) rmse/f_comp: 9.312e-02 (9.297e-02) Time(mcs/at): 39 (9)
+2025-10-27 04:49:24,689 I - Iteration #49/500 TRAIN(TEST): total_loss: 2.093e-03 (1.754e-03) mae/depa: 6.912e-03 (3.705e-03) rmse/depa: 1.179e-02 (9.273e-03) mae/f_comp: 4.511e-02 (3.919e-02) rmse/f_comp: 9.357e-02 (8.917e-02) Time(mcs/at): 40 (9)
+2025-10-27 05:34:24,618 I - Iteration #50/500 TRAIN(TEST): total_loss: 2.088e-03 (1.774e-03) mae/depa: 6.870e-03 (3.764e-03) rmse/depa: 1.175e-02 (9.433e-03) mae/f_comp: 4.498e-02 (3.959e-02) rmse/f_comp: 9.333e-02 (8.977e-02) Time(mcs/at): 40 (9)
+2025-10-27 05:34:24,626 I - Regular checkpointing
+2025-10-27 05:34:24,973 I - Sharding callback duration: 24 microseconds
+2025-10-27 06:19:28,357 I - Iteration #51/500 TRAIN(TEST): total_loss: 2.078e-03 (1.792e-03) mae/depa: 6.961e-03 (4.143e-03) rmse/depa: 1.174e-02 (9.678e-03) mae/f_comp: 4.482e-02 (3.992e-02) rmse/f_comp: 9.283e-02 (8.982e-02) Time(mcs/at): 40 (9)
+2025-10-27 06:19:28,368 I - Reducing learning rate: 1.00000e-02 -> 9.80000e-03
+2025-10-27 07:04:23,183 I - Iteration #52/500 TRAIN(TEST): total_loss: 2.066e-03 (1.774e-03) mae/depa: 6.830e-03 (3.787e-03) rmse/depa: 1.173e-02 (9.441e-03) mae/f_comp: 4.459e-02 (3.960e-02) rmse/f_comp: 9.249e-02 (8.865e-02) Time(mcs/at): 40 (9)
+2025-10-27 07:48:52,169 I - Iteration #53/500 TRAIN(TEST): total_loss: 2.057e-03 (1.764e-03) mae/depa: 6.811e-03 (3.876e-03) rmse/depa: 1.180e-02 (9.261e-03) mae/f_comp: 4.443e-02 (3.939e-02) rmse/f_comp: 9.223e-02 (8.854e-02) Time(mcs/at): 39 (9)
+2025-10-27 08:34:06,702 I - Iteration #54/500 TRAIN(TEST): total_loss: 2.051e-03 (1.771e-03) mae/depa: 6.749e-03 (3.748e-03) rmse/depa: 1.155e-02 (9.524e-03) mae/f_comp: 4.433e-02 (3.952e-02) rmse/f_comp: 9.209e-02 (8.896e-02) Time(mcs/at): 40 (9)
+2025-10-27 09:19:01,293 I - Iteration #55/500 TRAIN(TEST): total_loss: 2.045e-03 (1.743e-03) mae/depa: 6.734e-03 (3.844e-03) rmse/depa: 1.152e-02 (9.510e-03) mae/f_comp: 4.422e-02 (3.894e-02) rmse/f_comp: 9.164e-02 (8.774e-02) Time(mcs/at): 40 (9)
+2025-10-27 09:19:01,301 I - New best test loss found (1.74273e-03), checkpointing
+2025-10-27 09:19:01,618 I - Sharding callback duration: 357 microseconds
+2025-10-27 10:04:03,880 I - Iteration #56/500 TRAIN(TEST): total_loss: 2.044e-03 (1.751e-03) mae/depa: 6.751e-03 (3.737e-03) rmse/depa: 1.159e-02 (9.374e-03) mae/f_comp: 4.419e-02 (3.912e-02) rmse/f_comp: 9.174e-02 (8.767e-02) Time(mcs/at): 40 (9)
+2025-10-27 10:49:03,237 I - Iteration #57/500 TRAIN(TEST): total_loss: 2.041e-03 (1.715e-03) mae/depa: 6.701e-03 (3.554e-03) rmse/depa: 1.143e-02 (8.778e-03) mae/f_comp: 4.416e-02 (3.842e-02) rmse/f_comp: 9.151e-02 (8.659e-02) Time(mcs/at): 40 (9)
+2025-10-27 10:49:03,245 I - New best test loss found (1.71483e-03), checkpointing
+2025-10-27 10:49:03,567 I - Sharding callback duration: 354 microseconds
+2025-10-27 11:34:02,617 I - Iteration #58/500 TRAIN(TEST): total_loss: 2.038e-03 (1.761e-03) mae/depa: 6.731e-03 (4.012e-03) rmse/depa: 1.161e-02 (9.448e-03) mae/f_comp: 4.409e-02 (3.930e-02) rmse/f_comp: 9.157e-02 (8.850e-02) Time(mcs/at): 40 (9)
+2025-10-27 12:19:03,880 I - Iteration #59/500 TRAIN(TEST): total_loss: 2.027e-03 (1.736e-03) mae/depa: 6.698e-03 (3.547e-03) rmse/depa: 1.147e-02 (9.344e-03) mae/f_comp: 4.390e-02 (3.884e-02) rmse/f_comp: 9.093e-02 (8.867e-02) Time(mcs/at): 40 (9)
+2025-10-27 13:04:05,923 I - Iteration #60/500 TRAIN(TEST): total_loss: 2.029e-03 (1.709e-03) mae/depa: 6.651e-03 (3.463e-03) rmse/depa: 1.151e-02 (8.656e-03) mae/f_comp: 4.391e-02 (3.830e-02) rmse/f_comp: 9.164e-02 (8.614e-02) Time(mcs/at): 40 (9)
+2025-10-27 13:04:05,931 I - New best test loss found (1.70879e-03), checkpointing
+2025-10-27 13:04:06,276 I - Sharding callback duration: 341 microseconds
+2025-10-27 13:48:52,532 I - Iteration #61/500 TRAIN(TEST): total_loss: 2.022e-03 (1.714e-03) mae/depa: 6.632e-03 (3.559e-03) rmse/depa: 1.129e-02 (9.021e-03) mae/f_comp: 4.381e-02 (3.841e-02) rmse/f_comp: 9.054e-02 (8.942e-02) Time(mcs/at): 39 (9)
+2025-10-27 14:33:47,575 I - Iteration #62/500 TRAIN(TEST): total_loss: 2.027e-03 (1.736e-03) mae/depa: 6.681e-03 (3.767e-03) rmse/depa: 1.157e-02 (9.770e-03) mae/f_comp: 4.387e-02 (3.882e-02) rmse/f_comp: 9.114e-02 (8.842e-02) Time(mcs/at): 40 (9)
+2025-10-27 15:18:49,364 I - Iteration #63/500 TRAIN(TEST): total_loss: 2.010e-03 (1.718e-03) mae/depa: 6.582e-03 (3.463e-03) rmse/depa: 1.119e-02 (9.026e-03) mae/f_comp: 4.359e-02 (3.850e-02) rmse/f_comp: 9.014e-02 (8.891e-02) Time(mcs/at): 40 (9)
+2025-10-27 16:03:49,373 I - Iteration #64/500 TRAIN(TEST): total_loss: 2.022e-03 (1.824e-03) mae/depa: 6.729e-03 (3.839e-03) rmse/depa: 1.156e-02 (1.004e-02) mae/f_comp: 4.375e-02 (4.059e-02) rmse/f_comp: 9.106e-02 (9.717e-02) Time(mcs/at): 40 (9)
+2025-10-27 16:48:49,901 I - Iteration #65/500 TRAIN(TEST): total_loss: 2.011e-03 (1.696e-03) mae/depa: 6.599e-03 (3.683e-03) rmse/depa: 1.133e-02 (9.026e-03) mae/f_comp: 4.358e-02 (3.801e-02) rmse/f_comp: 9.009e-02 (8.593e-02) Time(mcs/at): 40 (9)
+2025-10-27 16:48:49,909 I - New best test loss found (1.69562e-03), checkpointing
+2025-10-27 16:48:50,236 I - Sharding callback duration: 347 microseconds
+2025-10-27 17:33:18,444 I - Iteration #66/500 TRAIN(TEST): total_loss: 2.004e-03 (1.747e-03) mae/depa: 6.545e-03 (4.069e-03) rmse/depa: 1.114e-02 (9.210e-03) mae/f_comp: 4.347e-02 (3.903e-02) rmse/f_comp: 9.003e-02 (8.769e-02) Time(mcs/at): 39 (9)
+2025-10-27 18:18:10,234 I - Iteration #67/500 TRAIN(TEST): total_loss: 1.996e-03 (1.696e-03) mae/depa: 6.509e-03 (3.495e-03) rmse/depa: 1.111e-02 (8.980e-03) mae/f_comp: 4.335e-02 (3.804e-02) rmse/f_comp: 8.987e-02 (8.595e-02) Time(mcs/at): 40 (9)
+2025-10-27 19:03:11,573 I - Iteration #68/500 TRAIN(TEST): total_loss: 1.999e-03 (1.724e-03) mae/depa: 6.607e-03 (3.800e-03) rmse/depa: 1.125e-02 (8.837e-03) mae/f_comp: 4.335e-02 (3.859e-02) rmse/f_comp: 8.994e-02 (8.650e-02) Time(mcs/at): 40 (9)
+2025-10-27 19:48:00,480 I - Iteration #69/500 TRAIN(TEST): total_loss: 1.995e-03 (1.691e-03) mae/depa: 6.517e-03 (3.443e-03) rmse/depa: 1.111e-02 (8.979e-03) mae/f_comp: 4.332e-02 (3.794e-02) rmse/f_comp: 8.957e-02 (8.595e-02) Time(mcs/at): 39 (9)
+2025-10-27 19:48:00,489 I - New best test loss found (1.69055e-03), checkpointing
+2025-10-27 19:48:00,813 I - Sharding callback duration: 341 microseconds
+2025-10-27 20:32:54,886 I - Iteration #70/500 TRAIN(TEST): total_loss: 1.990e-03 (1.704e-03) mae/depa: 6.491e-03 (3.720e-03) rmse/depa: 1.105e-02 (8.958e-03) mae/f_comp: 4.325e-02 (3.819e-02) rmse/f_comp: 8.946e-02 (8.636e-02) Time(mcs/at): 40 (9)
+2025-10-27 21:17:39,309 I - Iteration #71/500 TRAIN(TEST): total_loss: 1.989e-03 (1.699e-03) mae/depa: 6.539e-03 (3.563e-03) rmse/depa: 1.114e-02 (8.953e-03) mae/f_comp: 4.319e-02 (3.811e-02) rmse/f_comp: 8.937e-02 (8.569e-02) Time(mcs/at): 39 (9)
+2025-10-27 22:02:38,856 I - Iteration #72/500 TRAIN(TEST): total_loss: 1.987e-03 (1.704e-03) mae/depa: 6.531e-03 (3.474e-03) rmse/depa: 1.114e-02 (8.791e-03) mae/f_comp: 4.317e-02 (3.820e-02) rmse/f_comp: 8.898e-02 (8.538e-02) Time(mcs/at): 40 (9)
+2025-10-27 22:47:37,875 I - Iteration #73/500 TRAIN(TEST): total_loss: 1.985e-03 (1.688e-03) mae/depa: 6.498e-03 (3.421e-03) rmse/depa: 1.101e-02 (8.831e-03) mae/f_comp: 4.314e-02 (3.787e-02) rmse/f_comp: 8.944e-02 (8.614e-02) Time(mcs/at): 40 (9)
+2025-10-27 22:47:37,883 I - New best test loss found (1.68762e-03), checkpointing
+2025-10-27 22:47:38,213 I - Sharding callback duration: 25 microseconds
+2025-10-27 23:32:31,474 I - Iteration #74/500 TRAIN(TEST): total_loss: 1.989e-03 (1.693e-03) mae/depa: 6.528e-03 (3.614e-03) rmse/depa: 1.113e-02 (8.891e-03) mae/f_comp: 4.316e-02 (3.798e-02) rmse/f_comp: 8.929e-02 (8.527e-02) Time(mcs/at): 40 (9)
+2025-10-28 00:17:22,199 I - Iteration #75/500 TRAIN(TEST): total_loss: 1.980e-03 (1.717e-03) mae/depa: 6.522e-03 (3.728e-03) rmse/depa: 1.103e-02 (9.122e-03) mae/f_comp: 4.302e-02 (3.844e-02) rmse/f_comp: 8.887e-02 (8.691e-02) Time(mcs/at): 40 (9)
+2025-10-28 01:02:25,056 I - Iteration #76/500 TRAIN(TEST): total_loss: 1.978e-03 (1.681e-03) mae/depa: 6.472e-03 (3.432e-03) rmse/depa: 1.109e-02 (8.766e-03) mae/f_comp: 4.300e-02 (3.774e-02) rmse/f_comp: 8.894e-02 (8.506e-02) Time(mcs/at): 40 (9)
+2025-10-28 01:02:25,065 I - New best test loss found (1.68052e-03), checkpointing
+2025-10-28 01:02:25,415 I - Sharding callback duration: 361 microseconds
+2025-10-28 01:47:15,204 I - Iteration #77/500 TRAIN(TEST): total_loss: 1.979e-03 (1.720e-03) mae/depa: 6.498e-03 (3.523e-03) rmse/depa: 1.103e-02 (9.697e-03) mae/f_comp: 4.298e-02 (3.853e-02) rmse/f_comp: 8.861e-02 (8.851e-02) Time(mcs/at): 39 (9)
+2025-10-28 02:32:10,208 I - Iteration #78/500 TRAIN(TEST): total_loss: 1.973e-03 (1.709e-03) mae/depa: 6.469e-03 (3.645e-03) rmse/depa: 1.108e-02 (9.647e-03) mae/f_comp: 4.290e-02 (3.828e-02) rmse/f_comp: 8.880e-02 (8.642e-02) Time(mcs/at): 40 (9)
+2025-10-28 03:17:08,364 I - Iteration #79/500 TRAIN(TEST): total_loss: 1.974e-03 (1.683e-03) mae/depa: 6.505e-03 (3.528e-03) rmse/depa: 1.138e-02 (9.013e-03) mae/f_comp: 4.289e-02 (3.779e-02) rmse/f_comp: 8.893e-02 (8.486e-02) Time(mcs/at): 40 (9)
+2025-10-28 04:02:09,541 I - Iteration #80/500 TRAIN(TEST): total_loss: 1.965e-03 (1.790e-03) mae/depa: 6.395e-03 (3.666e-03) rmse/depa: 1.092e-02 (9.342e-03) mae/f_comp: 4.275e-02 (3.992e-02) rmse/f_comp: 8.841e-02 (8.988e-02) Time(mcs/at): 40 (9)
+2025-10-28 04:46:56,956 I - Iteration #81/500 TRAIN(TEST): total_loss: 1.966e-03 (1.683e-03) mae/depa: 6.505e-03 (3.487e-03) rmse/depa: 1.128e-02 (8.772e-03) mae/f_comp: 4.276e-02 (3.778e-02) rmse/f_comp: 8.860e-02 (8.658e-02) Time(mcs/at): 39 (9)
+2025-10-28 05:31:45,292 I - Iteration #82/500 TRAIN(TEST): total_loss: 1.956e-03 (1.743e-03) mae/depa: 6.388e-03 (3.568e-03) rmse/depa: 1.091e-02 (9.176e-03) mae/f_comp: 4.262e-02 (3.899e-02) rmse/f_comp: 8.828e-02 (8.724e-02) Time(mcs/at): 39 (9)
+2025-10-28 05:31:45,302 I - Reducing learning rate: 9.80000e-03 -> 9.60400e-03
+2025-10-28 06:16:38,919 I - Iteration #83/500 TRAIN(TEST): total_loss: 1.946e-03 (1.756e-03) mae/depa: 6.293e-03 (4.015e-03) rmse/depa: 1.083e-02 (9.140e-03) mae/f_comp: 4.241e-02 (3.921e-02) rmse/f_comp: 8.790e-02 (8.701e-02) Time(mcs/at): 40 (9)
+2025-10-28 07:01:32,146 I - Iteration #84/500 TRAIN(TEST): total_loss: 1.947e-03 (1.681e-03) mae/depa: 6.347e-03 (3.497e-03) rmse/depa: 1.080e-02 (8.760e-03) mae/f_comp: 4.243e-02 (3.774e-02) rmse/f_comp: 8.812e-02 (8.499e-02) Time(mcs/at): 40 (9)
+2025-10-28 07:46:21,338 I - Iteration #85/500 TRAIN(TEST): total_loss: 1.937e-03 (1.683e-03) mae/depa: 6.297e-03 (3.491e-03) rmse/depa: 1.084e-02 (8.753e-03) mae/f_comp: 4.227e-02 (3.779e-02) rmse/f_comp: 8.748e-02 (8.477e-02) Time(mcs/at): 39 (9)
+2025-10-28 08:31:16,833 I - Iteration #86/500 TRAIN(TEST): total_loss: 1.938e-03 (1.667e-03) mae/depa: 6.226e-03 (3.494e-03) rmse/depa: 1.069e-02 (8.270e-03) mae/f_comp: 4.228e-02 (3.746e-02) rmse/f_comp: 8.764e-02 (8.549e-02) Time(mcs/at): 40 (9)
+2025-10-28 08:31:16,841 I - New best test loss found (1.66708e-03), checkpointing
+2025-10-28 08:31:18,576 I - Sharding callback duration: 366 microseconds
+2025-10-28 09:16:44,950 I - Iteration #87/500 TRAIN(TEST): total_loss: 1.937e-03 (1.644e-03) mae/depa: 6.311e-03 (3.300e-03) rmse/depa: 1.077e-02 (8.777e-03) mae/f_comp: 4.224e-02 (3.701e-02) rmse/f_comp: 8.747e-02 (8.339e-02) Time(mcs/at): 40 (9)
+2025-10-28 09:16:44,959 I - New best test loss found (1.64368e-03), checkpointing
+2025-10-28 09:16:45,288 I - Sharding callback duration: 365 microseconds
+2025-10-28 10:01:31,867 I - Iteration #88/500 TRAIN(TEST): total_loss: 1.935e-03 (1.662e-03) mae/depa: 6.297e-03 (3.456e-03) rmse/depa: 1.077e-02 (8.948e-03) mae/f_comp: 4.220e-02 (3.736e-02) rmse/f_comp: 8.710e-02 (8.391e-02) Time(mcs/at): 39 (9)
+2025-10-28 10:46:07,197 I - Iteration #89/500 TRAIN(TEST): total_loss: 1.931e-03 (1.651e-03) mae/depa: 6.258e-03 (3.476e-03) rmse/depa: 1.072e-02 (9.012e-03) mae/f_comp: 4.213e-02 (3.713e-02) rmse/f_comp: 8.717e-02 (8.399e-02) Time(mcs/at): 39 (9)
+2025-10-28 11:31:16,004 I - Iteration #90/500 TRAIN(TEST): total_loss: 1.927e-03 (1.654e-03) mae/depa: 6.281e-03 (3.509e-03) rmse/depa: 1.073e-02 (8.802e-03) mae/f_comp: 4.207e-02 (3.720e-02) rmse/f_comp: 8.721e-02 (8.466e-02) Time(mcs/at): 40 (9)
+2025-10-28 12:16:31,780 I - Iteration #91/500 TRAIN(TEST): total_loss: 1.923e-03 (1.654e-03) mae/depa: 6.235e-03 (3.442e-03) rmse/depa: 1.076e-02 (8.595e-03) mae/f_comp: 4.200e-02 (3.720e-02) rmse/f_comp: 8.671e-02 (8.453e-02) Time(mcs/at): 40 (9)
+2025-10-28 13:01:40,199 I - Iteration #92/500 TRAIN(TEST): total_loss: 1.926e-03 (1.655e-03) mae/depa: 6.266e-03 (3.561e-03) rmse/depa: 1.077e-02 (8.620e-03) mae/f_comp: 4.205e-02 (3.723e-02) rmse/f_comp: 8.685e-02 (8.371e-02) Time(mcs/at): 40 (9)
+2025-10-28 13:46:33,765 I - Iteration #93/500 TRAIN(TEST): total_loss: 1.926e-03 (1.703e-03) mae/depa: 6.251e-03 (3.626e-03) rmse/depa: 1.073e-02 (9.079e-03) mae/f_comp: 4.205e-02 (3.817e-02) rmse/f_comp: 8.702e-02 (8.567e-02) Time(mcs/at): 40 (9)
+2025-10-28 13:46:33,777 I - Reducing learning rate: 9.60400e-03 -> 9.41192e-03
+2025-10-28 14:31:56,485 I - Iteration #94/500 TRAIN(TEST): total_loss: 1.907e-03 (1.649e-03) mae/depa: 6.136e-03 (3.349e-03) rmse/depa: 1.064e-02 (8.728e-03) mae/f_comp: 4.174e-02 (3.710e-02) rmse/f_comp: 8.640e-02 (8.389e-02) Time(mcs/at): 40 (9)
+2025-10-28 15:17:13,270 I - Iteration #95/500 TRAIN(TEST): total_loss: 1.909e-03 (1.638e-03) mae/depa: 6.151e-03 (3.328e-03) rmse/depa: 1.056e-02 (8.411e-03) mae/f_comp: 4.175e-02 (3.690e-02) rmse/f_comp: 8.664e-02 (8.316e-02) Time(mcs/at): 40 (9)
+2025-10-28 15:17:13,279 I - New best test loss found (1.63846e-03), checkpointing
+2025-10-28 15:17:13,609 I - Sharding callback duration: 350 microseconds
+2025-10-28 16:02:25,684 I - Iteration #96/500 TRAIN(TEST): total_loss: 1.906e-03 (1.650e-03) mae/depa: 6.152e-03 (3.354e-03) rmse/depa: 1.059e-02 (8.571e-03) mae/f_comp: 4.167e-02 (3.714e-02) rmse/f_comp: 8.627e-02 (8.359e-02) Time(mcs/at): 40 (9)
+2025-10-28 16:47:08,587 I - Iteration #97/500 TRAIN(TEST): total_loss: 1.906e-03 (1.714e-03) mae/depa: 6.108e-03 (3.777e-03) rmse/depa: 1.048e-02 (9.169e-03) mae/f_comp: 4.168e-02 (3.837e-02) rmse/f_comp: 8.640e-02 (8.582e-02) Time(mcs/at): 39 (9)
+2025-10-28 17:31:55,756 I - Iteration #98/500 TRAIN(TEST): total_loss: 1.904e-03 (1.661e-03) mae/depa: 6.151e-03 (3.449e-03) rmse/depa: 1.078e-02 (8.901e-03) mae/f_comp: 4.163e-02 (3.733e-02) rmse/f_comp: 8.614e-02 (8.449e-02) Time(mcs/at): 39 (9)
+2025-10-28 18:17:23,827 I - Iteration #99/500 TRAIN(TEST): total_loss: 1.896e-03 (1.639e-03) mae/depa: 6.132e-03 (3.279e-03) rmse/depa: 1.045e-02 (8.582e-03) mae/f_comp: 4.152e-02 (3.691e-02) rmse/f_comp: 8.604e-02 (8.375e-02) Time(mcs/at): 40 (9)
+2025-10-28 19:02:56,374 I - Iteration #100/500 TRAIN(TEST): total_loss: 1.901e-03 (1.644e-03) mae/depa: 6.145e-03 (3.339e-03) rmse/depa: 1.058e-02 (8.924e-03) mae/f_comp: 4.159e-02 (3.701e-02) rmse/f_comp: 8.616e-02 (8.456e-02) Time(mcs/at): 40 (9)
+2025-10-28 19:02:56,383 I - Regular checkpointing
+2025-10-28 19:02:56,722 I - Sharding callback duration: 26 microseconds
+2025-10-28 19:48:17,167 I - Iteration #101/500 TRAIN(TEST): total_loss: 1.905e-03 (1.662e-03) mae/depa: 6.177e-03 (3.783e-03) rmse/depa: 1.069e-02 (8.479e-03) mae/f_comp: 4.164e-02 (3.734e-02) rmse/f_comp: 8.667e-02 (8.465e-02) Time(mcs/at): 40 (9)
+2025-10-28 19:48:17,176 I - Reducing learning rate: 9.41192e-03 -> 9.22368e-03
+2025-10-28 20:33:40,148 I - Iteration #102/500 TRAIN(TEST): total_loss: 1.886e-03 (1.633e-03) mae/depa: 6.063e-03 (3.238e-03) rmse/depa: 1.050e-02 (8.259e-03) mae/f_comp: 4.134e-02 (3.681e-02) rmse/f_comp: 8.565e-02 (8.321e-02) Time(mcs/at): 40 (9)
+2025-10-28 20:33:40,156 I - New best test loss found (1.63342e-03), checkpointing
+2025-10-28 20:33:40,504 I - Sharding callback duration: 368 microseconds
+2025-10-28 21:18:57,305 I - Iteration #103/500 TRAIN(TEST): total_loss: 1.885e-03 (1.633e-03) mae/depa: 6.024e-03 (3.192e-03) rmse/depa: 1.050e-02 (8.278e-03) mae/f_comp: 4.130e-02 (3.680e-02) rmse/f_comp: 8.591e-02 (8.295e-02) Time(mcs/at): 40 (9)
+2025-10-28 21:18:57,316 I - New best test loss found (1.63276e-03), checkpointing
+2025-10-28 21:18:57,641 I - Sharding callback duration: 33 microseconds
+2025-10-28 22:04:12,808 I - Iteration #104/500 TRAIN(TEST): total_loss: 1.876e-03 (1.632e-03) mae/depa: 5.976e-03 (3.396e-03) rmse/depa: 1.037e-02 (7.896e-03) mae/f_comp: 4.113e-02 (3.677e-02) rmse/f_comp: 8.506e-02 (8.261e-02) Time(mcs/at): 40 (9)
+2025-10-28 22:04:12,816 I - New best test loss found (1.63197e-03), checkpointing
+2025-10-28 22:04:13,156 I - Sharding callback duration: 351 microseconds
+2025-10-28 22:48:54,862 I - Iteration #105/500 TRAIN(TEST): total_loss: 1.877e-03 (1.642e-03) mae/depa: 5.969e-03 (3.259e-03) rmse/depa: 1.030e-02 (8.501e-03) mae/f_comp: 4.116e-02 (3.698e-02) rmse/f_comp: 8.527e-02 (8.359e-02) Time(mcs/at): 39 (9)
+2025-10-28 23:34:10,638 I - Iteration #106/500 TRAIN(TEST): total_loss: 1.879e-03 (1.626e-03) mae/depa: 6.007e-03 (3.192e-03) rmse/depa: 1.040e-02 (8.360e-03) mae/f_comp: 4.122e-02 (3.666e-02) rmse/f_comp: 8.547e-02 (8.278e-02) Time(mcs/at): 40 (9)
+2025-10-28 23:34:10,646 I - New best test loss found (1.62593e-03), checkpointing
+2025-10-28 23:34:10,982 I - Sharding callback duration: 352 microseconds
+2025-10-29 00:19:27,760 I - Iteration #107/500 TRAIN(TEST): total_loss: 1.876e-03 (1.641e-03) mae/depa: 5.978e-03 (3.404e-03) rmse/depa: 1.040e-02 (8.822e-03) mae/f_comp: 4.115e-02 (3.694e-02) rmse/f_comp: 8.524e-02 (8.502e-02) Time(mcs/at): 40 (9)
+2025-10-29 01:04:48,111 I - Iteration #108/500 TRAIN(TEST): total_loss: 1.874e-03 (1.626e-03) mae/depa: 5.955e-03 (3.571e-03) rmse/depa: 1.021e-02 (8.751e-03) mae/f_comp: 4.111e-02 (3.663e-02) rmse/f_comp: 8.511e-02 (8.544e-02) Time(mcs/at): 40 (9)
+2025-10-29 01:50:12,380 I - Iteration #109/500 TRAIN(TEST): total_loss: 1.878e-03 (1.663e-03) mae/depa: 5.991e-03 (3.411e-03) rmse/depa: 1.033e-02 (8.895e-03) mae/f_comp: 4.117e-02 (3.739e-02) rmse/f_comp: 8.561e-02 (8.418e-02) Time(mcs/at): 40 (9)
+2025-10-29 02:35:33,379 I - Iteration #110/500 TRAIN(TEST): total_loss: 1.874e-03 (1.614e-03) mae/depa: 5.954e-03 (3.151e-03) rmse/depa: 1.040e-02 (8.007e-03) mae/f_comp: 4.110e-02 (3.643e-02) rmse/f_comp: 8.504e-02 (8.331e-02) Time(mcs/at): 40 (9)
+2025-10-29 02:35:33,387 I - New best test loss found (1.61448e-03), checkpointing
+2025-10-29 02:35:33,736 I - Sharding callback duration: 276 microseconds
+2025-10-29 03:20:53,816 I - Iteration #111/500 TRAIN(TEST): total_loss: 1.873e-03 (1.630e-03) mae/depa: 5.969e-03 (3.416e-03) rmse/depa: 1.035e-02 (8.673e-03) mae/f_comp: 4.110e-02 (3.673e-02) rmse/f_comp: 8.669e-02 (8.296e-02) Time(mcs/at): 40 (9)
+2025-10-29 04:06:09,412 I - Iteration #112/500 TRAIN(TEST): total_loss: 1.868e-03 (1.657e-03) mae/depa: 5.952e-03 (3.344e-03) rmse/depa: 1.026e-02 (8.971e-03) mae/f_comp: 4.100e-02 (3.727e-02) rmse/f_comp: 8.492e-02 (8.348e-02) Time(mcs/at): 40 (9)
+2025-10-29 04:51:21,551 I - Iteration #113/500 TRAIN(TEST): total_loss: 1.868e-03 (1.676e-03) mae/depa: 5.948e-03 (3.590e-03) rmse/depa: 1.034e-02 (8.794e-03) mae/f_comp: 4.100e-02 (3.765e-02) rmse/f_comp: 8.475e-02 (8.529e-02) Time(mcs/at): 40 (9)
+2025-10-29 05:36:13,436 I - Iteration #114/500 TRAIN(TEST): total_loss: 1.864e-03 (1.603e-03) mae/depa: 5.924e-03 (3.359e-03) rmse/depa: 1.025e-02 (8.094e-03) mae/f_comp: 4.095e-02 (3.619e-02) rmse/f_comp: 8.516e-02 (8.172e-02) Time(mcs/at): 40 (9)
+2025-10-29 05:36:13,442 I - New best test loss found (1.60281e-03), checkpointing
+2025-10-29 05:36:13,774 I - Sharding callback duration: 238 microseconds
+2025-10-29 06:21:29,464 I - Iteration #115/500 TRAIN(TEST): total_loss: 1.862e-03 (1.623e-03) mae/depa: 5.838e-03 (3.321e-03) rmse/depa: 1.016e-02 (8.539e-03) mae/f_comp: 4.091e-02 (3.659e-02) rmse/f_comp: 8.490e-02 (8.271e-02) Time(mcs/at): 40 (9)
+2025-10-29 07:06:48,238 I - Iteration #116/500 TRAIN(TEST): total_loss: 1.868e-03 (1.633e-03) mae/depa: 5.927e-03 (3.310e-03) rmse/depa: 1.025e-02 (8.372e-03) mae/f_comp: 4.099e-02 (3.680e-02) rmse/f_comp: 8.480e-02 (8.325e-02) Time(mcs/at): 40 (9)
+2025-10-29 07:52:05,883 I - Iteration #117/500 TRAIN(TEST): total_loss: 1.864e-03 (1.622e-03) mae/depa: 5.916e-03 (3.210e-03) rmse/depa: 1.020e-02 (8.413e-03) mae/f_comp: 4.093e-02 (3.657e-02) rmse/f_comp: 8.518e-02 (8.207e-02) Time(mcs/at): 40 (9)
+2025-10-29 08:37:14,920 I - Iteration #118/500 TRAIN(TEST): total_loss: 1.858e-03 (1.613e-03) mae/depa: 5.901e-03 (3.200e-03) rmse/depa: 1.016e-02 (8.287e-03) mae/f_comp: 4.084e-02 (3.640e-02) rmse/f_comp: 8.442e-02 (8.316e-02) Time(mcs/at): 40 (9)
+2025-10-29 09:22:28,300 I - Iteration #119/500 TRAIN(TEST): total_loss: 1.857e-03 (1.619e-03) mae/depa: 5.891e-03 (3.395e-03) rmse/depa: 1.012e-02 (8.313e-03) mae/f_comp: 4.081e-02 (3.650e-02) rmse/f_comp: 8.433e-02 (8.235e-02) Time(mcs/at): 40 (9)
+2025-10-29 10:07:44,095 I - Iteration #120/500 TRAIN(TEST): total_loss: 1.858e-03 (1.669e-03) mae/depa: 5.871e-03 (3.782e-03) rmse/depa: 1.023e-02 (8.961e-03) mae/f_comp: 4.081e-02 (3.748e-02) rmse/f_comp: 8.451e-02 (8.666e-02) Time(mcs/at): 40 (9)
+2025-10-29 10:07:44,102 I - Reducing learning rate: 9.22368e-03 -> 9.03921e-03
+2025-10-29 10:52:46,665 I - Iteration #121/500 TRAIN(TEST): total_loss: 1.845e-03 (1.614e-03) mae/depa: 5.744e-03 (3.515e-03) rmse/depa: 1.002e-02 (8.213e-03) mae/f_comp: 4.057e-02 (3.641e-02) rmse/f_comp: 8.416e-02 (8.208e-02) Time(mcs/at): 40 (9)
+2025-10-29 11:38:02,079 I - Iteration #122/500 TRAIN(TEST): total_loss: 1.844e-03 (1.675e-03) mae/depa: 5.788e-03 (3.973e-03) rmse/depa: 1.011e-02 (8.952e-03) mae/f_comp: 4.057e-02 (3.759e-02) rmse/f_comp: 8.426e-02 (8.467e-02) Time(mcs/at): 40 (9)
+2025-10-29 12:23:16,707 I - Iteration #123/500 TRAIN(TEST): total_loss: 1.835e-03 (1.614e-03) mae/depa: 5.783e-03 (3.180e-03) rmse/depa: 9.997e-03 (8.362e-03) mae/f_comp: 4.044e-02 (3.642e-02) rmse/f_comp: 8.361e-02 (8.204e-02) Time(mcs/at): 40 (9)
+2025-10-29 13:08:31,302 I - Iteration #124/500 TRAIN(TEST): total_loss: 1.840e-03 (1.601e-03) mae/depa: 5.744e-03 (3.263e-03) rmse/depa: 9.950e-03 (8.223e-03) mae/f_comp: 4.049e-02 (3.616e-02) rmse/f_comp: 8.376e-02 (8.179e-02) Time(mcs/at): 40 (9)
+2025-10-29 13:08:31,308 I - New best test loss found (1.60130e-03), checkpointing
+2025-10-29 13:08:31,641 I - Sharding callback duration: 219 microseconds
+2025-10-29 13:53:48,338 I - Iteration #125/500 TRAIN(TEST): total_loss: 1.846e-03 (1.595e-03) mae/depa: 5.814e-03 (3.214e-03) rmse/depa: 1.013e-02 (8.331e-03) mae/f_comp: 4.059e-02 (3.604e-02) rmse/f_comp: 8.437e-02 (8.253e-02) Time(mcs/at): 40 (9)
+2025-10-29 13:53:48,344 I - New best test loss found (1.59527e-03), checkpointing
+2025-10-29 13:53:48,667 I - Sharding callback duration: 229 microseconds
+2025-10-29 14:38:44,788 I - Iteration #126/500 TRAIN(TEST): total_loss: 1.838e-03 (1.615e-03) mae/depa: 5.781e-03 (3.165e-03) rmse/depa: 9.984e-03 (8.255e-03) mae/f_comp: 4.046e-02 (3.644e-02) rmse/f_comp: 8.384e-02 (8.349e-02) Time(mcs/at): 40 (9)
+2025-10-29 15:23:40,182 I - Iteration #127/500 TRAIN(TEST): total_loss: 1.834e-03 (1.648e-03) mae/depa: 5.736e-03 (3.356e-03) rmse/depa: 9.947e-03 (8.232e-03) mae/f_comp: 4.039e-02 (3.708e-02) rmse/f_comp: 8.381e-02 (8.344e-02) Time(mcs/at): 40 (9)
+2025-10-29 16:08:30,225 I - Iteration #128/500 TRAIN(TEST): total_loss: 1.834e-03 (1.588e-03) mae/depa: 5.737e-03 (3.111e-03) rmse/depa: 9.930e-03 (8.077e-03) mae/f_comp: 4.039e-02 (3.591e-02) rmse/f_comp: 8.374e-02 (8.115e-02) Time(mcs/at): 39 (9)
+2025-10-29 16:08:30,231 I - New best test loss found (1.58827e-03), checkpointing
+2025-10-29 16:08:36,393 I - Sharding callback duration: 33 microseconds
+2025-10-29 16:54:13,139 I - Iteration #129/500 TRAIN(TEST): total_loss: 1.831e-03 (1.599e-03) mae/depa: 5.710e-03 (3.310e-03) rmse/depa: 9.900e-03 (8.480e-03) mae/f_comp: 4.033e-02 (3.610e-02) rmse/f_comp: 8.389e-02 (8.151e-02) Time(mcs/at): 40 (9)
+2025-10-29 17:39:21,813 I - Iteration #130/500 TRAIN(TEST): total_loss: 1.832e-03 (1.602e-03) mae/depa: 5.750e-03 (3.232e-03) rmse/depa: 1.003e-02 (8.105e-03) mae/f_comp: 4.035e-02 (3.618e-02) rmse/f_comp: 8.392e-02 (8.225e-02) Time(mcs/at): 40 (9)
+2025-10-29 18:24:57,170 I - Iteration #131/500 TRAIN(TEST): total_loss: 1.834e-03 (1.601e-03) mae/depa: 5.752e-03 (3.123e-03) rmse/depa: 1.002e-02 (8.669e-03) mae/f_comp: 4.037e-02 (3.616e-02) rmse/f_comp: 8.373e-02 (8.227e-02) Time(mcs/at): 40 (9)
+2025-10-29 19:10:27,772 I - Iteration #132/500 TRAIN(TEST): total_loss: 1.833e-03 (1.622e-03) mae/depa: 5.831e-03 (3.212e-03) rmse/depa: 1.007e-02 (8.591e-03) mae/f_comp: 4.037e-02 (3.659e-02) rmse/f_comp: 8.366e-02 (8.168e-02) Time(mcs/at): 40 (9)
+2025-10-29 19:55:55,801 I - Iteration #133/500 TRAIN(TEST): total_loss: 1.829e-03 (1.575e-03) mae/depa: 5.702e-03 (3.136e-03) rmse/depa: 9.914e-03 (7.870e-03) mae/f_comp: 4.030e-02 (3.564e-02) rmse/f_comp: 8.336e-02 (8.066e-02) Time(mcs/at): 40 (9)
+2025-10-29 19:55:55,810 I - New best test loss found (1.57543e-03), checkpointing
+2025-10-29 19:55:56,134 I - Sharding callback duration: 346 microseconds
+2025-10-29 20:41:22,964 I - Iteration #134/500 TRAIN(TEST): total_loss: 1.833e-03 (1.599e-03) mae/depa: 5.776e-03 (3.296e-03) rmse/depa: 9.966e-03 (8.047e-03) mae/f_comp: 4.036e-02 (3.610e-02) rmse/f_comp: 8.353e-02 (8.215e-02) Time(mcs/at): 40 (9)
+2025-10-29 21:26:56,755 I - Iteration #135/500 TRAIN(TEST): total_loss: 1.829e-03 (1.584e-03) mae/depa: 5.748e-03 (3.219e-03) rmse/depa: 9.944e-03 (8.012e-03) mae/f_comp: 4.028e-02 (3.581e-02) rmse/f_comp: 8.352e-02 (8.206e-02) Time(mcs/at): 40 (9)
+2025-10-29 22:12:08,119 I - Iteration #136/500 TRAIN(TEST): total_loss: 1.829e-03 (1.655e-03) mae/depa: 5.753e-03 (3.973e-03) rmse/depa: 1.005e-02 (9.880e-03) mae/f_comp: 4.028e-02 (3.716e-02) rmse/f_comp: 8.354e-02 (8.277e-02) Time(mcs/at): 40 (9)
+2025-10-29 22:57:34,202 I - Iteration #137/500 TRAIN(TEST): total_loss: 1.825e-03 (1.601e-03) mae/depa: 5.723e-03 (3.137e-03) rmse/depa: 9.987e-03 (7.969e-03) mae/f_comp: 4.022e-02 (3.615e-02) rmse/f_comp: 8.316e-02 (8.177e-02) Time(mcs/at): 40 (9)
+2025-10-29 23:43:14,373 I - Iteration #138/500 TRAIN(TEST): total_loss: 1.827e-03 (1.603e-03) mae/depa: 5.755e-03 (3.160e-03) rmse/depa: 9.990e-03 (7.764e-03) mae/f_comp: 4.025e-02 (3.621e-02) rmse/f_comp: 8.333e-02 (8.132e-02) Time(mcs/at): 40 (9)
+2025-10-30 00:28:23,426 I - Iteration #139/500 TRAIN(TEST): total_loss: 1.825e-03 (1.593e-03) mae/depa: 5.669e-03 (3.324e-03) rmse/depa: 9.836e-03 (7.761e-03) mae/f_comp: 4.022e-02 (3.598e-02) rmse/f_comp: 8.343e-02 (8.116e-02) Time(mcs/at): 40 (9)
+2025-10-30 00:28:23,435 I - Reducing learning rate: 9.03921e-03 -> 8.85843e-03
+2025-10-30 01:13:58,777 I - Iteration #140/500 TRAIN(TEST): total_loss: 1.810e-03 (1.605e-03) mae/depa: 5.646e-03 (3.370e-03) rmse/depa: 9.842e-03 (8.609e-03) mae/f_comp: 3.994e-02 (3.621e-02) rmse/f_comp: 8.392e-02 (8.141e-02) Time(mcs/at): 40 (9)
+2025-10-30 01:59:30,191 I - Iteration #141/500 TRAIN(TEST): total_loss: 1.811e-03 (1.572e-03) mae/depa: 5.637e-03 (3.107e-03) rmse/depa: 9.836e-03 (7.847e-03) mae/f_comp: 3.996e-02 (3.558e-02) rmse/f_comp: 8.292e-02 (8.033e-02) Time(mcs/at): 40 (9)
+2025-10-30 01:59:30,200 I - New best test loss found (1.57185e-03), checkpointing
+2025-10-30 01:59:30,533 I - Sharding callback duration: 364 microseconds
+2025-10-30 02:44:48,145 I - Iteration #142/500 TRAIN(TEST): total_loss: 1.811e-03 (1.586e-03) mae/depa: 5.657e-03 (3.176e-03) rmse/depa: 9.726e-03 (7.990e-03) mae/f_comp: 3.997e-02 (3.586e-02) rmse/f_comp: 8.287e-02 (8.151e-02) Time(mcs/at): 40 (9)
+2025-10-30 03:30:11,173 I - Iteration #143/500 TRAIN(TEST): total_loss: 1.815e-03 (1.592e-03) mae/depa: 5.664e-03 (3.166e-03) rmse/depa: 9.862e-03 (8.020e-03) mae/f_comp: 4.004e-02 (3.598e-02) rmse/f_comp: 8.286e-02 (8.078e-02) Time(mcs/at): 40 (9)
+2025-10-30 04:15:39,037 I - Iteration #144/500 TRAIN(TEST): total_loss: 1.804e-03 (1.609e-03) mae/depa: 5.615e-03 (3.449e-03) rmse/depa: 9.765e-03 (8.241e-03) mae/f_comp: 3.982e-02 (3.630e-02) rmse/f_comp: 8.228e-02 (8.089e-02) Time(mcs/at): 40 (9)
+2025-10-30 05:01:07,255 I - Iteration #145/500 TRAIN(TEST): total_loss: 1.803e-03 (1.604e-03) mae/depa: 5.617e-03 (3.203e-03) rmse/depa: 9.808e-03 (7.824e-03) mae/f_comp: 3.981e-02 (3.622e-02) rmse/f_comp: 8.247e-02 (8.109e-02) Time(mcs/at): 40 (9)
+2025-10-30 05:46:00,895 I - Iteration #146/500 TRAIN(TEST): total_loss: 1.801e-03 (1.580e-03) mae/depa: 5.605e-03 (3.261e-03) rmse/depa: 9.751e-03 (8.277e-03) mae/f_comp: 3.978e-02 (3.572e-02) rmse/f_comp: 8.236e-02 (8.175e-02) Time(mcs/at): 40 (9)
+2025-10-30 06:31:21,270 I - Iteration #147/500 TRAIN(TEST): total_loss: 1.808e-03 (1.589e-03) mae/depa: 5.652e-03 (3.326e-03) rmse/depa: 9.754e-03 (8.147e-03) mae/f_comp: 3.990e-02 (3.590e-02) rmse/f_comp: 8.267e-02 (8.124e-02) Time(mcs/at): 40 (9)
+2025-10-30 06:31:21,279 I - Reducing learning rate: 8.85843e-03 -> 8.68126e-03
+2025-10-30 07:16:58,399 I - Iteration #148/500 TRAIN(TEST): total_loss: 1.795e-03 (1.584e-03) mae/depa: 5.576e-03 (3.100e-03) rmse/depa: 9.791e-03 (8.212e-03) mae/f_comp: 3.967e-02 (3.582e-02) rmse/f_comp: 8.241e-02 (8.344e-02) Time(mcs/at): 40 (9)
+2025-10-30 08:02:21,346 I - Iteration #149/500 TRAIN(TEST): total_loss: 1.777e-03 (1.580e-03) mae/depa: 5.401e-03 (3.062e-03) rmse/depa: 9.606e-03 (8.036e-03) mae/f_comp: 3.934e-02 (3.575e-02) rmse/f_comp: 8.170e-02 (8.201e-02) Time(mcs/at): 40 (9)
+2025-10-30 08:47:54,359 I - Iteration #150/500 TRAIN(TEST): total_loss: 1.780e-03 (1.604e-03) mae/depa: 5.449e-03 (3.246e-03) rmse/depa: 9.623e-03 (8.410e-03) mae/f_comp: 3.937e-02 (3.621e-02) rmse/f_comp: 8.194e-02 (8.373e-02) Time(mcs/at): 40 (9)
+2025-10-30 08:47:54,368 I - Regular checkpointing
+2025-10-30 08:47:54,708 I - Sharding callback duration: 362 microseconds
+2025-10-30 09:33:30,022 I - Iteration #151/500 TRAIN(TEST): total_loss: 1.774e-03 (1.561e-03) mae/depa: 5.394e-03 (3.088e-03) rmse/depa: 9.536e-03 (7.956e-03) mae/f_comp: 3.929e-02 (3.535e-02) rmse/f_comp: 8.172e-02 (7.995e-02) Time(mcs/at): 40 (9)
+2025-10-30 09:33:30,031 I - New best test loss found (1.56095e-03), checkpointing
+2025-10-30 09:33:30,364 I - Sharding callback duration: 26 microseconds
+2025-10-30 10:18:59,397 I - Iteration #152/500 TRAIN(TEST): total_loss: 1.775e-03 (1.576e-03) mae/depa: 5.423e-03 (3.245e-03) rmse/depa: 9.562e-03 (8.178e-03) mae/f_comp: 3.930e-02 (3.565e-02) rmse/f_comp: 8.159e-02 (8.089e-02) Time(mcs/at): 40 (9)
+2025-10-30 11:04:30,419 I - Iteration #153/500 TRAIN(TEST): total_loss: 1.773e-03 (1.571e-03) mae/depa: 5.356e-03 (3.080e-03) rmse/depa: 9.487e-03 (7.805e-03) mae/f_comp: 3.928e-02 (3.556e-02) rmse/f_comp: 8.162e-02 (8.044e-02) Time(mcs/at): 40 (9)
+2025-10-30 11:50:02,651 I - Iteration #154/500 TRAIN(TEST): total_loss: 1.778e-03 (1.583e-03) mae/depa: 5.408e-03 (3.139e-03) rmse/depa: 9.551e-03 (7.858e-03) mae/f_comp: 3.936e-02 (3.580e-02) rmse/f_comp: 8.193e-02 (8.237e-02) Time(mcs/at): 40 (9)
+2025-10-30 12:35:26,523 I - Iteration #155/500 TRAIN(TEST): total_loss: 1.772e-03 (1.572e-03) mae/depa: 5.386e-03 (3.117e-03) rmse/depa: 9.498e-03 (7.862e-03) mae/f_comp: 3.925e-02 (3.559e-02) rmse/f_comp: 8.173e-02 (8.188e-02) Time(mcs/at): 40 (9)
+2025-10-30 13:20:53,766 I - Iteration #156/500 TRAIN(TEST): total_loss: 1.766e-03 (1.572e-03) mae/depa: 5.385e-03 (3.215e-03) rmse/depa: 9.397e-03 (8.516e-03) mae/f_comp: 3.916e-02 (3.556e-02) rmse/f_comp: 8.144e-02 (8.121e-02) Time(mcs/at): 40 (9)
+2025-10-30 14:06:21,640 I - Iteration #157/500 TRAIN(TEST): total_loss: 1.771e-03 (1.552e-03) mae/depa: 5.382e-03 (2.986e-03) rmse/depa: 9.459e-03 (7.885e-03) mae/f_comp: 3.923e-02 (3.519e-02) rmse/f_comp: 8.159e-02 (7.985e-02) Time(mcs/at): 40 (9)
+2025-10-30 14:06:21,648 I - New best test loss found (1.55236e-03), checkpointing
+2025-10-30 14:06:21,972 I - Sharding callback duration: 362 microseconds
+2025-10-30 14:51:58,445 I - Iteration #158/500 TRAIN(TEST): total_loss: 1.772e-03 (1.569e-03) mae/depa: 5.389e-03 (3.066e-03) rmse/depa: 9.487e-03 (7.649e-03) mae/f_comp: 3.923e-02 (3.552e-02) rmse/f_comp: 8.140e-02 (8.057e-02) Time(mcs/at): 40 (9)
+2025-10-30 15:37:23,599 I - Iteration #159/500 TRAIN(TEST): total_loss: 1.773e-03 (1.577e-03) mae/depa: 5.396e-03 (3.225e-03) rmse/depa: 9.418e-03 (7.805e-03) mae/f_comp: 3.924e-02 (3.568e-02) rmse/f_comp: 8.139e-02 (8.104e-02) Time(mcs/at): 40 (9)
+2025-10-30 16:22:52,306 I - Iteration #160/500 TRAIN(TEST): total_loss: 1.771e-03 (1.574e-03) mae/depa: 5.409e-03 (3.110e-03) rmse/depa: 9.469e-03 (7.740e-03) mae/f_comp: 3.922e-02 (3.563e-02) rmse/f_comp: 8.174e-02 (8.053e-02) Time(mcs/at): 40 (9)
+2025-10-30 17:08:24,649 I - Iteration #161/500 TRAIN(TEST): total_loss: 1.767e-03 (1.576e-03) mae/depa: 5.394e-03 (3.097e-03) rmse/depa: 9.513e-03 (8.328e-03) mae/f_comp: 3.917e-02 (3.566e-02) rmse/f_comp: 8.143e-02 (8.010e-02) Time(mcs/at): 40 (9)
+2025-10-30 17:53:54,661 I - Iteration #162/500 TRAIN(TEST): total_loss: 1.767e-03 (1.577e-03) mae/depa: 5.386e-03 (3.140e-03) rmse/depa: 9.457e-03 (7.748e-03) mae/f_comp: 3.915e-02 (3.567e-02) rmse/f_comp: 8.148e-02 (8.071e-02) Time(mcs/at): 40 (9)
+2025-10-30 18:39:14,460 I - Iteration #163/500 TRAIN(TEST): total_loss: 1.762e-03 (1.554e-03) mae/depa: 5.352e-03 (3.057e-03) rmse/depa: 9.523e-03 (8.049e-03) mae/f_comp: 3.909e-02 (3.521e-02) rmse/f_comp: 8.123e-02 (7.939e-02) Time(mcs/at): 40 (9)
+2025-10-30 18:39:14,469 I - Reducing learning rate: 8.68126e-03 -> 8.50763e-03
+2025-10-30 19:24:32,230 I - Iteration #164/500 TRAIN(TEST): total_loss: 1.754e-03 (1.612e-03) mae/depa: 5.301e-03 (3.673e-03) rmse/depa: 9.402e-03 (8.440e-03) mae/f_comp: 3.891e-02 (3.635e-02) rmse/f_comp: 8.109e-02 (8.163e-02) Time(mcs/at): 40 (9)
+2025-10-30 20:09:58,637 I - Iteration #165/500 TRAIN(TEST): total_loss: 1.751e-03 (1.560e-03) mae/depa: 5.303e-03 (3.141e-03) rmse/depa: 9.388e-03 (7.822e-03) mae/f_comp: 3.887e-02 (3.533e-02) rmse/f_comp: 8.073e-02 (8.015e-02) Time(mcs/at): 40 (9)
+2025-10-30 20:55:21,002 I - Iteration #166/500 TRAIN(TEST): total_loss: 1.752e-03 (1.567e-03) mae/depa: 5.346e-03 (3.136e-03) rmse/depa: 9.410e-03 (7.825e-03) mae/f_comp: 3.888e-02 (3.548e-02) rmse/f_comp: 8.113e-02 (7.966e-02) Time(mcs/at): 40 (9)
+2025-10-30 21:40:35,126 I - Iteration #167/500 TRAIN(TEST): total_loss: 1.752e-03 (1.576e-03) mae/depa: 5.326e-03 (3.052e-03) rmse/depa: 9.341e-03 (7.639e-03) mae/f_comp: 3.889e-02 (3.566e-02) rmse/f_comp: 8.113e-02 (8.013e-02) Time(mcs/at): 40 (9)
+2025-10-30 22:25:57,152 I - Iteration #168/500 TRAIN(TEST): total_loss: 1.753e-03 (1.545e-03) mae/depa: 5.306e-03 (3.019e-03) rmse/depa: 9.300e-03 (7.761e-03) mae/f_comp: 3.889e-02 (3.504e-02) rmse/f_comp: 8.065e-02 (7.975e-02) Time(mcs/at): 40 (9)
+2025-10-30 22:25:57,161 I - New best test loss found (1.54494e-03), checkpointing
+2025-10-30 22:25:57,508 I - Sharding callback duration: 365 microseconds
+2025-10-30 23:11:15,676 I - Iteration #169/500 TRAIN(TEST): total_loss: 1.748e-03 (1.581e-03) mae/depa: 5.282e-03 (3.174e-03) rmse/depa: 9.370e-03 (8.028e-03) mae/f_comp: 3.881e-02 (3.575e-02) rmse/f_comp: 8.061e-02 (8.084e-02) Time(mcs/at): 40 (9)
+2025-10-30 23:56:27,168 I - Iteration #170/500 TRAIN(TEST): total_loss: 1.754e-03 (1.584e-03) mae/depa: 5.315e-03 (3.235e-03) rmse/depa: 9.369e-03 (7.729e-03) mae/f_comp: 3.893e-02 (3.582e-02) rmse/f_comp: 8.097e-02 (8.129e-02) Time(mcs/at): 40 (9)
+2025-10-31 00:41:36,055 I - Iteration #171/500 TRAIN(TEST): total_loss: 1.748e-03 (1.555e-03) mae/depa: 5.332e-03 (3.027e-03) rmse/depa: 9.366e-03 (7.931e-03) mae/f_comp: 3.882e-02 (3.524e-02) rmse/f_comp: 8.060e-02 (7.951e-02) Time(mcs/at): 40 (9)
+2025-10-31 01:26:48,355 I - Iteration #172/500 TRAIN(TEST): total_loss: 1.748e-03 (1.558e-03) mae/depa: 5.314e-03 (3.071e-03) rmse/depa: 9.354e-03 (7.947e-03) mae/f_comp: 3.881e-02 (3.531e-02) rmse/f_comp: 8.074e-02 (8.049e-02) Time(mcs/at): 40 (9)
+2025-10-31 02:12:02,231 I - Iteration #173/500 TRAIN(TEST): total_loss: 1.750e-03 (1.562e-03) mae/depa: 5.332e-03 (3.196e-03) rmse/depa: 9.358e-03 (7.869e-03) mae/f_comp: 3.884e-02 (3.539e-02) rmse/f_comp: 8.091e-02 (7.988e-02) Time(mcs/at): 40 (9)
+2025-10-31 02:57:01,272 I - Iteration #174/500 TRAIN(TEST): total_loss: 1.749e-03 (1.570e-03) mae/depa: 5.315e-03 (3.072e-03) rmse/depa: 9.463e-03 (7.542e-03) mae/f_comp: 3.879e-02 (3.553e-02) rmse/f_comp: 8.074e-02 (8.076e-02) Time(mcs/at): 40 (9)
+2025-10-31 02:57:01,281 I - Reducing learning rate: 8.50763e-03 -> 8.33748e-03
+2025-10-31 03:42:15,276 I - Iteration #175/500 TRAIN(TEST): total_loss: 1.734e-03 (1.628e-03) mae/depa: 5.209e-03 (3.808e-03) rmse/depa: 9.161e-03 (9.300e-03) mae/f_comp: 3.857e-02 (3.665e-02) rmse/f_comp: 8.021e-02 (8.419e-02) Time(mcs/at): 40 (9)
+2025-10-31 04:27:39,209 I - Iteration #176/500 TRAIN(TEST): total_loss: 1.735e-03 (1.547e-03) mae/depa: 5.217e-03 (3.038e-03) rmse/depa: 9.192e-03 (7.971e-03) mae/f_comp: 3.859e-02 (3.508e-02) rmse/f_comp: 8.028e-02 (7.932e-02) Time(mcs/at): 40 (9)
+2025-10-31 05:12:51,800 I - Iteration #177/500 TRAIN(TEST): total_loss: 1.735e-03 (1.557e-03) mae/depa: 5.236e-03 (3.105e-03) rmse/depa: 9.321e-03 (7.819e-03) mae/f_comp: 3.858e-02 (3.528e-02) rmse/f_comp: 8.022e-02 (8.021e-02) Time(mcs/at): 40 (9)
+2025-10-31 05:58:13,397 I - Iteration #178/500 TRAIN(TEST): total_loss: 1.736e-03 (1.549e-03) mae/depa: 5.231e-03 (3.184e-03) rmse/depa: 9.225e-03 (7.752e-03) mae/f_comp: 3.859e-02 (3.510e-02) rmse/f_comp: 8.028e-02 (7.963e-02) Time(mcs/at): 40 (9)
+2025-10-31 06:43:11,006 I - Iteration #179/500 TRAIN(TEST): total_loss: 1.731e-03 (1.529e-03) mae/depa: 5.196e-03 (3.015e-03) rmse/depa: 9.061e-03 (7.496e-03) mae/f_comp: 3.852e-02 (3.472e-02) rmse/f_comp: 8.025e-02 (7.856e-02) Time(mcs/at): 40 (9)
+2025-10-31 06:43:11,013 I - New best test loss found (1.52861e-03), checkpointing
+2025-10-31 06:43:11,334 I - Sharding callback duration: 236 microseconds
+2025-10-31 07:28:18,768 I - Iteration #180/500 TRAIN(TEST): total_loss: 1.730e-03 (1.552e-03) mae/depa: 5.219e-03 (3.008e-03) rmse/depa: 9.100e-03 (7.505e-03) mae/f_comp: 3.850e-02 (3.519e-02) rmse/f_comp: 8.009e-02 (7.936e-02) Time(mcs/at): 40 (9)
+2025-10-31 08:13:13,774 I - Iteration #181/500 TRAIN(TEST): total_loss: 1.730e-03 (1.542e-03) mae/depa: 5.189e-03 (3.039e-03) rmse/depa: 9.107e-03 (7.945e-03) mae/f_comp: 3.848e-02 (3.498e-02) rmse/f_comp: 8.011e-02 (7.909e-02) Time(mcs/at): 40 (9)
+2025-10-31 08:58:33,441 I - Iteration #182/500 TRAIN(TEST): total_loss: 1.728e-03 (1.554e-03) mae/depa: 5.196e-03 (3.015e-03) rmse/depa: 9.066e-03 (7.584e-03) mae/f_comp: 3.846e-02 (3.523e-02) rmse/f_comp: 7.996e-02 (8.290e-02) Time(mcs/at): 40 (9)
+2025-10-31 09:43:54,227 I - Iteration #183/500 TRAIN(TEST): total_loss: 1.728e-03 (1.553e-03) mae/depa: 5.173e-03 (3.178e-03) rmse/depa: 9.028e-03 (7.639e-03) mae/f_comp: 3.847e-02 (3.521e-02) rmse/f_comp: 8.010e-02 (7.909e-02) Time(mcs/at): 40 (9)
+2025-10-31 10:29:00,121 I - Iteration #184/500 TRAIN(TEST): total_loss: 1.731e-03 (1.556e-03) mae/depa: 5.192e-03 (3.062e-03) rmse/depa: 9.128e-03 (7.684e-03) mae/f_comp: 3.850e-02 (3.527e-02) rmse/f_comp: 7.975e-02 (7.930e-02) Time(mcs/at): 40 (9)
+2025-10-31 11:14:10,182 I - Iteration #185/500 TRAIN(TEST): total_loss: 1.728e-03 (1.548e-03) mae/depa: 5.213e-03 (3.092e-03) rmse/depa: 9.217e-03 (7.551e-03) mae/f_comp: 3.847e-02 (3.510e-02) rmse/f_comp: 8.000e-02 (8.025e-02) Time(mcs/at): 40 (9)
+2025-10-31 11:14:10,190 I - Reducing learning rate: 8.33748e-03 -> 8.17073e-03
+2025-10-31 11:59:20,709 I - Iteration #186/500 TRAIN(TEST): total_loss: 1.720e-03 (1.566e-03) mae/depa: 5.173e-03 (3.240e-03) rmse/depa: 9.071e-03 (7.683e-03) mae/f_comp: 3.830e-02 (3.547e-02) rmse/f_comp: 7.977e-02 (8.008e-02) Time(mcs/at): 40 (9)
+2025-10-31 12:44:39,790 I - Iteration #187/500 TRAIN(TEST): total_loss: 1.719e-03 (1.543e-03) mae/depa: 5.167e-03 (3.349e-03) rmse/depa: 9.054e-03 (7.918e-03) mae/f_comp: 3.829e-02 (3.500e-02) rmse/f_comp: 7.967e-02 (7.959e-02) Time(mcs/at): 40 (9)
+2025-10-31 13:29:57,706 I - Iteration #188/500 TRAIN(TEST): total_loss: 1.723e-03 (1.531e-03) mae/depa: 5.149e-03 (3.080e-03) rmse/depa: 9.099e-03 (7.824e-03) mae/f_comp: 3.836e-02 (3.474e-02) rmse/f_comp: 7.984e-02 (7.897e-02) Time(mcs/at): 40 (9)
+2025-10-31 14:15:09,594 I - Iteration #189/500 TRAIN(TEST): total_loss: 1.720e-03 (1.556e-03) mae/depa: 5.171e-03 (3.477e-03) rmse/depa: 9.162e-03 (8.058e-03) mae/f_comp: 3.829e-02 (3.523e-02) rmse/f_comp: 7.954e-02 (7.918e-02) Time(mcs/at): 40 (9)
+2025-10-31 15:00:19,826 I - Iteration #190/500 TRAIN(TEST): total_loss: 1.720e-03 (1.557e-03) mae/depa: 5.131e-03 (2.977e-03) rmse/depa: 9.079e-03 (7.358e-03) mae/f_comp: 3.829e-02 (3.530e-02) rmse/f_comp: 7.966e-02 (7.935e-02) Time(mcs/at): 40 (9)
+2025-10-31 15:45:27,037 I - Iteration #191/500 TRAIN(TEST): total_loss: 1.713e-03 (1.545e-03) mae/depa: 5.101e-03 (3.039e-03) rmse/depa: 8.978e-03 (7.908e-03) mae/f_comp: 3.819e-02 (3.505e-02) rmse/f_comp: 7.949e-02 (7.954e-02) Time(mcs/at): 40 (9)
+2025-10-31 15:45:27,045 I - Reducing learning rate: 8.17073e-03 -> 8.00732e-03
+2025-10-31 16:30:32,690 I - Iteration #192/500 TRAIN(TEST): total_loss: 1.709e-03 (1.556e-03) mae/depa: 5.091e-03 (3.131e-03) rmse/depa: 9.001e-03 (8.038e-03) mae/f_comp: 3.812e-02 (3.525e-02) rmse/f_comp: 7.941e-02 (7.984e-02) Time(mcs/at): 40 (9)
+2025-10-31 17:15:13,385 I - Iteration #193/500 TRAIN(TEST): total_loss: 1.706e-03 (1.544e-03) mae/depa: 5.077e-03 (3.118e-03) rmse/depa: 8.942e-03 (7.377e-03) mae/f_comp: 3.806e-02 (3.503e-02) rmse/f_comp: 7.941e-02 (7.858e-02) Time(mcs/at): 39 (9)
+2025-10-31 17:59:53,550 I - Iteration #194/500 TRAIN(TEST): total_loss: 1.708e-03 (1.537e-03) mae/depa: 5.081e-03 (3.016e-03) rmse/depa: 8.954e-03 (7.496e-03) mae/f_comp: 3.809e-02 (3.488e-02) rmse/f_comp: 7.947e-02 (7.936e-02) Time(mcs/at): 39 (9)
+2025-10-31 18:44:27,653 I - Iteration #195/500 TRAIN(TEST): total_loss: 1.706e-03 (1.547e-03) mae/depa: 5.091e-03 (3.065e-03) rmse/depa: 8.933e-03 (7.377e-03) mae/f_comp: 3.805e-02 (3.509e-02) rmse/f_comp: 7.944e-02 (7.887e-02) Time(mcs/at): 39 (9)
+2025-10-31 19:29:10,913 I - Iteration #196/500 TRAIN(TEST): total_loss: 1.705e-03 (1.547e-03) mae/depa: 5.035e-03 (3.004e-03) rmse/depa: 8.810e-03 (7.585e-03) mae/f_comp: 3.804e-02 (3.509e-02) rmse/f_comp: 7.916e-02 (7.907e-02) Time(mcs/at): 39 (9)
+2025-10-31 20:13:48,755 I - Iteration #197/500 TRAIN(TEST): total_loss: 1.708e-03 (1.541e-03) mae/depa: 5.023e-03 (3.057e-03) rmse/depa: 8.833e-03 (7.554e-03) mae/f_comp: 3.806e-02 (3.495e-02) rmse/f_comp: 7.916e-02 (7.897e-02) Time(mcs/at): 39 (9)
+2025-10-31 20:13:48,762 I - Reducing learning rate: 8.00732e-03 -> 7.84717e-03
+2025-10-31 20:58:29,930 I - Iteration #198/500 TRAIN(TEST): total_loss: 1.699e-03 (1.531e-03) mae/depa: 5.013e-03 (3.265e-03) rmse/depa: 9.015e-03 (7.760e-03) mae/f_comp: 3.792e-02 (3.475e-02) rmse/f_comp: 7.907e-02 (7.811e-02) Time(mcs/at): 39 (9)
+2025-10-31 21:43:19,495 I - Iteration #199/500 TRAIN(TEST): total_loss: 1.696e-03 (1.531e-03) mae/depa: 4.989e-03 (2.995e-03) rmse/depa: 8.820e-03 (7.566e-03) mae/f_comp: 3.787e-02 (3.477e-02) rmse/f_comp: 7.906e-02 (7.871e-02) Time(mcs/at): 39 (9)
+2025-10-31 22:28:07,043 I - Iteration #200/500 TRAIN(TEST): total_loss: 1.696e-03 (1.543e-03) mae/depa: 4.994e-03 (3.090e-03) rmse/depa: 8.806e-03 (7.517e-03) mae/f_comp: 3.786e-02 (3.500e-02) rmse/f_comp: 7.911e-02 (8.272e-02) Time(mcs/at): 39 (9)
+2025-10-31 22:28:07,050 I - Regular checkpointing
+2025-10-31 22:28:07,377 I - Sharding callback duration: 219 microseconds
+2025-10-31 23:12:48,575 I - Iteration #201/500 TRAIN(TEST): total_loss: 1.697e-03 (1.547e-03) mae/depa: 5.001e-03 (3.075e-03) rmse/depa: 8.903e-03 (7.658e-03) mae/f_comp: 3.788e-02 (3.508e-02) rmse/f_comp: 7.904e-02 (7.942e-02) Time(mcs/at): 39 (9)
+2025-10-31 23:57:33,400 I - Iteration #202/500 TRAIN(TEST): total_loss: 1.695e-03 (1.522e-03) mae/depa: 4.994e-03 (2.872e-03) rmse/depa: 8.916e-03 (7.350e-03) mae/f_comp: 3.784e-02 (3.459e-02) rmse/f_comp: 7.912e-02 (7.795e-02) Time(mcs/at): 39 (9)
+2025-10-31 23:57:33,406 I - New best test loss found (1.52174e-03), checkpointing
+2025-10-31 23:57:33,726 I - Sharding callback duration: 214 microseconds
+2025-11-01 00:42:07,211 I - Iteration #203/500 TRAIN(TEST): total_loss: 1.693e-03 (1.535e-03) mae/depa: 4.977e-03 (3.211e-03) rmse/depa: 8.710e-03 (7.659e-03) mae/f_comp: 3.781e-02 (3.483e-02) rmse/f_comp: 7.876e-02 (7.906e-02) Time(mcs/at): 39 (9)
+2025-11-01 01:26:53,804 I - Iteration #204/500 TRAIN(TEST): total_loss: 1.694e-03 (1.520e-03) mae/depa: 5.010e-03 (2.994e-03) rmse/depa: 8.897e-03 (7.429e-03) mae/f_comp: 3.782e-02 (3.454e-02) rmse/f_comp: 7.873e-02 (7.792e-02) Time(mcs/at): 39 (9)
+2025-11-01 01:26:53,809 I - New best test loss found (1.51991e-03), checkpointing
+2025-11-01 01:26:54,136 I - Sharding callback duration: 229 microseconds
+2025-11-01 02:11:38,592 I - Iteration #205/500 TRAIN(TEST): total_loss: 1.688e-03 (1.528e-03) mae/depa: 4.978e-03 (2.980e-03) rmse/depa: 8.797e-03 (7.995e-03) mae/f_comp: 3.774e-02 (3.469e-02) rmse/f_comp: 7.915e-02 (7.861e-02) Time(mcs/at): 39 (9)
+2025-11-01 02:56:24,894 I - Iteration #206/500 TRAIN(TEST): total_loss: 1.690e-03 (1.538e-03) mae/depa: 4.982e-03 (3.048e-03) rmse/depa: 8.750e-03 (7.450e-03) mae/f_comp: 3.776e-02 (3.490e-02) rmse/f_comp: 7.867e-02 (7.819e-02) Time(mcs/at): 39 (9)
+2025-11-01 03:40:49,216 I - Iteration #207/500 TRAIN(TEST): total_loss: 1.699e-03 (1.532e-03) mae/depa: 5.021e-03 (2.982e-03) rmse/depa: 8.907e-03 (7.147e-03) mae/f_comp: 3.792e-02 (3.479e-02) rmse/f_comp: 7.906e-02 (7.846e-02) Time(mcs/at): 39 (9)
+2025-11-01 04:25:35,521 I - Iteration #208/500 TRAIN(TEST): total_loss: 1.688e-03 (1.573e-03) mae/depa: 4.984e-03 (3.506e-03) rmse/depa: 8.771e-03 (7.536e-03) mae/f_comp: 3.774e-02 (3.558e-02) rmse/f_comp: 7.875e-02 (8.142e-02) Time(mcs/at): 39 (9)
+2025-11-01 05:10:19,129 I - Iteration #209/500 TRAIN(TEST): total_loss: 1.694e-03 (1.507e-03) mae/depa: 5.015e-03 (3.068e-03) rmse/depa: 8.830e-03 (7.273e-03) mae/f_comp: 3.784e-02 (3.428e-02) rmse/f_comp: 7.889e-02 (7.713e-02) Time(mcs/at): 39 (9)
+2025-11-01 05:10:19,134 I - New best test loss found (1.50695e-03), checkpointing
+2025-11-01 05:10:19,451 I - Sharding callback duration: 228 microseconds
+2025-11-01 05:55:01,192 I - Iteration #210/500 TRAIN(TEST): total_loss: 1.690e-03 (1.522e-03) mae/depa: 4.993e-03 (3.197e-03) rmse/depa: 8.876e-03 (7.519e-03) mae/f_comp: 3.773e-02 (3.456e-02) rmse/f_comp: 7.868e-02 (7.861e-02) Time(mcs/at): 39 (9)
+2025-11-01 06:39:39,199 I - Iteration #211/500 TRAIN(TEST): total_loss: 1.687e-03 (1.567e-03) mae/depa: 4.977e-03 (3.094e-03) rmse/depa: 8.749e-03 (7.540e-03) mae/f_comp: 3.771e-02 (3.548e-02) rmse/f_comp: 7.853e-02 (7.991e-02) Time(mcs/at): 39 (9)
+2025-11-01 07:24:12,990 I - Iteration #212/500 TRAIN(TEST): total_loss: 1.689e-03 (1.520e-03) mae/depa: 4.941e-03 (3.000e-03) rmse/depa: 8.764e-03 (7.326e-03) mae/f_comp: 3.776e-02 (3.455e-02) rmse/f_comp: 7.915e-02 (7.793e-02) Time(mcs/at): 39 (9)
+2025-11-01 08:08:52,878 I - Iteration #213/500 TRAIN(TEST): total_loss: 1.690e-03 (1.529e-03) mae/depa: 5.022e-03 (3.170e-03) rmse/depa: 8.835e-03 (7.609e-03) mae/f_comp: 3.774e-02 (3.471e-02) rmse/f_comp: 7.869e-02 (7.849e-02) Time(mcs/at): 39 (9)
+2025-11-01 08:53:16,300 I - Iteration #214/500 TRAIN(TEST): total_loss: 1.688e-03 (1.527e-03) mae/depa: 4.973e-03 (3.075e-03) rmse/depa: 8.857e-03 (7.197e-03) mae/f_comp: 3.771e-02 (3.468e-02) rmse/f_comp: 7.852e-02 (7.828e-02) Time(mcs/at): 39 (9)
+2025-11-01 09:37:58,152 I - Iteration #215/500 TRAIN(TEST): total_loss: 1.686e-03 (1.520e-03) mae/depa: 4.978e-03 (2.952e-03) rmse/depa: 8.664e-03 (7.452e-03) mae/f_comp: 3.768e-02 (3.454e-02) rmse/f_comp: 7.844e-02 (7.771e-02) Time(mcs/at): 39 (9)
+2025-11-01 09:37:58,160 I - Reducing learning rate: 7.84717e-03 -> 7.69023e-03
+2025-11-01 10:22:37,146 I - Iteration #216/500 TRAIN(TEST): total_loss: 1.675e-03 (1.544e-03) mae/depa: 4.885e-03 (2.920e-03) rmse/depa: 8.681e-03 (7.318e-03) mae/f_comp: 3.749e-02 (3.503e-02) rmse/f_comp: 7.824e-02 (7.900e-02) Time(mcs/at): 39 (9)
+2025-11-01 11:07:04,414 I - Iteration #217/500 TRAIN(TEST): total_loss: 1.675e-03 (1.511e-03) mae/depa: 4.876e-03 (2.985e-03) rmse/depa: 8.543e-03 (7.454e-03) mae/f_comp: 3.749e-02 (3.436e-02) rmse/f_comp: 7.809e-02 (7.742e-02) Time(mcs/at): 39 (9)
+2025-11-01 11:51:44,641 I - Iteration #218/500 TRAIN(TEST): total_loss: 1.675e-03 (1.518e-03) mae/depa: 4.918e-03 (2.889e-03) rmse/depa: 8.670e-03 (7.277e-03) mae/f_comp: 3.749e-02 (3.449e-02) rmse/f_comp: 7.818e-02 (7.934e-02) Time(mcs/at): 39 (9)
+2025-11-01 12:36:29,591 I - Iteration #219/500 TRAIN(TEST): total_loss: 1.680e-03 (1.525e-03) mae/depa: 4.931e-03 (3.234e-03) rmse/depa: 8.692e-03 (7.628e-03) mae/f_comp: 3.757e-02 (3.462e-02) rmse/f_comp: 7.836e-02 (7.791e-02) Time(mcs/at): 39 (9)
+2025-11-01 13:20:51,390 I - Iteration #220/500 TRAIN(TEST): total_loss: 1.677e-03 (1.532e-03) mae/depa: 4.937e-03 (3.035e-03) rmse/depa: 8.709e-03 (7.516e-03) mae/f_comp: 3.751e-02 (3.477e-02) rmse/f_comp: 7.827e-02 (7.843e-02) Time(mcs/at): 39 (9)
+2025-11-01 14:05:30,557 I - Iteration #221/500 TRAIN(TEST): total_loss: 1.673e-03 (1.514e-03) mae/depa: 4.922e-03 (2.884e-03) rmse/depa: 8.658e-03 (7.195e-03) mae/f_comp: 3.747e-02 (3.442e-02) rmse/f_comp: 7.811e-02 (7.817e-02) Time(mcs/at): 39 (9)
+2025-11-01 14:05:30,563 I - Reducing learning rate: 7.69023e-03 -> 7.53642e-03
+2025-11-03 10:01:43,060 I - ========================================
+2025-11-03 10:01:43,062 I -             Start GRACEmaker
+2025-11-03 10:01:43,062 I - ========================================
+2025-11-03 10:01:43,062 I - Tensorflow version: 2.19.1
+2025-11-03 10:01:43,062 I - Loaded input.yaml... 
+2025-11-03 10:01:43,062 I - Set seed to 1
+2025-11-03 10:01:43,063 I - Data distribution strategy: Single GPU
+2025-11-03 10:01:43,063 I - Number of replicas: 1
+2025-11-03 10:01:43,063 I - Replica ID in sync group: 0
+2025-11-03 10:01:43,063 I - Global TRAIN batch size (= minibatch size * num GPUS): 16, num. GPUS: 1, minibatch size: 16
+2025-11-03 10:01:43,063 I - Global TEST batch size (= minibatch size * num GPUS): 64, num. GPUS: 1, minibatch size: 64
+2025-11-03 10:01:43,063 I - Float dtype: float64
+2025-11-03 10:01:43,063 I - Loading training data from ../../data/b_off_2.0_train.pkl.gz
+2025-11-03 10:01:43,063 I - Search for dataset file(s): ['../../data/b_off_2.0_train.pkl.gz']
+2025-11-03 10:01:43,064 I - #1/1: try to load ../../data/b_off_2.0_train.pkl.gz
+2025-11-03 10:01:43,064 I - Loading dataframe from pickle file ../../data/b_off_2.0_train.pkl.gz (4.5GiB)
+2025-11-03 10:04:14,224 I -  1975993 structures found
+2025-11-03 10:04:15,160 I - Loaded dataset size: (1975993, 5)
+2025-11-03 10:04:15,160 I - Split test data from train dataset (fraction = 0.05)
+2025-11-03 10:04:18,306 I - Set 'energy_corrected' to 'energy', because reference_energy=0
+2025-11-03 10:04:19,639 I - Data (auto) scale: 1.0509016314895254
+2025-11-03 10:04:19,639 I - input::fit::compute_convex_hull is False, convex hull and 'low energy' group will not be computed 
+2025-11-03 10:04:19,639 I - Train Dataset size: 1877193
+2025-11-03 10:04:19,669 I - Test Dataset size: 98800
+2025-11-03 10:04:29,537 I - Extract elements from train and test datasets
+2025-11-03 10:04:29,537 I - Elements mapping: {'Br': 0, 'C': 1, 'Cl': 2, 'F': 3, 'H': 4, 'I': 5, 'N': 6, 'O': 7, 'P': 8, 'S': 9}
+2025-11-03 10:04:29,537 I - TRAIN WEIGHTS: energy - False, forces - False 
+2025-11-03 10:04:29,537 I - TEST WEIGHTS: energy - False, forces - False 
+2025-11-03 10:04:29,537 I - Saving current training set to seed/1/training_set.pkl.gz
+2025-11-03 10:10:56,967 I - Saving current test set to seed/1/test_set.pkl.gz
+2025-11-03 10:11:17,543 I - Train set processing
+2025-11-03 10:11:17,543 I - Train buckets: 100
+2025-11-03 10:11:17,543 I - 1/4. Converting pd.DataFrame to batch data
+2025-11-03 10:32:48,149 I - 2/4. Splitting batches into per-batch groups.
+2025-11-03 10:33:24,899 I - 3/4. Joining groups to batches
+2025-11-03 10:35:06,312 I - 4/4. Padding batches
+2025-11-03 10:38:27,911 I - [TRAIN] dataset stats: num. batches: 117325 | num. real structures: 1877193 (+6.25%) | num. real atoms: 67121994 (+20.31%) | num. real neighbours: 1618681336 (+3.02%) 
+2025-11-03 10:38:28,114 I - Average number of neighbors (computed): 24.115513254865462
+2025-11-03 10:38:28,115 I - Test set processing
+2025-11-03 10:38:28,115 I - Test buckets: 50
+2025-11-03 10:38:28,115 I - 1/4. Converting pd.DataFrame to batch data
+2025-11-03 10:40:09,385 I - 2/4. Splitting batches into per-batch groups.
+2025-11-03 10:40:34,629 I - 3/4. Joining groups to batches
+2025-11-03 10:41:09,169 I - 4/4. Padding batches
+2025-11-03 10:41:13,283 I - [TEST] dataset stats: num. batches: 1544 | num. real structures: 98800 (+1.58%) | num. real atoms: 3537779 (+2.94%) | num. real neighbours: 85372862 (+0.54%) 
+2025-11-03 10:41:23,965 I - Constructing model from config
+2025-11-03 10:41:23,967 I - Model kwargs: {'lmax': 4, 'n_rad_max': 48, 'max_order': 4, 'n_mlp_dens': 16}
+2025-11-03 10:41:26,244 I - Saving model config to seed/1/model.yaml
+2025-11-03 10:41:26,258 I - Loss function: Loss(1.0*WeightedHuberEnergyPerAtomLoss(delta=0.01)(energy) + 5.0*WeightedHuberForceLoss(delta=0.01)(forces))
+2025-11-03 10:41:26,258 I - JIT compilation: True
+2025-11-03 10:41:26,258 I - Optimization options: {'learning_rate': 0.01, 'amsgrad': True, 'use_ema': True, 'ema_momentum': 0.99, 'weight_decay': None, 'clipvalue': 1.0}
+2025-11-03 10:41:26,640 I - Trying to load best test checkpoint
+2025-11-03 10:41:26,707 I - Loaded checkpoint from seed/1/checkpoints/checkpoint.best_test_loss
+2025-11-03 10:41:26,709 I - Convert data to tensors
+2025-11-03 10:41:26,709 I - [TRAIN] Convert to tensors
+2025-11-03 10:51:08,793 I - [TEST] Convert to tensors
+2025-11-03 10:51:20,766 I - Start Adam optimization
+2025-11-03 10:51:32,909 I - Number of trainable parameters: 1026592
+2025-11-03 10:51:32,910 I - Learning rate reduction will be used with parameters: {'patience': 5, 'factor': 0.98, 'min': 0.0005, 'stop_at_min': True, 'resume_lr': True}
+2025-11-03 11:55:49,766 I - Iteration #1/279 TRAIN(TEST): total_loss: 1.692e-03 (1.518e-03) mae/depa: 5.004e-03 (2.953e-03) rmse/depa: 8.818e-03 (7.249e-03) mae/f_comp: 3.778e-02 (3.451e-02) rmse/f_comp: 7.887e-02 (7.850e-02) Time(mcs/at): 54 (70)
+2025-11-03 11:55:49,776 I - New best test loss found (1.51821e-03), checkpointing
+2025-11-03 11:55:49,932 I - Sharding callback duration: 37 microseconds
+2025-11-03 12:42:55,640 I - Iteration #2/279 TRAIN(TEST): total_loss: 1.692e-03 (1.543e-03) mae/depa: 5.002e-03 (3.046e-03) rmse/depa: 8.835e-03 (7.257e-03) mae/f_comp: 3.779e-02 (3.501e-02) rmse/f_comp: 7.891e-02 (7.897e-02) Time(mcs/at): 41 (10)
+2025-11-03 13:30:05,787 I - Iteration #3/279 TRAIN(TEST): total_loss: 1.689e-03 (1.542e-03) mae/depa: 4.968e-03 (2.962e-03) rmse/depa: 8.826e-03 (7.176e-03) mae/f_comp: 3.774e-02 (3.497e-02) rmse/f_comp: 7.864e-02 (7.895e-02) Time(mcs/at): 42 (10)
+2025-11-03 14:17:22,471 I - Iteration #4/279 TRAIN(TEST): total_loss: 1.691e-03 (1.538e-03) mae/depa: 4.976e-03 (3.053e-03) rmse/depa: 8.797e-03 (7.656e-03) mae/f_comp: 3.777e-02 (3.489e-02) rmse/f_comp: 7.874e-02 (7.885e-02) Time(mcs/at): 42 (10)
+2025-11-03 15:04:47,346 I - Iteration #5/279 TRAIN(TEST): total_loss: 1.691e-03 (1.535e-03) mae/depa: 5.010e-03 (2.960e-03) rmse/depa: 8.814e-03 (7.525e-03) mae/f_comp: 3.775e-02 (3.484e-02) rmse/f_comp: 7.896e-02 (7.975e-02) Time(mcs/at): 42 (10)
+2025-11-03 15:51:18,315 I - Iteration #6/279 TRAIN(TEST): total_loss: 1.689e-03 (1.528e-03) mae/depa: 4.977e-03 (2.924e-03) rmse/depa: 8.794e-03 (7.404e-03) mae/f_comp: 3.775e-02 (3.470e-02) rmse/f_comp: 7.897e-02 (7.960e-02) Time(mcs/at): 41 (10)
+2025-11-03 16:37:49,224 I - Iteration #7/279 TRAIN(TEST): total_loss: 1.688e-03 (1.519e-03) mae/depa: 4.986e-03 (2.980e-03) rmse/depa: 8.752e-03 (7.572e-03) mae/f_comp: 3.772e-02 (3.452e-02) rmse/f_comp: 7.853e-02 (7.806e-02) Time(mcs/at): 41 (10)
+2025-11-03 16:37:49,240 I - Reducing learning rate: 7.84717e-03 -> 7.69023e-03
+2025-11-03 17:24:26,056 I - Iteration #8/279 TRAIN(TEST): total_loss: 1.682e-03 (1.513e-03) mae/depa: 4.945e-03 (3.006e-03) rmse/depa: 8.731e-03 (7.275e-03) mae/f_comp: 3.759e-02 (3.439e-02) rmse/f_comp: 7.849e-02 (7.783e-02) Time(mcs/at): 41 (10)
+2025-11-03 17:24:26,066 I - New best test loss found (1.51288e-03), checkpointing
+2025-11-03 17:24:29,872 I - Sharding callback duration: 42 microseconds
+2025-11-03 18:11:09,902 I - Iteration #9/279 TRAIN(TEST): total_loss: 1.681e-03 (1.527e-03) mae/depa: 4.939e-03 (3.056e-03) rmse/depa: 8.681e-03 (7.488e-03) mae/f_comp: 3.758e-02 (3.469e-02) rmse/f_comp: 7.840e-02 (7.846e-02) Time(mcs/at): 41 (9)
+2025-11-03 18:57:41,697 I - Iteration #10/279 TRAIN(TEST): total_loss: 1.677e-03 (1.507e-03) mae/depa: 4.918e-03 (2.924e-03) rmse/depa: 8.681e-03 (7.396e-03) mae/f_comp: 3.752e-02 (3.429e-02) rmse/f_comp: 7.825e-02 (7.775e-02) Time(mcs/at): 41 (9)
+2025-11-03 18:57:41,793 I - New best test loss found (1.50715e-03), checkpointing
+2025-11-03 18:57:42,147 I - Sharding callback duration: 36 microseconds
+2025-11-03 19:44:15,591 I - Iteration #11/279 TRAIN(TEST): total_loss: 1.676e-03 (1.508e-03) mae/depa: 4.910e-03 (2.903e-03) rmse/depa: 8.683e-03 (7.239e-03) mae/f_comp: 3.750e-02 (3.432e-02) rmse/f_comp: 7.834e-02 (7.741e-02) Time(mcs/at): 41 (9)
+2025-11-03 20:30:59,483 I - Iteration #12/279 TRAIN(TEST): total_loss: 1.677e-03 (1.538e-03) mae/depa: 4.890e-03 (2.975e-03) rmse/depa: 8.570e-03 (6.894e-03) mae/f_comp: 3.752e-02 (3.492e-02) rmse/f_comp: 7.833e-02 (7.820e-02) Time(mcs/at): 41 (9)
+2025-11-03 21:17:38,377 I - Iteration #13/279 TRAIN(TEST): total_loss: 1.676e-03 (1.510e-03) mae/depa: 4.933e-03 (2.862e-03) rmse/depa: 8.667e-03 (7.210e-03) mae/f_comp: 3.749e-02 (3.436e-02) rmse/f_comp: 7.813e-02 (7.765e-02) Time(mcs/at): 41 (9)
+2025-11-03 22:04:02,932 I - Iteration #14/279 TRAIN(TEST): total_loss: 1.674e-03 (1.525e-03) mae/depa: 4.872e-03 (2.990e-03) rmse/depa: 8.512e-03 (7.488e-03) mae/f_comp: 3.747e-02 (3.463e-02) rmse/f_comp: 7.800e-02 (7.771e-02) Time(mcs/at): 41 (9)
+2025-11-03 22:50:36,548 I - Iteration #15/279 TRAIN(TEST): total_loss: 1.676e-03 (1.518e-03) mae/depa: 4.912e-03 (2.974e-03) rmse/depa: 8.535e-03 (7.293e-03) mae/f_comp: 3.750e-02 (3.450e-02) rmse/f_comp: 7.799e-02 (7.830e-02) Time(mcs/at): 41 (10)
+2025-11-03 23:37:02,812 I - Iteration #16/279 TRAIN(TEST): total_loss: 1.676e-03 (1.533e-03) mae/depa: 4.903e-03 (2.949e-03) rmse/depa: 8.565e-03 (7.282e-03) mae/f_comp: 3.749e-02 (3.482e-02) rmse/f_comp: 7.827e-02 (7.818e-02) Time(mcs/at): 41 (9)
+2025-11-03 23:37:02,822 I - Reducing learning rate: 7.69023e-03 -> 7.53642e-03
+2025-11-04 00:23:33,089 I - Iteration #17/279 TRAIN(TEST): total_loss: 1.667e-03 (1.512e-03) mae/depa: 4.870e-03 (2.939e-03) rmse/depa: 8.580e-03 (7.056e-03) mae/f_comp: 3.734e-02 (3.439e-02) rmse/f_comp: 7.799e-02 (7.777e-02) Time(mcs/at): 41 (10)
+2025-11-04 01:09:37,576 I - Iteration #18/279 TRAIN(TEST): total_loss: 1.666e-03 (1.506e-03) mae/depa: 4.858e-03 (2.890e-03) rmse/depa: 8.744e-03 (7.228e-03) mae/f_comp: 3.731e-02 (3.428e-02) rmse/f_comp: 7.825e-02 (7.699e-02) Time(mcs/at): 41 (9)
+2025-11-04 01:09:37,585 I - New best test loss found (1.50623e-03), checkpointing
+2025-11-04 01:09:37,936 I - Sharding callback duration: 39 microseconds
+2025-11-04 01:55:37,526 I - Iteration #19/279 TRAIN(TEST): total_loss: 1.663e-03 (1.513e-03) mae/depa: 4.840e-03 (2.849e-03) rmse/depa: 8.555e-03 (7.183e-03) mae/f_comp: 3.728e-02 (3.441e-02) rmse/f_comp: 7.750e-02 (7.813e-02) Time(mcs/at): 41 (9)
+2025-11-04 02:42:17,691 I - Iteration #20/279 TRAIN(TEST): total_loss: 1.669e-03 (1.518e-03) mae/depa: 4.844e-03 (2.965e-03) rmse/depa: 8.529e-03 (7.223e-03) mae/f_comp: 3.736e-02 (3.450e-02) rmse/f_comp: 7.798e-02 (7.754e-02) Time(mcs/at): 41 (10)
+2025-11-04 03:29:02,349 I - Iteration #21/279 TRAIN(TEST): total_loss: 1.666e-03 (1.513e-03) mae/depa: 4.855e-03 (2.901e-03) rmse/depa: 8.528e-03 (7.084e-03) mae/f_comp: 3.732e-02 (3.442e-02) rmse/f_comp: 7.780e-02 (7.791e-02) Time(mcs/at): 41 (10)
+2025-11-04 04:16:28,800 I - Iteration #22/279 TRAIN(TEST): total_loss: 1.668e-03 (1.503e-03) mae/depa: 4.865e-03 (2.942e-03) rmse/depa: 8.586e-03 (7.203e-03) mae/f_comp: 3.735e-02 (3.420e-02) rmse/f_comp: 7.807e-02 (7.701e-02) Time(mcs/at): 42 (10)
+2025-11-04 04:16:28,808 I - New best test loss found (1.50297e-03), checkpointing
+2025-11-04 04:16:29,195 I - Sharding callback duration: 129 microseconds
+2025-11-04 05:03:20,987 I - Iteration #23/279 TRAIN(TEST): total_loss: 1.666e-03 (1.518e-03) mae/depa: 4.870e-03 (2.938e-03) rmse/depa: 8.522e-03 (7.220e-03) mae/f_comp: 3.732e-02 (3.452e-02) rmse/f_comp: 7.786e-02 (7.779e-02) Time(mcs/at): 41 (10)
+2025-11-04 05:50:46,951 I - Iteration #24/279 TRAIN(TEST): total_loss: 1.667e-03 (1.503e-03) mae/depa: 4.866e-03 (2.891e-03) rmse/depa: 8.667e-03 (7.195e-03) mae/f_comp: 3.733e-02 (3.420e-02) rmse/f_comp: 7.786e-02 (7.753e-02) Time(mcs/at): 42 (10)
+2025-11-04 05:50:46,959 I - New best test loss found (1.50257e-03), checkpointing
+2025-11-04 05:50:47,466 I - Sharding callback duration: 46 microseconds
+2025-11-04 06:37:46,387 I - Iteration #25/279 TRAIN(TEST): total_loss: 1.666e-03 (1.517e-03) mae/depa: 4.859e-03 (3.208e-03) rmse/depa: 8.532e-03 (7.328e-03) mae/f_comp: 3.731e-02 (3.448e-02) rmse/f_comp: 7.787e-02 (7.779e-02) Time(mcs/at): 41 (10)
+2025-11-04 07:24:09,673 I - Iteration #26/279 TRAIN(TEST): total_loss: 1.664e-03 (1.515e-03) mae/depa: 4.853e-03 (2.918e-03) rmse/depa: 8.534e-03 (7.220e-03) mae/f_comp: 3.727e-02 (3.446e-02) rmse/f_comp: 7.787e-02 (7.743e-02) Time(mcs/at): 41 (9)
+2025-11-04 08:10:50,124 I - Iteration #27/279 TRAIN(TEST): total_loss: 1.665e-03 (1.507e-03) mae/depa: 4.858e-03 (2.950e-03) rmse/depa: 8.535e-03 (7.162e-03) mae/f_comp: 3.729e-02 (3.428e-02) rmse/f_comp: 7.788e-02 (7.802e-02) Time(mcs/at): 41 (9)
+2025-11-04 08:57:25,974 I - Iteration #28/279 TRAIN(TEST): total_loss: 1.663e-03 (1.513e-03) mae/depa: 4.832e-03 (2.919e-03) rmse/depa: 8.483e-03 (7.171e-03) mae/f_comp: 3.728e-02 (3.441e-02) rmse/f_comp: 7.764e-02 (7.774e-02) Time(mcs/at): 41 (9)
+2025-11-04 09:43:22,767 I - Iteration #29/279 TRAIN(TEST): total_loss: 1.665e-03 (1.507e-03) mae/depa: 4.879e-03 (2.821e-03) rmse/depa: 8.576e-03 (7.021e-03) mae/f_comp: 3.729e-02 (3.429e-02) rmse/f_comp: 7.803e-02 (7.755e-02) Time(mcs/at): 40 (9)
+2025-11-04 10:29:07,482 I - Iteration #30/279 TRAIN(TEST): total_loss: 1.663e-03 (1.508e-03) mae/depa: 4.849e-03 (3.033e-03) rmse/depa: 8.542e-03 (7.272e-03) mae/f_comp: 3.726e-02 (3.430e-02) rmse/f_comp: 7.769e-02 (7.713e-02) Time(mcs/at): 40 (9)
+2025-11-04 10:29:07,490 I - Reducing learning rate: 7.53642e-03 -> 7.38569e-03
+2025-11-04 11:15:08,434 I - Iteration #31/279 TRAIN(TEST): total_loss: 1.654e-03 (1.494e-03) mae/depa: 4.772e-03 (2.816e-03) rmse/depa: 8.426e-03 (7.054e-03) mae/f_comp: 3.710e-02 (3.403e-02) rmse/f_comp: 7.735e-02 (7.687e-02) Time(mcs/at): 41 (9)
+2025-11-04 11:15:08,440 I - New best test loss found (1.49374e-03), checkpointing
+2025-11-04 11:15:08,820 I - Sharding callback duration: 114 microseconds
+2025-11-04 12:01:14,510 I - Iteration #32/279 TRAIN(TEST): total_loss: 1.647e-03 (1.516e-03) mae/depa: 4.760e-03 (3.003e-03) rmse/depa: 8.387e-03 (7.020e-03) mae/f_comp: 3.699e-02 (3.447e-02) rmse/f_comp: 7.709e-02 (7.727e-02) Time(mcs/at): 41 (9)
+2025-11-04 12:47:38,160 I - Iteration #33/279 TRAIN(TEST): total_loss: 1.650e-03 (1.499e-03) mae/depa: 4.759e-03 (2.929e-03) rmse/depa: 8.323e-03 (7.306e-03) mae/f_comp: 3.703e-02 (3.412e-02) rmse/f_comp: 7.722e-02 (7.696e-02) Time(mcs/at): 41 (9)
+2025-11-04 13:34:32,617 I - Iteration #34/279 TRAIN(TEST): total_loss: 1.650e-03 (1.527e-03) mae/depa: 4.756e-03 (2.987e-03) rmse/depa: 8.455e-03 (7.167e-03) mae/f_comp: 3.703e-02 (3.468e-02) rmse/f_comp: 7.736e-02 (7.862e-02) Time(mcs/at): 41 (9)
+2025-11-04 14:20:55,649 I - Iteration #35/279 TRAIN(TEST): total_loss: 1.651e-03 (1.499e-03) mae/depa: 4.795e-03 (2.987e-03) rmse/depa: 8.476e-03 (7.224e-03) mae/f_comp: 3.704e-02 (3.412e-02) rmse/f_comp: 7.727e-02 (7.703e-02) Time(mcs/at): 41 (9)
+2025-11-04 15:06:44,800 I - Iteration #36/279 TRAIN(TEST): total_loss: 1.649e-03 (1.503e-03) mae/depa: 4.754e-03 (2.856e-03) rmse/depa: 8.305e-03 (7.063e-03) mae/f_comp: 3.702e-02 (3.420e-02) rmse/f_comp: 7.713e-02 (7.705e-02) Time(mcs/at): 40 (9)
+2025-11-04 15:52:20,629 I - Iteration #37/279 TRAIN(TEST): total_loss: 1.655e-03 (1.497e-03) mae/depa: 4.793e-03 (2.837e-03) rmse/depa: 8.478e-03 (7.150e-03) mae/f_comp: 3.711e-02 (3.410e-02) rmse/f_comp: 7.782e-02 (7.780e-02) Time(mcs/at): 40 (9)
+2025-11-04 15:52:20,638 I - Reducing learning rate: 7.38569e-03 -> 7.23798e-03
+2025-11-04 16:38:00,901 I - Iteration #38/279 TRAIN(TEST): total_loss: 1.638e-03 (1.553e-03) mae/depa: 4.688e-03 (3.476e-03) rmse/depa: 8.356e-03 (7.551e-03) mae/f_comp: 3.682e-02 (3.516e-02) rmse/f_comp: 7.702e-02 (7.877e-02) Time(mcs/at): 40 (9)
+2025-11-04 17:23:30,916 I - Iteration #39/279 TRAIN(TEST): total_loss: 1.641e-03 (1.518e-03) mae/depa: 4.708e-03 (2.940e-03) rmse/depa: 8.286e-03 (7.062e-03) mae/f_comp: 3.685e-02 (3.451e-02) rmse/f_comp: 7.713e-02 (7.738e-02) Time(mcs/at): 40 (9)
+2025-11-04 18:08:54,825 I - Iteration #40/279 TRAIN(TEST): total_loss: 1.638e-03 (1.501e-03) mae/depa: 4.714e-03 (2.969e-03) rmse/depa: 8.347e-03 (6.888e-03) mae/f_comp: 3.680e-02 (3.417e-02) rmse/f_comp: 7.700e-02 (7.727e-02) Time(mcs/at): 40 (9)
+2025-11-04 18:54:13,010 I - Iteration #41/279 TRAIN(TEST): total_loss: 1.640e-03 (1.531e-03) mae/depa: 4.686e-03 (3.114e-03) rmse/depa: 8.311e-03 (7.489e-03) mae/f_comp: 3.685e-02 (3.475e-02) rmse/f_comp: 7.716e-02 (8.150e-02) Time(mcs/at): 40 (9)
+2025-11-04 19:39:17,334 I - Iteration #42/279 TRAIN(TEST): total_loss: 1.642e-03 (1.498e-03) mae/depa: 4.724e-03 (2.865e-03) rmse/depa: 8.409e-03 (7.026e-03) mae/f_comp: 3.687e-02 (3.410e-02) rmse/f_comp: 7.716e-02 (7.713e-02) Time(mcs/at): 40 (9)
+2025-11-04 20:24:39,543 I - Iteration #43/279 TRAIN(TEST): total_loss: 1.638e-03 (1.492e-03) mae/depa: 4.683e-03 (2.869e-03) rmse/depa: 8.296e-03 (7.002e-03) mae/f_comp: 3.682e-02 (3.399e-02) rmse/f_comp: 7.690e-02 (7.721e-02) Time(mcs/at): 40 (9)
+2025-11-04 20:24:39,550 I - New best test loss found (1.49214e-03), checkpointing
+2025-11-04 20:24:39,909 I - Sharding callback duration: 121 microseconds
+2025-11-04 21:10:00,971 I - Iteration #44/279 TRAIN(TEST): total_loss: 1.640e-03 (1.502e-03) mae/depa: 4.712e-03 (2.869e-03) rmse/depa: 8.246e-03 (7.280e-03) mae/f_comp: 3.683e-02 (3.418e-02) rmse/f_comp: 7.683e-02 (7.671e-02) Time(mcs/at): 40 (9)
+2025-11-04 21:55:23,258 I - Iteration #45/279 TRAIN(TEST): total_loss: 1.638e-03 (1.485e-03) mae/depa: 4.710e-03 (2.876e-03) rmse/depa: 8.358e-03 (7.074e-03) mae/f_comp: 3.682e-02 (3.384e-02) rmse/f_comp: 7.687e-02 (7.663e-02) Time(mcs/at): 40 (9)
+2025-11-04 21:55:23,264 I - New best test loss found (1.48500e-03), checkpointing
+2025-11-04 21:55:23,621 I - Sharding callback duration: 30 microseconds
+2025-11-04 22:40:21,815 I - Iteration #46/279 TRAIN(TEST): total_loss: 1.638e-03 (1.496e-03) mae/depa: 4.680e-03 (2.878e-03) rmse/depa: 8.238e-03 (6.650e-03) mae/f_comp: 3.682e-02 (3.408e-02) rmse/f_comp: 7.683e-02 (7.720e-02) Time(mcs/at): 40 (9)
+2025-11-04 23:25:49,754 I - Iteration #47/279 TRAIN(TEST): total_loss: 1.640e-03 (1.512e-03) mae/depa: 4.728e-03 (3.016e-03) rmse/depa: 8.358e-03 (7.291e-03) mae/f_comp: 3.684e-02 (3.439e-02) rmse/f_comp: 7.691e-02 (7.814e-02) Time(mcs/at): 40 (9)
+2025-11-05 00:11:19,444 I - Iteration #48/279 TRAIN(TEST): total_loss: 1.637e-03 (1.573e-03) mae/depa: 4.728e-03 (3.987e-03) rmse/depa: 8.336e-03 (8.311e-03) mae/f_comp: 3.679e-02 (3.549e-02) rmse/f_comp: 7.675e-02 (7.960e-02) Time(mcs/at): 40 (9)
+2025-11-05 00:56:42,439 I - Iteration #49/279 TRAIN(TEST): total_loss: 1.640e-03 (1.488e-03) mae/depa: 4.706e-03 (2.831e-03) rmse/depa: 8.269e-03 (6.790e-03) mae/f_comp: 3.682e-02 (3.391e-02) rmse/f_comp: 7.688e-02 (7.648e-02) Time(mcs/at): 40 (9)
+2025-11-05 01:42:05,326 I - Iteration #50/279 TRAIN(TEST): total_loss: 1.636e-03 (1.496e-03) mae/depa: 4.701e-03 (2.777e-03) rmse/depa: 8.324e-03 (6.803e-03) mae/f_comp: 3.676e-02 (3.408e-02) rmse/f_comp: 7.683e-02 (7.701e-02) Time(mcs/at): 40 (9)
+2025-11-05 01:42:05,332 I - Regular checkpointing
+2025-11-05 01:42:05,663 I - Sharding callback duration: 113 microseconds
+2025-11-05 02:27:26,159 I - Iteration #51/279 TRAIN(TEST): total_loss: 1.634e-03 (1.548e-03) mae/depa: 4.711e-03 (3.191e-03) rmse/depa: 8.249e-03 (7.278e-03) mae/f_comp: 3.674e-02 (3.510e-02) rmse/f_comp: 7.672e-02 (7.850e-02) Time(mcs/at): 40 (9)
+2025-11-05 02:27:26,166 I - Reducing learning rate: 7.23798e-03 -> 7.09322e-03
+2025-11-05 03:12:37,095 I - Iteration #52/279 TRAIN(TEST): total_loss: 1.628e-03 (1.497e-03) mae/depa: 4.667e-03 (2.891e-03) rmse/depa: 8.241e-03 (6.878e-03) mae/f_comp: 3.663e-02 (3.408e-02) rmse/f_comp: 7.655e-02 (7.702e-02) Time(mcs/at): 40 (9)
+2025-11-05 03:58:00,387 I - Iteration #53/279 TRAIN(TEST): total_loss: 1.631e-03 (1.503e-03) mae/depa: 4.656e-03 (3.044e-03) rmse/depa: 8.220e-03 (6.997e-03) mae/f_comp: 3.667e-02 (3.421e-02) rmse/f_comp: 7.678e-02 (7.693e-02) Time(mcs/at): 40 (9)
+2025-11-05 04:43:23,606 I - Iteration #54/279 TRAIN(TEST): total_loss: 1.623e-03 (1.495e-03) mae/depa: 4.621e-03 (2.978e-03) rmse/depa: 8.214e-03 (6.873e-03) mae/f_comp: 3.655e-02 (3.404e-02) rmse/f_comp: 7.632e-02 (7.682e-02) Time(mcs/at): 40 (9)
+2025-11-05 05:28:41,564 I - Iteration #55/279 TRAIN(TEST): total_loss: 1.626e-03 (1.496e-03) mae/depa: 4.650e-03 (3.015e-03) rmse/depa: 8.214e-03 (7.192e-03) mae/f_comp: 3.660e-02 (3.405e-02) rmse/f_comp: 7.654e-02 (7.671e-02) Time(mcs/at): 40 (9)
+2025-11-05 06:13:50,408 I - Iteration #56/279 TRAIN(TEST): total_loss: 1.630e-03 (1.489e-03) mae/depa: 4.664e-03 (2.836e-03) rmse/depa: 8.329e-03 (6.675e-03) mae/f_comp: 3.665e-02 (3.393e-02) rmse/f_comp: 7.672e-02 (7.644e-02) Time(mcs/at): 40 (9)
+2025-11-05 06:59:20,966 I - Iteration #57/279 TRAIN(TEST): total_loss: 1.623e-03 (1.475e-03) mae/depa: 4.619e-03 (2.752e-03) rmse/depa: 8.139e-03 (6.912e-03) mae/f_comp: 3.656e-02 (3.366e-02) rmse/f_comp: 7.650e-02 (7.609e-02) Time(mcs/at): 40 (9)
+2025-11-05 06:59:20,972 I - New best test loss found (1.47547e-03), checkpointing
+2025-11-05 06:59:21,336 I - Sharding callback duration: 28 microseconds
+2025-11-05 07:44:45,326 I - Iteration #58/279 TRAIN(TEST): total_loss: 1.626e-03 (1.499e-03) mae/depa: 4.657e-03 (3.218e-03) rmse/depa: 8.241e-03 (7.017e-03) mae/f_comp: 3.658e-02 (3.409e-02) rmse/f_comp: 7.671e-02 (7.685e-02) Time(mcs/at): 40 (9)
+2025-11-05 08:30:10,410 I - Iteration #59/279 TRAIN(TEST): total_loss: 1.625e-03 (1.487e-03) mae/depa: 4.599e-03 (2.848e-03) rmse/depa: 8.127e-03 (7.180e-03) mae/f_comp: 3.658e-02 (3.389e-02) rmse/f_comp: 7.656e-02 (7.745e-02) Time(mcs/at): 40 (9)
+2025-11-05 09:15:36,863 I - Iteration #60/279 TRAIN(TEST): total_loss: 1.625e-03 (1.483e-03) mae/depa: 4.646e-03 (2.919e-03) rmse/depa: 8.217e-03 (6.788e-03) mae/f_comp: 3.657e-02 (3.380e-02) rmse/f_comp: 7.627e-02 (7.660e-02) Time(mcs/at): 40 (9)
+2025-11-05 10:01:05,515 I - Iteration #61/279 TRAIN(TEST): total_loss: 1.629e-03 (1.481e-03) mae/depa: 4.627e-03 (2.776e-03) rmse/depa: 8.180e-03 (6.655e-03) mae/f_comp: 3.663e-02 (3.378e-02) rmse/f_comp: 7.638e-02 (7.847e-02) Time(mcs/at): 40 (9)
+2025-11-05 10:46:36,172 I - Iteration #62/279 TRAIN(TEST): total_loss: 1.624e-03 (1.492e-03) mae/depa: 4.604e-03 (2.887e-03) rmse/depa: 8.168e-03 (6.916e-03) mae/f_comp: 3.655e-02 (3.399e-02) rmse/f_comp: 7.634e-02 (7.736e-02) Time(mcs/at): 40 (9)
+2025-11-05 11:32:01,949 I - Iteration #63/279 TRAIN(TEST): total_loss: 1.628e-03 (1.483e-03) mae/depa: 4.680e-03 (2.817e-03) rmse/depa: 8.240e-03 (7.103e-03) mae/f_comp: 3.662e-02 (3.382e-02) rmse/f_comp: 7.654e-02 (7.669e-02) Time(mcs/at): 40 (9)
+2025-11-05 11:32:01,960 I - Reducing learning rate: 7.09322e-03 -> 6.95136e-03
+2025-11-05 12:17:27,472 I - Iteration #64/279 TRAIN(TEST): total_loss: 1.620e-03 (1.521e-03) mae/depa: 4.600e-03 (2.929e-03) rmse/depa: 8.152e-03 (7.367e-03) mae/f_comp: 3.648e-02 (3.456e-02) rmse/f_comp: 7.643e-02 (7.889e-02) Time(mcs/at): 40 (9)
+2025-11-05 13:02:54,458 I - Iteration #65/279 TRAIN(TEST): total_loss: 1.613e-03 (1.476e-03) mae/depa: 4.579e-03 (2.845e-03) rmse/depa: 8.124e-03 (6.830e-03) mae/f_comp: 3.637e-02 (3.366e-02) rmse/f_comp: 7.601e-02 (7.623e-02) Time(mcs/at): 40 (9)
+2025-11-05 13:48:22,747 I - Iteration #66/279 TRAIN(TEST): total_loss: 1.615e-03 (1.524e-03) mae/depa: 4.585e-03 (3.191e-03) rmse/depa: 8.100e-03 (6.950e-03) mae/f_comp: 3.639e-02 (3.462e-02) rmse/f_comp: 7.623e-02 (7.776e-02) Time(mcs/at): 40 (9)
+2025-11-05 14:33:47,580 I - Iteration #67/279 TRAIN(TEST): total_loss: 1.615e-03 (1.473e-03) mae/depa: 4.579e-03 (2.797e-03) rmse/depa: 8.124e-03 (6.917e-03) mae/f_comp: 3.640e-02 (3.361e-02) rmse/f_comp: 7.619e-02 (7.595e-02) Time(mcs/at): 40 (9)
+2025-11-05 14:33:47,590 I - New best test loss found (1.47305e-03), checkpointing
+2025-11-05 14:33:47,947 I - Sharding callback duration: 114 microseconds
+2025-11-05 15:19:10,982 I - Iteration #68/279 TRAIN(TEST): total_loss: 1.615e-03 (1.499e-03) mae/depa: 4.581e-03 (2.939e-03) rmse/depa: 8.047e-03 (6.815e-03) mae/f_comp: 3.639e-02 (3.413e-02) rmse/f_comp: 7.622e-02 (7.657e-02) Time(mcs/at): 40 (9)
+2025-11-05 16:04:39,026 I - Iteration #69/279 TRAIN(TEST): total_loss: 1.614e-03 (1.482e-03) mae/depa: 4.605e-03 (2.802e-03) rmse/depa: 8.153e-03 (6.808e-03) mae/f_comp: 3.639e-02 (3.379e-02) rmse/f_comp: 7.601e-02 (7.676e-02) Time(mcs/at): 40 (9)
+2025-11-05 16:49:59,651 I - Iteration #70/279 TRAIN(TEST): total_loss: 1.611e-03 (1.478e-03) mae/depa: 4.522e-03 (2.870e-03) rmse/depa: 7.952e-03 (6.935e-03) mae/f_comp: 3.634e-02 (3.370e-02) rmse/f_comp: 7.589e-02 (7.680e-02) Time(mcs/at): 40 (9)
+2025-11-05 17:35:29,417 I - Iteration #71/279 TRAIN(TEST): total_loss: 1.618e-03 (1.483e-03) mae/depa: 4.587e-03 (2.827e-03) rmse/depa: 8.182e-03 (6.945e-03) mae/f_comp: 3.644e-02 (3.380e-02) rmse/f_comp: 7.617e-02 (7.636e-02) Time(mcs/at): 40 (9)
+2025-11-05 18:21:01,212 I - Iteration #72/279 TRAIN(TEST): total_loss: 1.616e-03 (1.489e-03) mae/depa: 4.604e-03 (2.946e-03) rmse/depa: 8.110e-03 (6.993e-03) mae/f_comp: 3.640e-02 (3.393e-02) rmse/f_comp: 7.604e-02 (7.663e-02) Time(mcs/at): 40 (9)
+2025-11-05 19:06:18,775 I - Iteration #73/279 TRAIN(TEST): total_loss: 1.614e-03 (1.479e-03) mae/depa: 4.548e-03 (2.790e-03) rmse/depa: 8.059e-03 (6.798e-03) mae/f_comp: 3.639e-02 (3.373e-02) rmse/f_comp: 7.611e-02 (7.642e-02) Time(mcs/at): 40 (9)
+2025-11-05 19:06:18,786 I - Reducing learning rate: 6.95136e-03 -> 6.81233e-03
+2025-11-05 19:52:00,634 I - Iteration #74/279 TRAIN(TEST): total_loss: 1.607e-03 (1.479e-03) mae/depa: 4.514e-03 (2.748e-03) rmse/depa: 8.011e-03 (6.741e-03) mae/f_comp: 3.624e-02 (3.373e-02) rmse/f_comp: 7.583e-02 (7.598e-02) Time(mcs/at): 40 (9)
+2025-11-05 20:37:36,518 I - Iteration #75/279 TRAIN(TEST): total_loss: 1.605e-03 (1.478e-03) mae/depa: 4.540e-03 (2.803e-03) rmse/depa: 7.930e-03 (6.786e-03) mae/f_comp: 3.622e-02 (3.371e-02) rmse/f_comp: 7.569e-02 (7.625e-02) Time(mcs/at): 40 (9)
+2025-11-05 21:23:22,973 I - Iteration #76/279 TRAIN(TEST): total_loss: 1.605e-03 (1.474e-03) mae/depa: 4.532e-03 (2.767e-03) rmse/depa: 7.988e-03 (6.462e-03) mae/f_comp: 3.621e-02 (3.364e-02) rmse/f_comp: 7.586e-02 (7.626e-02) Time(mcs/at): 40 (9)
+2025-11-05 22:09:06,267 I - Iteration #77/279 TRAIN(TEST): total_loss: 1.608e-03 (1.502e-03) mae/depa: 4.524e-03 (2.842e-03) rmse/depa: 8.040e-03 (6.947e-03) mae/f_comp: 3.625e-02 (3.418e-02) rmse/f_comp: 7.589e-02 (7.744e-02) Time(mcs/at): 40 (9)
+2025-11-05 22:54:41,096 I - Iteration #78/279 TRAIN(TEST): total_loss: 1.606e-03 (1.494e-03) mae/depa: 4.526e-03 (2.899e-03) rmse/depa: 7.997e-03 (7.315e-03) mae/f_comp: 3.622e-02 (3.403e-02) rmse/f_comp: 7.572e-02 (7.677e-02) Time(mcs/at): 40 (9)
+2025-11-05 23:40:19,450 I - Iteration #79/279 TRAIN(TEST): total_loss: 1.608e-03 (1.476e-03) mae/depa: 4.537e-03 (2.821e-03) rmse/depa: 8.079e-03 (6.587e-03) mae/f_comp: 3.626e-02 (3.367e-02) rmse/f_comp: 7.587e-02 (7.600e-02) Time(mcs/at): 40 (9)
+2025-11-05 23:40:19,463 I - Reducing learning rate: 6.81233e-03 -> 6.67608e-03
+2025-11-05 23:40:19,464 I - Switching loss weights to {'learning_rate': 0.001, 'energy': {'weight': 5}, 'forces': {'weight': 2}} after 79 epochs
+2025-11-05 23:40:19,475 I - Trying to load best test checkpoint
+2025-11-05 23:40:19,936 I - Loaded checkpoint from seed/1/checkpoints/checkpoint.best_test_loss
+2025-11-05 23:40:20,102 I - Sharding callback duration: 27 microseconds
+2025-11-05 23:40:20,230 I - Set new learning rate to 1.000e-03
+2025-11-06 00:26:04,099 I - Iteration #80/279 TRAIN(TEST): total_loss: 6.064e-04 (6.034e-04) mae/depa: 3.019e-03 (2.350e-03) rmse/depa: 6.512e-03 (5.689e-03) mae/f_comp: 3.259e-02 (3.272e-02) rmse/f_comp: 7.096e-02 (7.447e-02) Time(mcs/at): 40 (9)
+2025-11-06 00:26:04,111 I - New best test loss found (6.03450e-04), checkpointing
+2025-11-06 00:26:09,092 I - Sharding callback duration: 36 microseconds
+2025-11-06 01:12:37,342 I - Iteration #81/279 TRAIN(TEST): total_loss: 5.957e-04 (5.979e-04) mae/depa: 2.794e-03 (2.184e-03) rmse/depa: 6.053e-03 (5.534e-03) mae/f_comp: 3.245e-02 (3.262e-02) rmse/f_comp: 7.061e-02 (7.434e-02) Time(mcs/at): 41 (9)
+2025-11-06 01:12:37,354 I - New best test loss found (5.97912e-04), checkpointing
+2025-11-06 01:12:38,024 I - Sharding callback duration: 34 microseconds
+2025-11-06 01:58:58,999 I - Iteration #82/279 TRAIN(TEST): total_loss: 5.920e-04 (5.963e-04) mae/depa: 2.695e-03 (2.101e-03) rmse/depa: 5.806e-03 (5.364e-03) mae/f_comp: 3.242e-02 (3.261e-02) rmse/f_comp: 7.054e-02 (7.426e-02) Time(mcs/at): 41 (9)
+2025-11-06 01:58:59,013 I - New best test loss found (5.96345e-04), checkpointing
+2025-11-06 01:58:59,410 I - Sharding callback duration: 32 microseconds
+2025-11-06 02:45:24,132 I - Iteration #83/279 TRAIN(TEST): total_loss: 5.899e-04 (5.965e-04) mae/depa: 2.622e-03 (2.092e-03) rmse/depa: 5.656e-03 (5.133e-03) mae/f_comp: 3.241e-02 (3.265e-02) rmse/f_comp: 7.050e-02 (7.428e-02) Time(mcs/at): 41 (9)
+2025-11-06 03:31:59,573 I - Iteration #84/279 TRAIN(TEST): total_loss: 5.885e-04 (5.939e-04) mae/depa: 2.576e-03 (2.029e-03) rmse/depa: 5.523e-03 (5.050e-03) mae/f_comp: 3.240e-02 (3.258e-02) rmse/f_comp: 7.046e-02 (7.421e-02) Time(mcs/at): 41 (9)
+2025-11-06 03:31:59,585 I - New best test loss found (5.93879e-04), checkpointing
+2025-11-06 03:31:59,952 I - Sharding callback duration: 35 microseconds
+2025-11-06 04:18:28,438 I - Iteration #85/279 TRAIN(TEST): total_loss: 5.871e-04 (5.935e-04) mae/depa: 2.528e-03 (2.076e-03) rmse/depa: 5.388e-03 (4.834e-03) mae/f_comp: 3.239e-02 (3.258e-02) rmse/f_comp: 7.047e-02 (7.425e-02) Time(mcs/at): 41 (9)
+2025-11-06 04:18:28,450 I - New best test loss found (5.93499e-04), checkpointing
+2025-11-06 04:18:29,081 I - Sharding callback duration: 37 microseconds
+2025-11-06 05:04:43,273 I - Iteration #86/279 TRAIN(TEST): total_loss: 5.863e-04 (5.921e-04) mae/depa: 2.503e-03 (2.002e-03) rmse/depa: 5.252e-03 (4.719e-03) mae/f_comp: 3.239e-02 (3.256e-02) rmse/f_comp: 7.045e-02 (7.422e-02) Time(mcs/at): 41 (9)
+2025-11-06 05:04:43,288 I - New best test loss found (5.92142e-04), checkpointing
+2025-11-06 05:04:43,633 I - Sharding callback duration: 26 microseconds
+2025-11-06 05:51:06,656 I - Iteration #87/279 TRAIN(TEST): total_loss: 5.853e-04 (5.920e-04) mae/depa: 2.468e-03 (2.009e-03) rmse/depa: 5.166e-03 (4.713e-03) mae/f_comp: 3.238e-02 (3.257e-02) rmse/f_comp: 7.045e-02 (7.421e-02) Time(mcs/at): 41 (9)
+2025-11-06 05:51:06,670 I - New best test loss found (5.92047e-04), checkpointing
+2025-11-06 05:51:07,056 I - Sharding callback duration: 27 microseconds
+2025-11-06 06:37:29,708 I - Iteration #88/279 TRAIN(TEST): total_loss: 5.848e-04 (5.911e-04) mae/depa: 2.452e-03 (1.926e-03) rmse/depa: 5.113e-03 (4.575e-03) mae/f_comp: 3.238e-02 (3.258e-02) rmse/f_comp: 7.043e-02 (7.418e-02) Time(mcs/at): 41 (9)
+2025-11-06 06:37:29,722 I - New best test loss found (5.91135e-04), checkpointing
+2025-11-06 06:37:30,510 I - Sharding callback duration: 44 microseconds
+2025-11-06 07:23:58,310 I - Iteration #89/279 TRAIN(TEST): total_loss: 5.837e-04 (5.904e-04) mae/depa: 2.416e-03 (1.920e-03) rmse/depa: 5.012e-03 (4.518e-03) mae/f_comp: 3.237e-02 (3.254e-02) rmse/f_comp: 7.042e-02 (7.413e-02) Time(mcs/at): 41 (9)
+2025-11-06 07:23:58,324 I - New best test loss found (5.90445e-04), checkpointing
+2025-11-06 07:23:58,699 I - Sharding callback duration: 30 microseconds
+2025-11-06 08:10:16,117 I - Iteration #90/279 TRAIN(TEST): total_loss: 5.833e-04 (5.901e-04) mae/depa: 2.405e-03 (1.914e-03) rmse/depa: 4.955e-03 (4.435e-03) mae/f_comp: 3.237e-02 (3.255e-02) rmse/f_comp: 7.041e-02 (7.415e-02) Time(mcs/at): 41 (9)
+2025-11-06 08:10:16,131 I - New best test loss found (5.90059e-04), checkpointing
+2025-11-06 08:10:16,473 I - Sharding callback duration: 41 microseconds
+2025-11-06 08:56:30,874 I - Iteration #91/279 TRAIN(TEST): total_loss: 5.826e-04 (5.902e-04) mae/depa: 2.381e-03 (1.899e-03) rmse/depa: 4.887e-03 (4.361e-03) mae/f_comp: 3.236e-02 (3.257e-02) rmse/f_comp: 7.040e-02 (7.414e-02) Time(mcs/at): 41 (9)
+2025-11-06 09:42:56,486 I - Iteration #92/279 TRAIN(TEST): total_loss: 5.822e-04 (5.898e-04) mae/depa: 2.368e-03 (1.964e-03) rmse/depa: 4.846e-03 (4.329e-03) mae/f_comp: 3.236e-02 (3.254e-02) rmse/f_comp: 7.040e-02 (7.416e-02) Time(mcs/at): 41 (9)
+2025-11-06 09:42:56,499 I - New best test loss found (5.89752e-04), checkpointing
+2025-11-06 09:42:57,250 I - Sharding callback duration: 49 microseconds
+2025-11-06 10:29:32,801 I - Iteration #93/279 TRAIN(TEST): total_loss: 5.817e-04 (5.900e-04) mae/depa: 2.355e-03 (1.981e-03) rmse/depa: 4.810e-03 (4.287e-03) mae/f_comp: 3.235e-02 (3.256e-02) rmse/f_comp: 7.038e-02 (7.415e-02) Time(mcs/at): 41 (10)
+2025-11-06 11:16:50,780 I - Iteration #94/279 TRAIN(TEST): total_loss: 5.811e-04 (5.883e-04) mae/depa: 2.332e-03 (1.858e-03) rmse/depa: 4.760e-03 (4.229e-03) mae/f_comp: 3.235e-02 (3.254e-02) rmse/f_comp: 7.037e-02 (7.413e-02) Time(mcs/at): 42 (9)
+2025-11-06 11:16:50,794 I - New best test loss found (5.88284e-04), checkpointing
+2025-11-06 11:16:51,272 I - Sharding callback duration: 54 microseconds
+2025-11-06 12:03:13,254 I - Iteration #95/279 TRAIN(TEST): total_loss: 5.806e-04 (5.880e-04) mae/depa: 2.320e-03 (1.846e-03) rmse/depa: 4.749e-03 (4.213e-03) mae/f_comp: 3.234e-02 (3.253e-02) rmse/f_comp: 7.036e-02 (7.408e-02) Time(mcs/at): 41 (9)
+2025-11-06 12:03:13,265 I - New best test loss found (5.88003e-04), checkpointing
+2025-11-06 12:03:16,358 I - Sharding callback duration: 33 microseconds
+2025-11-06 12:49:34,625 I - Iteration #96/279 TRAIN(TEST): total_loss: 5.802e-04 (5.882e-04) mae/depa: 2.303e-03 (1.876e-03) rmse/depa: 4.728e-03 (4.223e-03) mae/f_comp: 3.234e-02 (3.253e-02) rmse/f_comp: 7.036e-02 (7.408e-02) Time(mcs/at): 41 (9)
+2025-11-06 13:35:58,531 I - Iteration #97/279 TRAIN(TEST): total_loss: 5.799e-04 (5.877e-04) mae/depa: 2.289e-03 (1.859e-03) rmse/depa: 4.709e-03 (4.218e-03) mae/f_comp: 3.234e-02 (3.252e-02) rmse/f_comp: 7.035e-02 (7.407e-02) Time(mcs/at): 41 (9)
+2025-11-06 13:35:58,543 I - New best test loss found (5.87691e-04), checkpointing
+2025-11-06 13:35:59,193 I - Sharding callback duration: 31 microseconds
+2025-11-06 14:22:18,722 I - Iteration #98/279 TRAIN(TEST): total_loss: 5.797e-04 (5.876e-04) mae/depa: 2.281e-03 (1.853e-03) rmse/depa: 4.692e-03 (4.178e-03) mae/f_comp: 3.233e-02 (3.253e-02) rmse/f_comp: 7.034e-02 (7.413e-02) Time(mcs/at): 41 (9)
+2025-11-06 14:22:18,737 I - New best test loss found (5.87620e-04), checkpointing
+2025-11-06 14:22:19,176 I - Sharding callback duration: 47 microseconds
+2025-11-06 15:08:38,609 I - Iteration #99/279 TRAIN(TEST): total_loss: 5.792e-04 (5.874e-04) mae/depa: 2.267e-03 (1.829e-03) rmse/depa: 4.669e-03 (4.129e-03) mae/f_comp: 3.233e-02 (3.253e-02) rmse/f_comp: 7.033e-02 (7.413e-02) Time(mcs/at): 41 (9)
+2025-11-06 15:08:38,621 I - New best test loss found (5.87356e-04), checkpointing
+2025-11-06 15:08:38,999 I - Sharding callback duration: 29 microseconds
+2025-11-06 15:55:00,529 I - Iteration #100/279 TRAIN(TEST): total_loss: 5.789e-04 (5.869e-04) mae/depa: 2.260e-03 (1.807e-03) rmse/depa: 4.654e-03 (4.130e-03) mae/f_comp: 3.233e-02 (3.252e-02) rmse/f_comp: 7.033e-02 (7.404e-02) Time(mcs/at): 41 (9)
+2025-11-06 15:55:00,541 I - New best test loss found (5.86890e-04), checkpointing
+2025-11-06 15:55:01,138 I - Sharding callback duration: 42 microseconds
+2025-11-06 15:55:01,321 I - Regular checkpointing
+2025-11-06 15:55:01,393 I - Sharding callback duration: 29 microseconds
+2025-11-06 16:41:23,031 I - Iteration #101/279 TRAIN(TEST): total_loss: 5.786e-04 (5.868e-04) mae/depa: 2.255e-03 (1.831e-03) rmse/depa: 4.641e-03 (4.143e-03) mae/f_comp: 3.232e-02 (3.250e-02) rmse/f_comp: 7.031e-02 (7.407e-02) Time(mcs/at): 41 (9)
+2025-11-06 16:41:23,045 I - New best test loss found (5.86813e-04), checkpointing
+2025-11-06 16:41:23,459 I - Sharding callback duration: 39 microseconds
+2025-11-06 17:27:48,127 I - Iteration #102/279 TRAIN(TEST): total_loss: 5.783e-04 (5.874e-04) mae/depa: 2.248e-03 (1.824e-03) rmse/depa: 4.621e-03 (4.101e-03) mae/f_comp: 3.232e-02 (3.256e-02) rmse/f_comp: 7.030e-02 (7.407e-02) Time(mcs/at): 41 (9)
+2025-11-06 18:14:14,348 I - Iteration #103/279 TRAIN(TEST): total_loss: 5.780e-04 (5.866e-04) mae/depa: 2.229e-03 (1.800e-03) rmse/depa: 4.606e-03 (4.100e-03) mae/f_comp: 3.231e-02 (3.252e-02) rmse/f_comp: 7.029e-02 (7.408e-02) Time(mcs/at): 41 (9)
+2025-11-06 18:14:14,361 I - New best test loss found (5.86595e-04), checkpointing
+2025-11-06 18:14:15,019 I - Sharding callback duration: 33 microseconds
+2025-11-06 19:00:23,648 I - Iteration #104/279 TRAIN(TEST): total_loss: 5.777e-04 (5.873e-04) mae/depa: 2.222e-03 (1.855e-03) rmse/depa: 4.591e-03 (4.160e-03) mae/f_comp: 3.231e-02 (3.252e-02) rmse/f_comp: 7.029e-02 (7.407e-02) Time(mcs/at): 41 (9)
+2025-11-06 19:46:43,118 I - Iteration #105/279 TRAIN(TEST): total_loss: 5.774e-04 (5.867e-04) mae/depa: 2.215e-03 (1.820e-03) rmse/depa: 4.585e-03 (4.103e-03) mae/f_comp: 3.230e-02 (3.252e-02) rmse/f_comp: 7.029e-02 (7.407e-02) Time(mcs/at): 41 (9)
+2025-11-06 20:32:27,904 I - Iteration #106/279 TRAIN(TEST): total_loss: 5.773e-04 (5.862e-04) mae/depa: 2.215e-03 (1.782e-03) rmse/depa: 4.585e-03 (4.058e-03) mae/f_comp: 3.230e-02 (3.252e-02) rmse/f_comp: 7.028e-02 (7.402e-02) Time(mcs/at): 40 (9)
+2025-11-06 20:32:27,916 I - New best test loss found (5.86164e-04), checkpointing
+2025-11-06 20:32:28,269 I - Sharding callback duration: 28 microseconds
+2025-11-06 21:18:49,581 I - Iteration #107/279 TRAIN(TEST): total_loss: 5.769e-04 (5.855e-04) mae/depa: 2.206e-03 (1.782e-03) rmse/depa: 4.558e-03 (4.055e-03) mae/f_comp: 3.230e-02 (3.249e-02) rmse/f_comp: 7.027e-02 (7.398e-02) Time(mcs/at): 41 (9)
+2025-11-06 21:18:49,594 I - New best test loss found (5.85453e-04), checkpointing
+2025-11-06 21:18:49,970 I - Sharding callback duration: 37 microseconds
+2025-11-06 22:05:03,781 I - Iteration #108/279 TRAIN(TEST): total_loss: 5.767e-04 (5.865e-04) mae/depa: 2.190e-03 (1.838e-03) rmse/depa: 4.557e-03 (4.110e-03) mae/f_comp: 3.229e-02 (3.249e-02) rmse/f_comp: 7.025e-02 (7.406e-02) Time(mcs/at): 41 (9)
+2025-11-06 22:51:16,938 I - Iteration #109/279 TRAIN(TEST): total_loss: 5.766e-04 (5.859e-04) mae/depa: 2.190e-03 (1.783e-03) rmse/depa: 4.539e-03 (4.061e-03) mae/f_comp: 3.229e-02 (3.250e-02) rmse/f_comp: 7.025e-02 (7.408e-02) Time(mcs/at): 41 (9)
+2025-11-06 23:37:31,205 I - Iteration #110/279 TRAIN(TEST): total_loss: 5.764e-04 (5.851e-04) mae/depa: 2.189e-03 (1.775e-03) rmse/depa: 4.543e-03 (4.019e-03) mae/f_comp: 3.229e-02 (3.248e-02) rmse/f_comp: 7.025e-02 (7.402e-02) Time(mcs/at): 41 (9)
+2025-11-06 23:37:31,217 I - New best test loss found (5.85086e-04), checkpointing
+2025-11-06 23:37:31,841 I - Sharding callback duration: 32 microseconds
+2025-11-07 00:23:44,826 I - Iteration #111/279 TRAIN(TEST): total_loss: 5.761e-04 (5.852e-04) mae/depa: 2.182e-03 (1.792e-03) rmse/depa: 4.509e-03 (4.050e-03) mae/f_comp: 3.228e-02 (3.248e-02) rmse/f_comp: 7.024e-02 (7.401e-02) Time(mcs/at): 41 (9)
+2025-11-07 01:09:57,993 I - Iteration #112/279 TRAIN(TEST): total_loss: 5.758e-04 (5.852e-04) mae/depa: 2.170e-03 (1.767e-03) rmse/depa: 4.498e-03 (4.006e-03) mae/f_comp: 3.228e-02 (3.249e-02) rmse/f_comp: 7.024e-02 (7.398e-02) Time(mcs/at): 41 (9)
+2025-11-07 01:56:08,805 I - Iteration #113/279 TRAIN(TEST): total_loss: 5.758e-04 (5.849e-04) mae/depa: 2.171e-03 (1.753e-03) rmse/depa: 4.501e-03 (4.005e-03) mae/f_comp: 3.228e-02 (3.249e-02) rmse/f_comp: 7.023e-02 (7.397e-02) Time(mcs/at): 41 (9)
+2025-11-07 01:56:08,814 I - New best test loss found (5.84860e-04), checkpointing
+2025-11-07 01:56:09,239 I - Sharding callback duration: 41 microseconds
+2025-11-07 02:42:25,213 I - Iteration #114/279 TRAIN(TEST): total_loss: 5.755e-04 (5.842e-04) mae/depa: 2.159e-03 (1.745e-03) rmse/depa: 4.480e-03 (3.985e-03) mae/f_comp: 3.227e-02 (3.246e-02) rmse/f_comp: 7.021e-02 (7.395e-02) Time(mcs/at): 41 (9)
+2025-11-07 02:42:25,225 I - New best test loss found (5.84156e-04), checkpointing
+2025-11-07 02:42:29,543 I - Sharding callback duration: 37 microseconds
+2025-11-07 03:28:50,790 I - Iteration #115/279 TRAIN(TEST): total_loss: 5.753e-04 (5.846e-04) mae/depa: 2.154e-03 (1.757e-03) rmse/depa: 4.478e-03 (3.987e-03) mae/f_comp: 3.227e-02 (3.247e-02) rmse/f_comp: 7.020e-02 (7.401e-02) Time(mcs/at): 41 (9)
+2025-11-07 04:14:59,898 I - Iteration #116/279 TRAIN(TEST): total_loss: 5.752e-04 (5.844e-04) mae/depa: 2.153e-03 (1.777e-03) rmse/depa: 4.469e-03 (4.014e-03) mae/f_comp: 3.227e-02 (3.246e-02) rmse/f_comp: 7.020e-02 (7.395e-02) Time(mcs/at): 41 (9)
+2025-11-07 05:01:17,594 I - Iteration #117/279 TRAIN(TEST): total_loss: 5.749e-04 (5.840e-04) mae/depa: 2.146e-03 (1.731e-03) rmse/depa: 4.456e-03 (3.969e-03) mae/f_comp: 3.226e-02 (3.246e-02) rmse/f_comp: 7.019e-02 (7.391e-02) Time(mcs/at): 41 (9)
+2025-11-07 05:01:17,606 I - New best test loss found (5.83984e-04), checkpointing
+2025-11-07 05:01:18,262 I - Sharding callback duration: 32 microseconds
+2025-11-07 05:47:37,626 I - Iteration #118/279 TRAIN(TEST): total_loss: 5.746e-04 (5.837e-04) mae/depa: 2.134e-03 (1.733e-03) rmse/depa: 4.446e-03 (3.960e-03) mae/f_comp: 3.226e-02 (3.245e-02) rmse/f_comp: 7.018e-02 (7.393e-02) Time(mcs/at): 41 (9)
+2025-11-07 05:47:37,639 I - New best test loss found (5.83737e-04), checkpointing
+2025-11-07 05:47:38,090 I - Sharding callback duration: 27 microseconds
+2025-11-07 06:33:59,879 I - Iteration #119/279 TRAIN(TEST): total_loss: 5.746e-04 (5.840e-04) mae/depa: 2.137e-03 (1.778e-03) rmse/depa: 4.446e-03 (3.975e-03) mae/f_comp: 3.226e-02 (3.245e-02) rmse/f_comp: 7.017e-02 (7.396e-02) Time(mcs/at): 41 (9)
+2025-11-07 07:20:19,430 I - Iteration #120/279 TRAIN(TEST): total_loss: 5.743e-04 (5.850e-04) mae/depa: 2.127e-03 (1.764e-03) rmse/depa: 4.422e-03 (4.011e-03) mae/f_comp: 3.225e-02 (3.249e-02) rmse/f_comp: 7.018e-02 (7.400e-02) Time(mcs/at): 41 (9)
+2025-11-07 08:06:13,990 I - Iteration #121/279 TRAIN(TEST): total_loss: 5.743e-04 (5.834e-04) mae/depa: 2.131e-03 (1.735e-03) rmse/depa: 4.434e-03 (3.963e-03) mae/f_comp: 3.225e-02 (3.244e-02) rmse/f_comp: 7.017e-02 (7.391e-02) Time(mcs/at): 40 (9)
+2025-11-07 08:06:14,002 I - New best test loss found (5.83374e-04), checkpointing
+2025-11-07 08:06:14,370 I - Sharding callback duration: 32 microseconds
+2025-11-07 08:52:33,764 I - Iteration #122/279 TRAIN(TEST): total_loss: 5.742e-04 (5.846e-04) mae/depa: 2.125e-03 (1.741e-03) rmse/depa: 4.426e-03 (3.966e-03) mae/f_comp: 3.225e-02 (3.248e-02) rmse/f_comp: 7.016e-02 (7.394e-02) Time(mcs/at): 41 (9)
+2025-11-07 09:38:57,027 I - Iteration #123/279 TRAIN(TEST): total_loss: 5.739e-04 (5.832e-04) mae/depa: 2.117e-03 (1.731e-03) rmse/depa: 4.409e-03 (3.950e-03) mae/f_comp: 3.225e-02 (3.243e-02) rmse/f_comp: 7.015e-02 (7.393e-02) Time(mcs/at): 41 (9)
+2025-11-07 09:38:57,039 I - New best test loss found (5.83224e-04), checkpointing
+2025-11-07 09:38:57,734 I - Sharding callback duration: 33 microseconds
+2025-11-07 10:25:08,070 I - Iteration #124/279 TRAIN(TEST): total_loss: 5.738e-04 (5.831e-04) mae/depa: 2.111e-03 (1.723e-03) rmse/depa: 4.400e-03 (3.908e-03) mae/f_comp: 3.224e-02 (3.243e-02) rmse/f_comp: 7.014e-02 (7.394e-02) Time(mcs/at): 41 (9)
+2025-11-07 10:25:08,082 I - New best test loss found (5.83143e-04), checkpointing
+2025-11-07 10:25:08,425 I - Sharding callback duration: 31 microseconds
+2025-11-07 11:10:59,163 I - Iteration #125/279 TRAIN(TEST): total_loss: 5.737e-04 (5.827e-04) mae/depa: 2.115e-03 (1.716e-03) rmse/depa: 4.413e-03 (3.916e-03) mae/f_comp: 3.224e-02 (3.242e-02) rmse/f_comp: 7.013e-02 (7.389e-02) Time(mcs/at): 40 (9)
+2025-11-07 11:10:59,175 I - New best test loss found (5.82687e-04), checkpointing
+2025-11-07 11:10:59,543 I - Sharding callback duration: 80 microseconds
+2025-11-07 11:56:44,165 I - Iteration #126/279 TRAIN(TEST): total_loss: 5.737e-04 (5.840e-04) mae/depa: 2.113e-03 (1.748e-03) rmse/depa: 4.398e-03 (3.928e-03) mae/f_comp: 3.224e-02 (3.247e-02) rmse/f_comp: 7.014e-02 (7.393e-02) Time(mcs/at): 40 (9)
+2025-11-07 12:42:32,400 I - Iteration #127/279 TRAIN(TEST): total_loss: 5.736e-04 (5.831e-04) mae/depa: 2.108e-03 (1.731e-03) rmse/depa: 4.381e-03 (3.937e-03) mae/f_comp: 3.224e-02 (3.243e-02) rmse/f_comp: 7.013e-02 (7.393e-02) Time(mcs/at): 40 (9)
+2025-11-07 13:27:58,499 I - Iteration #128/279 TRAIN(TEST): total_loss: 5.732e-04 (5.825e-04) mae/depa: 2.098e-03 (1.719e-03) rmse/depa: 4.372e-03 (3.903e-03) mae/f_comp: 3.223e-02 (3.241e-02) rmse/f_comp: 7.012e-02 (7.387e-02) Time(mcs/at): 40 (9)
+2025-11-07 13:27:58,510 I - New best test loss found (5.82468e-04), checkpointing
+2025-11-07 13:27:59,202 I - Sharding callback duration: 45 microseconds
+2025-11-07 14:13:41,287 I - Iteration #129/279 TRAIN(TEST): total_loss: 5.731e-04 (5.830e-04) mae/depa: 2.097e-03 (1.713e-03) rmse/depa: 4.376e-03 (3.908e-03) mae/f_comp: 3.223e-02 (3.243e-02) rmse/f_comp: 7.012e-02 (7.391e-02) Time(mcs/at): 40 (9)
+2025-11-07 14:59:58,136 I - Iteration #130/279 TRAIN(TEST): total_loss: 5.730e-04 (5.828e-04) mae/depa: 2.097e-03 (1.755e-03) rmse/depa: 4.367e-03 (3.899e-03) mae/f_comp: 3.223e-02 (3.242e-02) rmse/f_comp: 7.011e-02 (7.392e-02) Time(mcs/at): 41 (9)
+2025-11-07 15:45:54,811 I - Iteration #131/279 TRAIN(TEST): total_loss: 5.728e-04 (5.830e-04) mae/depa: 2.087e-03 (1.769e-03) rmse/depa: 4.358e-03 (3.948e-03) mae/f_comp: 3.222e-02 (3.241e-02) rmse/f_comp: 7.011e-02 (7.390e-02) Time(mcs/at): 40 (9)
+2025-11-07 16:31:44,182 I - Iteration #132/279 TRAIN(TEST): total_loss: 5.723e-04 (5.821e-04) mae/depa: 2.071e-03 (1.710e-03) rmse/depa: 4.333e-03 (3.860e-03) mae/f_comp: 3.222e-02 (3.241e-02) rmse/f_comp: 7.009e-02 (7.382e-02) Time(mcs/at): 40 (9)
+2025-11-07 16:31:44,204 I - New best test loss found (5.82131e-04), checkpointing
+2025-11-07 16:31:44,748 I - Sharding callback duration: 70 microseconds
+2025-11-07 17:17:49,338 I - Iteration #133/279 TRAIN(TEST): total_loss: 5.726e-04 (5.818e-04) mae/depa: 2.085e-03 (1.705e-03) rmse/depa: 4.350e-03 (3.888e-03) mae/f_comp: 3.222e-02 (3.239e-02) rmse/f_comp: 7.009e-02 (7.384e-02) Time(mcs/at): 41 (9)
+2025-11-07 17:17:49,350 I - New best test loss found (5.81849e-04), checkpointing
+2025-11-07 17:17:49,720 I - Sharding callback duration: 47 microseconds
+2025-11-07 18:03:34,966 I - Iteration #134/279 TRAIN(TEST): total_loss: 5.724e-04 (5.823e-04) mae/depa: 2.078e-03 (1.724e-03) rmse/depa: 4.342e-03 (3.906e-03) mae/f_comp: 3.221e-02 (3.241e-02) rmse/f_comp: 7.009e-02 (7.383e-02) Time(mcs/at): 40 (9)
+2025-11-07 18:49:43,937 I - Iteration #135/279 TRAIN(TEST): total_loss: 5.721e-04 (5.818e-04) mae/depa: 2.074e-03 (1.698e-03) rmse/depa: 4.332e-03 (3.864e-03) mae/f_comp: 3.221e-02 (3.240e-02) rmse/f_comp: 7.006e-02 (7.382e-02) Time(mcs/at): 41 (9)
+2025-11-07 18:49:43,950 I - New best test loss found (5.81809e-04), checkpointing
+2025-11-07 18:49:44,633 I - Sharding callback duration: 56 microseconds
+2025-11-07 19:35:38,018 I - Iteration #136/279 TRAIN(TEST): total_loss: 5.720e-04 (5.829e-04) mae/depa: 2.068e-03 (1.718e-03) rmse/depa: 4.324e-03 (3.862e-03) mae/f_comp: 3.221e-02 (3.243e-02) rmse/f_comp: 7.006e-02 (7.385e-02) Time(mcs/at): 40 (9)
+2025-11-07 20:21:26,966 I - Iteration #137/279 TRAIN(TEST): total_loss: 5.722e-04 (5.823e-04) mae/depa: 2.076e-03 (1.742e-03) rmse/depa: 4.335e-03 (3.856e-03) mae/f_comp: 3.221e-02 (3.241e-02) rmse/f_comp: 7.006e-02 (7.386e-02) Time(mcs/at): 40 (9)
+2025-11-07 21:07:08,817 I - Iteration #138/279 TRAIN(TEST): total_loss: 5.719e-04 (5.831e-04) mae/depa: 2.066e-03 (1.779e-03) rmse/depa: 4.320e-03 (3.840e-03) mae/f_comp: 3.220e-02 (3.244e-02) rmse/f_comp: 7.005e-02 (7.385e-02) Time(mcs/at): 40 (9)
+2025-11-07 21:52:57,359 I - Iteration #139/279 TRAIN(TEST): total_loss: 5.717e-04 (5.814e-04) mae/depa: 2.058e-03 (1.738e-03) rmse/depa: 4.300e-03 (3.838e-03) mae/f_comp: 3.220e-02 (3.238e-02) rmse/f_comp: 7.005e-02 (7.381e-02) Time(mcs/at): 40 (9)
+2025-11-07 21:52:57,371 I - New best test loss found (5.81444e-04), checkpointing
+2025-11-07 21:52:59,719 I - Sharding callback duration: 42 microseconds
+2025-11-07 22:39:33,947 I - Iteration #140/279 TRAIN(TEST): total_loss: 5.719e-04 (5.821e-04) mae/depa: 2.068e-03 (1.696e-03) rmse/depa: 4.334e-03 (3.853e-03) mae/f_comp: 3.220e-02 (3.242e-02) rmse/f_comp: 7.006e-02 (7.380e-02) Time(mcs/at): 41 (9)
+2025-11-07 23:25:47,407 I - Iteration #141/279 TRAIN(TEST): total_loss: 5.715e-04 (5.810e-04) mae/depa: 2.052e-03 (1.671e-03) rmse/depa: 4.305e-03 (3.824e-03) mae/f_comp: 3.220e-02 (3.238e-02) rmse/f_comp: 7.004e-02 (7.380e-02) Time(mcs/at): 41 (9)
+2025-11-07 23:25:47,421 I - New best test loss found (5.80996e-04), checkpointing
+2025-11-07 23:25:47,859 I - Sharding callback duration: 46 microseconds
+2025-11-08 00:12:10,669 I - Iteration #142/279 TRAIN(TEST): total_loss: 5.713e-04 (5.815e-04) mae/depa: 2.055e-03 (1.690e-03) rmse/depa: 4.293e-03 (3.836e-03) mae/f_comp: 3.219e-02 (3.239e-02) rmse/f_comp: 7.004e-02 (7.383e-02) Time(mcs/at): 41 (9)
+2025-11-08 00:58:39,339 I - Iteration #143/279 TRAIN(TEST): total_loss: 5.713e-04 (5.814e-04) mae/depa: 2.051e-03 (1.686e-03) rmse/depa: 4.289e-03 (3.825e-03) mae/f_comp: 3.219e-02 (3.239e-02) rmse/f_comp: 7.002e-02 (7.377e-02) Time(mcs/at): 41 (9)
+2025-11-08 01:45:02,906 I - Iteration #144/279 TRAIN(TEST): total_loss: 5.712e-04 (5.812e-04) mae/depa: 2.043e-03 (1.695e-03) rmse/depa: 4.286e-03 (3.803e-03) mae/f_comp: 3.219e-02 (3.239e-02) rmse/f_comp: 7.003e-02 (7.377e-02) Time(mcs/at): 41 (9)
+2025-11-08 02:31:17,339 I - Iteration #145/279 TRAIN(TEST): total_loss: 5.710e-04 (5.810e-04) mae/depa: 2.043e-03 (1.668e-03) rmse/depa: 4.284e-03 (3.821e-03) mae/f_comp: 3.218e-02 (3.238e-02) rmse/f_comp: 7.002e-02 (7.384e-02) Time(mcs/at): 41 (9)
+2025-11-08 03:17:50,172 I - Iteration #146/279 TRAIN(TEST): total_loss: 5.709e-04 (5.811e-04) mae/depa: 2.039e-03 (1.669e-03) rmse/depa: 4.272e-03 (3.812e-03) mae/f_comp: 3.218e-02 (3.239e-02) rmse/f_comp: 7.000e-02 (7.378e-02) Time(mcs/at): 41 (9)
+2025-11-08 04:04:14,344 I - Iteration #147/279 TRAIN(TEST): total_loss: 5.708e-04 (5.812e-04) mae/depa: 2.038e-03 (1.682e-03) rmse/depa: 4.275e-03 (3.809e-03) mae/f_comp: 3.218e-02 (3.239e-02) rmse/f_comp: 7.001e-02 (7.375e-02) Time(mcs/at): 41 (9)
+2025-11-08 04:04:14,360 I - Reducing learning rate: 1.00000e-03 -> 9.80000e-04
+2025-11-08 04:50:30,234 I - Iteration #148/279 TRAIN(TEST): total_loss: 5.707e-04 (5.808e-04) mae/depa: 2.036e-03 (1.671e-03) rmse/depa: 4.276e-03 (3.805e-03) mae/f_comp: 3.218e-02 (3.237e-02) rmse/f_comp: 7.000e-02 (7.376e-02) Time(mcs/at): 41 (9)
+2025-11-08 04:50:30,246 I - New best test loss found (5.80838e-04), checkpointing
+2025-11-08 04:50:30,872 I - Sharding callback duration: 47 microseconds
+2025-11-08 05:36:43,203 I - Iteration #149/279 TRAIN(TEST): total_loss: 5.705e-04 (5.810e-04) mae/depa: 2.023e-03 (1.683e-03) rmse/depa: 4.254e-03 (3.793e-03) mae/f_comp: 3.217e-02 (3.238e-02) rmse/f_comp: 7.000e-02 (7.380e-02) Time(mcs/at): 41 (9)
+2025-11-08 06:23:29,704 I - Iteration #150/279 TRAIN(TEST): total_loss: 5.704e-04 (5.809e-04) mae/depa: 2.029e-03 (1.664e-03) rmse/depa: 4.260e-03 (3.780e-03) mae/f_comp: 3.217e-02 (3.239e-02) rmse/f_comp: 6.999e-02 (7.376e-02) Time(mcs/at): 41 (9)
+2025-11-08 06:23:29,717 I - Regular checkpointing
+2025-11-08 06:23:30,108 I - Sharding callback duration: 66 microseconds
+2025-11-08 07:09:58,835 I - Iteration #151/279 TRAIN(TEST): total_loss: 5.701e-04 (5.805e-04) mae/depa: 2.022e-03 (1.666e-03) rmse/depa: 4.246e-03 (3.777e-03) mae/f_comp: 3.216e-02 (3.237e-02) rmse/f_comp: 6.998e-02 (7.376e-02) Time(mcs/at): 41 (9)
+2025-11-08 07:09:58,847 I - New best test loss found (5.80524e-04), checkpointing
+2025-11-08 07:09:59,218 I - Sharding callback duration: 33 microseconds
+2025-11-08 07:56:27,222 I - Iteration #152/279 TRAIN(TEST): total_loss: 5.701e-04 (5.805e-04) mae/depa: 2.022e-03 (1.675e-03) rmse/depa: 4.236e-03 (3.807e-03) mae/f_comp: 3.216e-02 (3.236e-02) rmse/f_comp: 6.997e-02 (7.374e-02) Time(mcs/at): 41 (9)
+2025-11-08 08:42:59,276 I - Iteration #153/279 TRAIN(TEST): total_loss: 5.702e-04 (5.805e-04) mae/depa: 2.020e-03 (1.672e-03) rmse/depa: 4.261e-03 (3.769e-03) mae/f_comp: 3.216e-02 (3.237e-02) rmse/f_comp: 6.998e-02 (7.376e-02) Time(mcs/at): 41 (9)
+2025-11-08 08:42:59,290 I - New best test loss found (5.80518e-04), checkpointing
+2025-11-08 08:43:02,003 I - Sharding callback duration: 67 microseconds
+2025-11-08 09:29:18,494 I - Iteration #154/279 TRAIN(TEST): total_loss: 5.700e-04 (5.803e-04) mae/depa: 2.014e-03 (1.673e-03) rmse/depa: 4.253e-03 (3.774e-03) mae/f_comp: 3.216e-02 (3.235e-02) rmse/f_comp: 6.997e-02 (7.373e-02) Time(mcs/at): 41 (9)
+2025-11-08 09:29:18,507 I - New best test loss found (5.80266e-04), checkpointing
+2025-11-08 09:29:18,604 I - Sharding callback duration: 48 microseconds
+2025-11-08 10:16:06,860 I - Iteration #155/279 TRAIN(TEST): total_loss: 5.699e-04 (5.801e-04) mae/depa: 2.014e-03 (1.661e-03) rmse/depa: 4.236e-03 (3.757e-03) mae/f_comp: 3.216e-02 (3.236e-02) rmse/f_comp: 6.996e-02 (7.375e-02) Time(mcs/at): 41 (9)
+2025-11-08 10:16:06,873 I - New best test loss found (5.80115e-04), checkpointing
+2025-11-08 10:16:07,235 I - Sharding callback duration: 32 microseconds
+2025-11-08 11:02:34,930 I - Iteration #156/279 TRAIN(TEST): total_loss: 5.697e-04 (5.805e-04) mae/depa: 2.007e-03 (1.679e-03) rmse/depa: 4.218e-03 (3.818e-03) mae/f_comp: 3.216e-02 (3.236e-02) rmse/f_comp: 6.996e-02 (7.372e-02) Time(mcs/at): 41 (9)
+2025-11-08 11:49:50,986 I - Iteration #157/279 TRAIN(TEST): total_loss: 5.695e-04 (5.799e-04) mae/depa: 1.999e-03 (1.644e-03) rmse/depa: 4.214e-03 (3.764e-03) mae/f_comp: 3.215e-02 (3.235e-02) rmse/f_comp: 6.996e-02 (7.372e-02) Time(mcs/at): 42 (9)
+2025-11-08 11:49:50,998 I - New best test loss found (5.79946e-04), checkpointing
+2025-11-08 11:49:51,373 I - Sharding callback duration: 50 microseconds
+2025-11-08 12:36:14,065 I - Iteration #158/279 TRAIN(TEST): total_loss: 5.695e-04 (5.807e-04) mae/depa: 2.006e-03 (1.652e-03) rmse/depa: 4.221e-03 (3.755e-03) mae/f_comp: 3.215e-02 (3.239e-02) rmse/f_comp: 6.994e-02 (7.375e-02) Time(mcs/at): 41 (9)
+2025-11-08 13:22:07,165 I - Iteration #159/279 TRAIN(TEST): total_loss: 5.695e-04 (5.796e-04) mae/depa: 2.009e-03 (1.645e-03) rmse/depa: 4.223e-03 (3.768e-03) mae/f_comp: 3.215e-02 (3.234e-02) rmse/f_comp: 6.995e-02 (7.368e-02) Time(mcs/at): 40 (9)
+2025-11-08 13:22:07,177 I - New best test loss found (5.79643e-04), checkpointing
+2025-11-08 13:22:07,527 I - Sharding callback duration: 227 microseconds
+2025-11-08 14:07:59,930 I - Iteration #160/279 TRAIN(TEST): total_loss: 5.693e-04 (5.805e-04) mae/depa: 2.002e-03 (1.746e-03) rmse/depa: 4.208e-03 (3.780e-03) mae/f_comp: 3.215e-02 (3.235e-02) rmse/f_comp: 6.994e-02 (7.368e-02) Time(mcs/at): 40 (9)
+2025-11-08 14:54:15,942 I - Iteration #161/279 TRAIN(TEST): total_loss: 5.694e-04 (5.803e-04) mae/depa: 2.004e-03 (1.659e-03) rmse/depa: 4.214e-03 (3.782e-03) mae/f_comp: 3.214e-02 (3.236e-02) rmse/f_comp: 6.992e-02 (7.376e-02) Time(mcs/at): 41 (9)
+2025-11-08 15:40:40,519 I - Iteration #162/279 TRAIN(TEST): total_loss: 5.692e-04 (5.810e-04) mae/depa: 1.997e-03 (1.695e-03) rmse/depa: 4.222e-03 (3.761e-03) mae/f_comp: 3.214e-02 (3.239e-02) rmse/f_comp: 6.993e-02 (7.375e-02) Time(mcs/at): 41 (9)
+2025-11-08 16:27:00,813 I - Iteration #163/279 TRAIN(TEST): total_loss: 5.690e-04 (5.794e-04) mae/depa: 1.988e-03 (1.637e-03) rmse/depa: 4.209e-03 (3.722e-03) mae/f_comp: 3.214e-02 (3.234e-02) rmse/f_comp: 6.992e-02 (7.371e-02) Time(mcs/at): 41 (9)
+2025-11-08 16:27:00,826 I - New best test loss found (5.79425e-04), checkpointing
+2025-11-08 16:27:01,179 I - Sharding callback duration: 38 microseconds
+2025-11-08 17:13:17,058 I - Iteration #164/279 TRAIN(TEST): total_loss: 5.691e-04 (5.800e-04) mae/depa: 2.000e-03 (1.644e-03) rmse/depa: 4.208e-03 (3.782e-03) mae/f_comp: 3.214e-02 (3.235e-02) rmse/f_comp: 6.992e-02 (7.375e-02) Time(mcs/at): 41 (9)
+2025-11-08 17:59:28,152 I - Iteration #165/279 TRAIN(TEST): total_loss: 5.689e-04 (5.799e-04) mae/depa: 1.993e-03 (1.644e-03) rmse/depa: 4.193e-03 (3.739e-03) mae/f_comp: 3.213e-02 (3.235e-02) rmse/f_comp: 6.990e-02 (7.374e-02) Time(mcs/at): 41 (9)
+2025-11-08 18:45:53,328 I - Iteration #166/279 TRAIN(TEST): total_loss: 5.689e-04 (5.791e-04) mae/depa: 1.993e-03 (1.628e-03) rmse/depa: 4.198e-03 (3.731e-03) mae/f_comp: 3.214e-02 (3.233e-02) rmse/f_comp: 6.992e-02 (7.365e-02) Time(mcs/at): 41 (9)
+2025-11-08 18:45:53,340 I - New best test loss found (5.79114e-04), checkpointing
+2025-11-08 18:45:53,704 I - Sharding callback duration: 53 microseconds
+2025-11-08 19:32:15,012 I - Iteration #167/279 TRAIN(TEST): total_loss: 5.687e-04 (5.793e-04) mae/depa: 1.989e-03 (1.646e-03) rmse/depa: 4.179e-03 (3.728e-03) mae/f_comp: 3.213e-02 (3.233e-02) rmse/f_comp: 6.989e-02 (7.366e-02) Time(mcs/at): 41 (9)
+2025-11-08 20:18:29,579 I - Iteration #168/279 TRAIN(TEST): total_loss: 5.687e-04 (5.791e-04) mae/depa: 1.989e-03 (1.650e-03) rmse/depa: 4.195e-03 (3.732e-03) mae/f_comp: 3.213e-02 (3.231e-02) rmse/f_comp: 6.990e-02 (7.367e-02) Time(mcs/at): 41 (9)
+2025-11-08 21:04:49,382 I - Iteration #169/279 TRAIN(TEST): total_loss: 5.685e-04 (5.794e-04) mae/depa: 1.985e-03 (1.640e-03) rmse/depa: 4.182e-03 (3.744e-03) mae/f_comp: 3.212e-02 (3.233e-02) rmse/f_comp: 6.989e-02 (7.371e-02) Time(mcs/at): 41 (9)
+2025-11-08 21:50:34,506 I - Iteration #170/279 TRAIN(TEST): total_loss: 5.683e-04 (5.793e-04) mae/depa: 1.975e-03 (1.652e-03) rmse/depa: 4.164e-03 (3.705e-03) mae/f_comp: 3.212e-02 (3.233e-02) rmse/f_comp: 6.988e-02 (7.365e-02) Time(mcs/at): 40 (9)
+2025-11-08 22:36:42,691 I - Iteration #171/279 TRAIN(TEST): total_loss: 5.682e-04 (5.788e-04) mae/depa: 1.976e-03 (1.632e-03) rmse/depa: 4.166e-03 (3.738e-03) mae/f_comp: 3.212e-02 (3.231e-02) rmse/f_comp: 6.988e-02 (7.361e-02) Time(mcs/at): 41 (9)
+2025-11-08 22:36:42,706 I - New best test loss found (5.78794e-04), checkpointing
+2025-11-08 22:36:44,491 I - Sharding callback duration: 46 microseconds
+2025-11-08 23:22:57,872 I - Iteration #172/279 TRAIN(TEST): total_loss: 5.684e-04 (5.786e-04) mae/depa: 1.982e-03 (1.623e-03) rmse/depa: 4.169e-03 (3.689e-03) mae/f_comp: 3.212e-02 (3.231e-02) rmse/f_comp: 6.988e-02 (7.365e-02) Time(mcs/at): 41 (9)
+2025-11-08 23:22:57,887 I - New best test loss found (5.78614e-04), checkpointing
+2025-11-08 23:22:58,308 I - Sharding callback duration: 37 microseconds
+2025-11-09 00:09:07,819 I - Iteration #173/279 TRAIN(TEST): total_loss: 5.682e-04 (5.787e-04) mae/depa: 1.971e-03 (1.630e-03) rmse/depa: 4.158e-03 (3.717e-03) mae/f_comp: 3.212e-02 (3.231e-02) rmse/f_comp: 6.987e-02 (7.367e-02) Time(mcs/at): 41 (9)
+2025-11-09 00:55:31,874 I - Iteration #174/279 TRAIN(TEST): total_loss: 5.680e-04 (5.792e-04) mae/depa: 1.976e-03 (1.639e-03) rmse/depa: 4.165e-03 (3.726e-03) mae/f_comp: 3.211e-02 (3.232e-02) rmse/f_comp: 6.985e-02 (7.367e-02) Time(mcs/at): 41 (10)
+2025-11-09 01:42:30,691 I - Iteration #175/279 TRAIN(TEST): total_loss: 5.682e-04 (5.807e-04) mae/depa: 1.975e-03 (1.656e-03) rmse/depa: 4.180e-03 (3.770e-03) mae/f_comp: 3.212e-02 (3.238e-02) rmse/f_comp: 6.987e-02 (7.372e-02) Time(mcs/at): 41 (9)
+2025-11-09 02:28:47,387 I - Iteration #176/279 TRAIN(TEST): total_loss: 5.679e-04 (5.785e-04) mae/depa: 1.970e-03 (1.617e-03) rmse/depa: 4.154e-03 (3.716e-03) mae/f_comp: 3.211e-02 (3.231e-02) rmse/f_comp: 6.987e-02 (7.360e-02) Time(mcs/at): 41 (9)
+2025-11-09 02:28:47,416 I - New best test loss found (5.78535e-04), checkpointing
+2025-11-09 02:28:47,756 I - Sharding callback duration: 32 microseconds
+2025-11-09 03:15:58,102 I - Iteration #177/279 TRAIN(TEST): total_loss: 5.678e-04 (5.789e-04) mae/depa: 1.966e-03 (1.645e-03) rmse/depa: 4.144e-03 (3.714e-03) mae/f_comp: 3.211e-02 (3.231e-02) rmse/f_comp: 6.984e-02 (7.366e-02) Time(mcs/at): 41 (9)
+2025-11-09 04:02:06,244 I - Iteration #178/279 TRAIN(TEST): total_loss: 5.677e-04 (5.783e-04) mae/depa: 1.967e-03 (1.640e-03) rmse/depa: 4.148e-03 (3.700e-03) mae/f_comp: 3.211e-02 (3.229e-02) rmse/f_comp: 6.984e-02 (7.360e-02) Time(mcs/at): 41 (9)
+2025-11-09 04:02:06,257 I - New best test loss found (5.78267e-04), checkpointing
+2025-11-09 04:02:06,621 I - Sharding callback duration: 37 microseconds
+2025-11-09 04:50:15,880 I - Iteration #179/279 TRAIN(TEST): total_loss: 5.678e-04 (5.783e-04) mae/depa: 1.970e-03 (1.620e-03) rmse/depa: 4.153e-03 (3.697e-03) mae/f_comp: 3.211e-02 (3.230e-02) rmse/f_comp: 6.985e-02 (7.358e-02) Time(mcs/at): 42 (9)
+2025-11-09 05:36:51,771 I - Iteration #180/279 TRAIN(TEST): total_loss: 5.678e-04 (5.784e-04) mae/depa: 1.971e-03 (1.616e-03) rmse/depa: 4.154e-03 (3.675e-03) mae/f_comp: 3.210e-02 (3.231e-02) rmse/f_comp: 6.983e-02 (7.363e-02) Time(mcs/at): 41 (9)
+2025-11-09 06:23:30,220 I - Iteration #181/279 TRAIN(TEST): total_loss: 5.677e-04 (5.783e-04) mae/depa: 1.967e-03 (1.624e-03) rmse/depa: 4.146e-03 (3.679e-03) mae/f_comp: 3.210e-02 (3.230e-02) rmse/f_comp: 6.982e-02 (7.358e-02) Time(mcs/at): 41 (9)
+2025-11-09 07:10:04,377 I - Iteration #182/279 TRAIN(TEST): total_loss: 5.676e-04 (5.789e-04) mae/depa: 1.963e-03 (1.655e-03) rmse/depa: 4.153e-03 (3.689e-03) mae/f_comp: 3.210e-02 (3.232e-02) rmse/f_comp: 6.983e-02 (7.366e-02) Time(mcs/at): 41 (10)
+2025-11-09 07:56:35,683 I - Iteration #183/279 TRAIN(TEST): total_loss: 5.674e-04 (5.785e-04) mae/depa: 1.957e-03 (1.642e-03) rmse/depa: 4.128e-03 (3.694e-03) mae/f_comp: 3.210e-02 (3.231e-02) rmse/f_comp: 6.982e-02 (7.357e-02) Time(mcs/at): 41 (9)
+2025-11-09 08:42:45,929 I - Iteration #184/279 TRAIN(TEST): total_loss: 5.674e-04 (5.785e-04) mae/depa: 1.964e-03 (1.647e-03) rmse/depa: 4.135e-03 (3.733e-03) mae/f_comp: 3.210e-02 (3.229e-02) rmse/f_comp: 6.982e-02 (7.364e-02) Time(mcs/at): 41 (9)
+2025-11-09 08:42:45,942 I - Reducing learning rate: 9.80000e-04 -> 9.60400e-04
+2025-11-09 09:28:55,214 I - Iteration #185/279 TRAIN(TEST): total_loss: 5.671e-04 (5.785e-04) mae/depa: 1.951e-03 (1.657e-03) rmse/depa: 4.128e-03 (3.663e-03) mae/f_comp: 3.209e-02 (3.231e-02) rmse/f_comp: 6.980e-02 (7.362e-02) Time(mcs/at): 41 (9)
+2025-11-09 10:15:06,522 I - Iteration #186/279 TRAIN(TEST): total_loss: 5.670e-04 (5.784e-04) mae/depa: 1.947e-03 (1.629e-03) rmse/depa: 4.117e-03 (3.672e-03) mae/f_comp: 3.209e-02 (3.230e-02) rmse/f_comp: 6.981e-02 (7.364e-02) Time(mcs/at): 41 (9)
+2025-11-09 11:01:11,620 I - Iteration #187/279 TRAIN(TEST): total_loss: 5.670e-04 (5.783e-04) mae/depa: 1.945e-03 (1.681e-03) rmse/depa: 4.115e-03 (3.699e-03) mae/f_comp: 3.209e-02 (3.228e-02) rmse/f_comp: 6.980e-02 (7.355e-02) Time(mcs/at): 41 (9)
+2025-11-09 11:47:21,760 I - Iteration #188/279 TRAIN(TEST): total_loss: 5.669e-04 (5.781e-04) mae/depa: 1.947e-03 (1.635e-03) rmse/depa: 4.110e-03 (3.695e-03) mae/f_comp: 3.209e-02 (3.229e-02) rmse/f_comp: 6.979e-02 (7.355e-02) Time(mcs/at): 41 (9)
+2025-11-09 11:47:21,771 I - New best test loss found (5.78117e-04), checkpointing
+2025-11-09 11:47:22,143 I - Sharding callback duration: 44 microseconds
+2025-11-09 12:33:19,188 I - Iteration #189/279 TRAIN(TEST): total_loss: 5.670e-04 (5.780e-04) mae/depa: 1.952e-03 (1.620e-03) rmse/depa: 4.124e-03 (3.693e-03) mae/f_comp: 3.208e-02 (3.228e-02) rmse/f_comp: 6.979e-02 (7.356e-02) Time(mcs/at): 40 (9)
+2025-11-09 12:33:19,199 I - New best test loss found (5.77985e-04), checkpointing
+2025-11-09 12:33:19,552 I - Sharding callback duration: 39 microseconds
+2025-11-09 13:19:31,004 I - Iteration #190/279 TRAIN(TEST): total_loss: 5.670e-04 (5.778e-04) mae/depa: 1.947e-03 (1.622e-03) rmse/depa: 4.122e-03 (3.640e-03) mae/f_comp: 3.208e-02 (3.229e-02) rmse/f_comp: 6.978e-02 (7.365e-02) Time(mcs/at): 41 (9)
+2025-11-09 13:19:31,014 I - New best test loss found (5.77780e-04), checkpointing
+2025-11-09 13:19:31,359 I - Sharding callback duration: 32 microseconds
+2025-11-09 14:05:42,969 I - Iteration #191/279 TRAIN(TEST): total_loss: 5.665e-04 (5.778e-04) mae/depa: 1.938e-03 (1.628e-03) rmse/depa: 4.107e-03 (3.649e-03) mae/f_comp: 3.207e-02 (3.229e-02) rmse/f_comp: 6.979e-02 (7.354e-02) Time(mcs/at): 41 (9)
+2025-11-09 14:51:52,453 I - Iteration #192/279 TRAIN(TEST): total_loss: 5.664e-04 (5.777e-04) mae/depa: 1.937e-03 (1.617e-03) rmse/depa: 4.095e-03 (3.658e-03) mae/f_comp: 3.207e-02 (3.228e-02) rmse/f_comp: 6.978e-02 (7.358e-02) Time(mcs/at): 41 (9)
+2025-11-09 14:51:52,465 I - New best test loss found (5.77735e-04), checkpointing
+2025-11-09 14:51:52,857 I - Sharding callback duration: 50 microseconds
+2025-11-09 15:37:37,626 I - Iteration #193/279 TRAIN(TEST): total_loss: 5.666e-04 (5.787e-04) mae/depa: 1.944e-03 (1.666e-03) rmse/depa: 4.111e-03 (3.645e-03) mae/f_comp: 3.207e-02 (3.232e-02) rmse/f_comp: 6.977e-02 (7.358e-02) Time(mcs/at): 40 (9)
+2025-11-09 16:24:03,233 I - Iteration #194/279 TRAIN(TEST): total_loss: 5.665e-04 (5.773e-04) mae/depa: 1.937e-03 (1.616e-03) rmse/depa: 4.099e-03 (3.644e-03) mae/f_comp: 3.207e-02 (3.226e-02) rmse/f_comp: 6.976e-02 (7.357e-02) Time(mcs/at): 41 (9)
+2025-11-09 16:24:03,243 I - New best test loss found (5.77320e-04), checkpointing
+2025-11-09 16:24:03,592 I - Sharding callback duration: 34 microseconds
+2025-11-09 17:10:01,199 I - Iteration #195/279 TRAIN(TEST): total_loss: 5.662e-04 (5.799e-04) mae/depa: 1.934e-03 (1.699e-03) rmse/depa: 4.090e-03 (3.688e-03) mae/f_comp: 3.207e-02 (3.236e-02) rmse/f_comp: 6.975e-02 (7.362e-02) Time(mcs/at): 40 (9)
+2025-11-09 17:56:09,665 I - Iteration #196/279 TRAIN(TEST): total_loss: 5.665e-04 (5.775e-04) mae/depa: 1.941e-03 (1.612e-03) rmse/depa: 4.115e-03 (3.660e-03) mae/f_comp: 3.207e-02 (3.227e-02) rmse/f_comp: 6.977e-02 (7.355e-02) Time(mcs/at): 41 (9)
+2025-11-09 18:42:17,572 I - Iteration #197/279 TRAIN(TEST): total_loss: 5.662e-04 (5.777e-04) mae/depa: 1.935e-03 (1.608e-03) rmse/depa: 4.084e-03 (3.675e-03) mae/f_comp: 3.207e-02 (3.228e-02) rmse/f_comp: 6.975e-02 (7.356e-02) Time(mcs/at): 41 (9)
+2025-11-09 19:28:32,940 I - Iteration #198/279 TRAIN(TEST): total_loss: 5.662e-04 (5.771e-04) mae/depa: 1.935e-03 (1.597e-03) rmse/depa: 4.099e-03 (3.622e-03) mae/f_comp: 3.206e-02 (3.226e-02) rmse/f_comp: 6.975e-02 (7.353e-02) Time(mcs/at): 41 (9)
+2025-11-09 19:28:32,952 I - New best test loss found (5.77077e-04), checkpointing
+2025-11-09 19:28:33,297 I - Sharding callback duration: 51 microseconds
+2025-11-09 20:14:36,309 I - Iteration #199/279 TRAIN(TEST): total_loss: 5.660e-04 (5.774e-04) mae/depa: 1.929e-03 (1.621e-03) rmse/depa: 4.076e-03 (3.640e-03) mae/f_comp: 3.206e-02 (3.227e-02) rmse/f_comp: 6.975e-02 (7.355e-02) Time(mcs/at): 41 (9)
+2025-11-09 21:00:38,675 I - Iteration #200/279 TRAIN(TEST): total_loss: 5.661e-04 (5.776e-04) mae/depa: 1.938e-03 (1.639e-03) rmse/depa: 4.091e-03 (3.633e-03) mae/f_comp: 3.206e-02 (3.228e-02) rmse/f_comp: 6.975e-02 (7.355e-02) Time(mcs/at): 41 (9)
+2025-11-09 21:00:38,684 I - Regular checkpointing
+2025-11-09 21:00:39,031 I - Sharding callback duration: 38 microseconds
+2025-11-09 21:46:27,503 I - Iteration #201/279 TRAIN(TEST): total_loss: 5.660e-04 (5.769e-04) mae/depa: 1.930e-03 (1.602e-03) rmse/depa: 4.076e-03 (3.620e-03) mae/f_comp: 3.206e-02 (3.225e-02) rmse/f_comp: 6.973e-02 (7.352e-02) Time(mcs/at): 40 (9)
+2025-11-09 21:46:27,511 I - New best test loss found (5.76901e-04), checkpointing
+2025-11-09 21:46:27,848 I - Sharding callback duration: 30 microseconds
+2025-11-09 22:32:30,349 I - Iteration #202/279 TRAIN(TEST): total_loss: 5.659e-04 (5.771e-04) mae/depa: 1.930e-03 (1.610e-03) rmse/depa: 4.085e-03 (3.630e-03) mae/f_comp: 3.206e-02 (3.226e-02) rmse/f_comp: 6.973e-02 (7.355e-02) Time(mcs/at): 41 (9)
+2025-11-09 23:18:28,791 I - Iteration #203/279 TRAIN(TEST): total_loss: 5.659e-04 (5.769e-04) mae/depa: 1.926e-03 (1.600e-03) rmse/depa: 4.111e-03 (3.619e-03) mae/f_comp: 3.205e-02 (3.225e-02) rmse/f_comp: 6.973e-02 (7.349e-02) Time(mcs/at): 40 (9)
+2025-11-09 23:18:28,800 I - New best test loss found (5.76854e-04), checkpointing
+2025-11-09 23:18:34,890 I - Sharding callback duration: 52 microseconds
+2025-11-10 00:05:00,145 I - Iteration #204/279 TRAIN(TEST): total_loss: 5.658e-04 (5.768e-04) mae/depa: 1.927e-03 (1.597e-03) rmse/depa: 4.070e-03 (3.609e-03) mae/f_comp: 3.205e-02 (3.225e-02) rmse/f_comp: 6.972e-02 (7.350e-02) Time(mcs/at): 41 (9)
+2025-11-10 00:05:00,156 I - New best test loss found (5.76785e-04), checkpointing
+2025-11-10 00:05:00,498 I - Sharding callback duration: 50 microseconds
+2025-11-10 00:51:22,314 I - Iteration #205/279 TRAIN(TEST): total_loss: 5.659e-04 (5.785e-04) mae/depa: 1.929e-03 (1.615e-03) rmse/depa: 4.069e-03 (3.711e-03) mae/f_comp: 3.205e-02 (3.231e-02) rmse/f_comp: 6.972e-02 (7.363e-02) Time(mcs/at): 41 (9)
+2025-11-10 01:37:28,812 I - Iteration #206/279 TRAIN(TEST): total_loss: 5.657e-04 (5.769e-04) mae/depa: 1.928e-03 (1.611e-03) rmse/depa: 4.066e-03 (3.614e-03) mae/f_comp: 3.205e-02 (3.225e-02) rmse/f_comp: 6.972e-02 (7.349e-02) Time(mcs/at): 41 (9)
+2025-11-10 02:23:17,583 I - Iteration #207/279 TRAIN(TEST): total_loss: 5.656e-04 (5.766e-04) mae/depa: 1.924e-03 (1.590e-03) rmse/depa: 4.059e-03 (3.607e-03) mae/f_comp: 3.205e-02 (3.225e-02) rmse/f_comp: 6.972e-02 (7.348e-02) Time(mcs/at): 40 (9)
+2025-11-10 02:23:17,595 I - New best test loss found (5.76647e-04), checkpointing
+2025-11-10 02:23:17,991 I - Sharding callback duration: 52 microseconds
+2025-11-10 03:09:07,761 I - Iteration #208/279 TRAIN(TEST): total_loss: 5.656e-04 (5.774e-04) mae/depa: 1.922e-03 (1.636e-03) rmse/depa: 4.088e-03 (3.600e-03) mae/f_comp: 3.204e-02 (3.228e-02) rmse/f_comp: 6.972e-02 (7.350e-02) Time(mcs/at): 40 (9)
+2025-11-10 03:54:35,073 I - Iteration #209/279 TRAIN(TEST): total_loss: 5.655e-04 (5.777e-04) mae/depa: 1.924e-03 (1.670e-03) rmse/depa: 4.053e-03 (3.678e-03) mae/f_comp: 3.204e-02 (3.227e-02) rmse/f_comp: 6.971e-02 (7.347e-02) Time(mcs/at): 40 (9)
+2025-11-10 04:40:09,396 I - Iteration #210/279 TRAIN(TEST): total_loss: 5.654e-04 (5.776e-04) mae/depa: 1.918e-03 (1.665e-03) rmse/depa: 4.060e-03 (3.615e-03) mae/f_comp: 3.204e-02 (3.227e-02) rmse/f_comp: 6.970e-02 (7.350e-02) Time(mcs/at): 40 (9)
+2025-11-10 05:26:03,549 I - Iteration #211/279 TRAIN(TEST): total_loss: 5.654e-04 (5.770e-04) mae/depa: 1.917e-03 (1.614e-03) rmse/depa: 4.055e-03 (3.649e-03) mae/f_comp: 3.204e-02 (3.224e-02) rmse/f_comp: 6.969e-02 (7.348e-02) Time(mcs/at): 40 (9)
+2025-11-10 06:11:57,701 I - Iteration #212/279 TRAIN(TEST): total_loss: 5.654e-04 (5.763e-04) mae/depa: 1.922e-03 (1.596e-03) rmse/depa: 4.061e-03 (3.599e-03) mae/f_comp: 3.204e-02 (3.223e-02) rmse/f_comp: 6.970e-02 (7.345e-02) Time(mcs/at): 40 (9)
+2025-11-10 06:11:57,713 I - New best test loss found (5.76253e-04), checkpointing
+2025-11-10 06:11:58,079 I - Sharding callback duration: 36 microseconds
+2025-11-10 06:57:56,564 I - Iteration #213/279 TRAIN(TEST): total_loss: 5.652e-04 (5.765e-04) mae/depa: 1.914e-03 (1.604e-03) rmse/depa: 4.058e-03 (3.623e-03) mae/f_comp: 3.204e-02 (3.223e-02) rmse/f_comp: 6.969e-02 (7.346e-02) Time(mcs/at): 40 (9)
+2025-11-10 07:43:45,803 I - Iteration #214/279 TRAIN(TEST): total_loss: 5.650e-04 (5.763e-04) mae/depa: 1.911e-03 (1.589e-03) rmse/depa: 4.040e-03 (3.586e-03) mae/f_comp: 3.203e-02 (3.223e-02) rmse/f_comp: 6.967e-02 (7.348e-02) Time(mcs/at): 40 (9)
+2025-11-10 08:29:41,613 I - Iteration #215/279 TRAIN(TEST): total_loss: 5.654e-04 (5.762e-04) mae/depa: 1.922e-03 (1.590e-03) rmse/depa: 4.064e-03 (3.600e-03) mae/f_comp: 3.204e-02 (3.223e-02) rmse/f_comp: 6.968e-02 (7.347e-02) Time(mcs/at): 40 (9)
+2025-11-10 08:29:41,625 I - New best test loss found (5.76215e-04), checkpointing
+2025-11-10 08:29:41,969 I - Sharding callback duration: 36 microseconds
+2025-11-10 09:15:36,501 I - Iteration #216/279 TRAIN(TEST): total_loss: 5.650e-04 (5.762e-04) mae/depa: 1.910e-03 (1.596e-03) rmse/depa: 4.041e-03 (3.606e-03) mae/f_comp: 3.203e-02 (3.223e-02) rmse/f_comp: 6.968e-02 (7.345e-02) Time(mcs/at): 40 (9)
+2025-11-10 09:15:36,513 I - New best test loss found (5.76205e-04), checkpointing
+2025-11-10 09:15:36,893 I - Sharding callback duration: 26 microseconds
+2025-11-10 10:01:04,214 I - Iteration #217/279 TRAIN(TEST): total_loss: 5.650e-04 (5.760e-04) mae/depa: 1.911e-03 (1.586e-03) rmse/depa: 4.033e-03 (3.626e-03) mae/f_comp: 3.203e-02 (3.222e-02) rmse/f_comp: 6.967e-02 (7.348e-02) Time(mcs/at): 40 (9)
+2025-11-10 10:01:04,227 I - New best test loss found (5.76037e-04), checkpointing
+2025-11-10 10:01:04,583 I - Sharding callback duration: 48 microseconds
+2025-11-10 10:10:40,572 I - ========================================
+2025-11-10 10:10:40,576 I -             Start GRACEmaker
+2025-11-10 10:10:40,577 I - ========================================
+2025-11-10 10:10:40,578 I - Tensorflow version: 2.19.1
+2025-11-10 10:10:40,579 I - Loaded input.yaml... 
+2025-11-10 10:10:40,580 I - Set seed to 1
+2025-11-10 10:10:40,582 I - Data distribution strategy: Single GPU
+2025-11-10 10:10:40,583 I - Number of replicas: 1
+2025-11-10 10:10:40,584 I - Replica ID in sync group: 0
+2025-11-10 10:10:40,585 I - Global TRAIN batch size (= minibatch size * num GPUS): 16, num. GPUS: 1, minibatch size: 16
+2025-11-10 10:10:40,587 I - Global TEST batch size (= minibatch size * num GPUS): 64, num. GPUS: 1, minibatch size: 64
+2025-11-10 10:10:40,589 I - Float dtype: float64
+2025-11-10 10:10:40,590 I - Loading training data from ../../data/b_off_2.0_train.pkl.gz
+2025-11-10 10:10:40,591 I - Search for dataset file(s): ['../../data/b_off_2.0_train.pkl.gz']
+2025-11-10 10:10:40,592 I - #1/1: try to load ../../data/b_off_2.0_train.pkl.gz
+2025-11-10 10:10:40,594 I - Loading dataframe from pickle file ../../data/b_off_2.0_train.pkl.gz (4.5GiB)
+2025-11-10 10:13:06,783 I -  1975993 structures found
+2025-11-10 10:13:07,711 I - Loaded dataset size: (1975993, 5)
+2025-11-10 10:13:07,713 I - Split test data from train dataset (fraction = 0.05)
+2025-11-10 10:13:09,782 I - Set 'energy_corrected' to 'energy', because reference_energy=0
+2025-11-10 10:13:11,106 I - Data (auto) scale: 1.0509016314895254
+2025-11-10 10:13:11,108 I - input::fit::compute_convex_hull is False, convex hull and 'low energy' group will not be computed 
+2025-11-10 10:13:11,109 I - Train Dataset size: 1877193
+2025-11-10 10:13:11,140 I - Test Dataset size: 98800
+2025-11-10 10:13:19,731 I - Extract elements from train and test datasets
+2025-11-10 10:13:19,733 I - Elements mapping: {'Br': 0, 'C': 1, 'Cl': 2, 'F': 3, 'H': 4, 'I': 5, 'N': 6, 'O': 7, 'P': 8, 'S': 9}
+2025-11-10 10:13:19,734 I - TRAIN WEIGHTS: energy - False, forces - False 
+2025-11-10 10:13:19,735 I - TEST WEIGHTS: energy - False, forces - False 
+2025-11-10 10:13:19,736 I - Saving current training set to seed/1/training_set.pkl.gz
+2025-11-10 10:19:49,159 I - Saving current test set to seed/1/test_set.pkl.gz
+2025-11-10 10:20:10,200 I - Train set processing
+2025-11-10 10:20:10,202 I - Train buckets: 100
+2025-11-10 10:20:10,203 I - 1/4. Converting pd.DataFrame to batch data
+2025-11-10 10:40:57,213 I - 2/4. Splitting batches into per-batch groups.
+2025-11-10 10:41:33,409 I - 3/4. Joining groups to batches
+2025-11-10 10:43:14,773 I - 4/4. Padding batches
+2025-11-10 10:45:43,281 I - [TRAIN] dataset stats: num. batches: 117325 | num. real structures: 1877193 (+6.25%) | num. real atoms: 67121994 (+20.31%) | num. real neighbours: 1618681336 (+3.02%) 
+2025-11-10 10:45:43,423 I - Average number of neighbors (computed): 24.115513254865462
+2025-11-10 10:45:43,425 I - Test set processing
+2025-11-10 10:45:43,426 I - Test buckets: 50
+2025-11-10 10:45:43,427 I - 1/4. Converting pd.DataFrame to batch data
+2025-11-10 10:46:57,215 I - 2/4. Splitting batches into per-batch groups.
+2025-11-10 10:47:21,155 I - 3/4. Joining groups to batches
+2025-11-10 10:47:51,369 I - 4/4. Padding batches
+2025-11-10 10:47:55,120 I - [TEST] dataset stats: num. batches: 1544 | num. real structures: 98800 (+1.58%) | num. real atoms: 3537779 (+2.94%) | num. real neighbours: 85372862 (+0.54%) 
+2025-11-10 10:48:05,347 I - Constructing model from config
+2025-11-10 10:48:05,355 I - Model kwargs: {'lmax': 4, 'n_rad_max': 48, 'max_order': 4, 'n_mlp_dens': 16}
+2025-11-10 10:48:07,450 I - Saving model config to seed/1/model.yaml
+2025-11-10 10:48:07,466 I - Loss function: Loss(5.0*WeightedHuberEnergyPerAtomLoss(delta=0.001)(energy) + 2.0*WeightedHuberForceLoss(delta=0.001)(forces))
+2025-11-10 10:48:07,467 I - JIT compilation: True
+2025-11-10 10:48:07,468 I - Optimization options: {'learning_rate': 0.01, 'amsgrad': True, 'use_ema': True, 'ema_momentum': 0.99, 'weight_decay': None, 'clipvalue': 1.0}
+2025-11-10 10:48:07,837 I - Trying to load best test checkpoint
+2025-11-10 10:48:07,880 I - Loaded checkpoint from seed/1/checkpoints/checkpoint.best_test_loss
+2025-11-10 10:48:07,884 I - Convert data to tensors
+2025-11-10 10:48:07,885 I - [TRAIN] Convert to tensors
+2025-11-10 10:57:09,779 I - [TEST] Convert to tensors
+2025-11-10 10:57:20,888 I - Start Adam optimization
+2025-11-10 10:57:31,949 I - Number of trainable parameters: 1026592
+2025-11-10 10:57:31,951 I - Learning rate reduction will be used with parameters: {'patience': 5, 'factor': 0.98, 'min': 0.0005, 'stop_at_min': True, 'resume_lr': True}
+2025-11-10 12:00:48,958 I - Iteration #1/62 TRAIN(TEST): total_loss: 6.764e-05 (6.901e-05) mae/depa: 1.611e-03 (1.524e-03) rmse/depa: 3.858e-03 (3.550e-03) mae/f_comp: 3.192e-02 (3.220e-02) rmse/f_comp: 6.953e-02 (7.342e-02) Time(mcs/at): 53 (66)
+2025-11-10 12:00:48,971 I - New best test loss found (6.90147e-05), checkpointing
+2025-11-10 12:00:49,147 I - Sharding callback duration: 36 microseconds
+2025-11-10 12:47:31,676 I - Iteration #2/62 TRAIN(TEST): total_loss: 6.756e-05 (6.902e-05) mae/depa: 1.589e-03 (1.514e-03) rmse/depa: 3.839e-03 (3.534e-03) mae/f_comp: 3.193e-02 (3.222e-02) rmse/f_comp: 6.954e-02 (7.346e-02) Time(mcs/at): 41 (9)
+2025-11-10 13:34:47,313 I - Iteration #3/62 TRAIN(TEST): total_loss: 6.750e-05 (6.897e-05) mae/depa: 1.573e-03 (1.501e-03) rmse/depa: 3.824e-03 (3.521e-03) mae/f_comp: 3.194e-02 (3.223e-02) rmse/f_comp: 6.956e-02 (7.347e-02) Time(mcs/at): 42 (9)
+2025-11-10 13:34:47,328 I - New best test loss found (6.89712e-05), checkpointing
+2025-11-10 13:34:50,133 I - Sharding callback duration: 367 microseconds
+2025-11-10 14:21:49,196 I - Iteration #4/62 TRAIN(TEST): total_loss: 6.748e-05 (6.893e-05) mae/depa: 1.563e-03 (1.489e-03) rmse/depa: 3.819e-03 (3.529e-03) mae/f_comp: 3.195e-02 (3.223e-02) rmse/f_comp: 6.957e-02 (7.346e-02) Time(mcs/at): 41 (9)
+2025-11-10 14:21:49,213 I - New best test loss found (6.89292e-05), checkpointing
+2025-11-10 14:21:49,759 I - Sharding callback duration: 51 microseconds
+2025-11-10 15:09:27,238 I - Iteration #5/62 TRAIN(TEST): total_loss: 6.745e-05 (6.892e-05) mae/depa: 1.555e-03 (1.485e-03) rmse/depa: 3.818e-03 (3.507e-03) mae/f_comp: 3.196e-02 (3.224e-02) rmse/f_comp: 6.958e-02 (7.347e-02) Time(mcs/at): 42 (10)
+2025-11-10 15:09:27,257 I - New best test loss found (6.89205e-05), checkpointing
+2025-11-10 15:09:27,932 I - Sharding callback duration: 2942 microseconds
+2025-11-10 16:00:31,493 I - Iteration #6/62 TRAIN(TEST): total_loss: 6.744e-05 (6.892e-05) mae/depa: 1.550e-03 (1.478e-03) rmse/depa: 3.810e-03 (3.494e-03) mae/f_comp: 3.196e-02 (3.226e-02) rmse/f_comp: 6.959e-02 (7.348e-02) Time(mcs/at): 45 (10)
+2025-11-10 16:51:30,093 I - Iteration #7/62 TRAIN(TEST): total_loss: 6.742e-05 (6.888e-05) mae/depa: 1.544e-03 (1.470e-03) rmse/depa: 3.804e-03 (3.499e-03) mae/f_comp: 3.197e-02 (3.225e-02) rmse/f_comp: 6.960e-02 (7.348e-02) Time(mcs/at): 45 (10)
+2025-11-10 16:51:30,107 I - New best test loss found (6.88806e-05), checkpointing
+2025-11-10 16:51:30,606 I - Sharding callback duration: 373 microseconds
+2025-11-10 17:42:17,782 I - Iteration #8/62 TRAIN(TEST): total_loss: 6.741e-05 (6.891e-05) mae/depa: 1.539e-03 (1.476e-03) rmse/depa: 3.799e-03 (3.515e-03) mae/f_comp: 3.197e-02 (3.225e-02) rmse/f_comp: 6.960e-02 (7.348e-02) Time(mcs/at): 45 (10)
+2025-11-10 18:33:05,394 I - Iteration #9/62 TRAIN(TEST): total_loss: 6.739e-05 (6.886e-05) mae/depa: 1.534e-03 (1.463e-03) rmse/depa: 3.799e-03 (3.488e-03) mae/f_comp: 3.198e-02 (3.226e-02) rmse/f_comp: 6.961e-02 (7.350e-02) Time(mcs/at): 45 (10)
+2025-11-10 18:33:05,406 I - New best test loss found (6.88649e-05), checkpointing
+2025-11-10 18:33:05,780 I - Sharding callback duration: 363 microseconds
+2025-11-10 19:22:22,369 I - Iteration #10/62 TRAIN(TEST): total_loss: 6.738e-05 (6.886e-05) mae/depa: 1.531e-03 (1.461e-03) rmse/depa: 3.794e-03 (3.495e-03) mae/f_comp: 3.198e-02 (3.226e-02) rmse/f_comp: 6.961e-02 (7.350e-02) Time(mcs/at): 43 (10)
+2025-11-10 19:22:22,384 I - New best test loss found (6.88571e-05), checkpointing
+2025-11-10 19:22:23,071 I - Sharding callback duration: 373 microseconds
+2025-11-10 20:12:12,187 I - Iteration #11/62 TRAIN(TEST): total_loss: 6.737e-05 (6.886e-05) mae/depa: 1.526e-03 (1.460e-03) rmse/depa: 3.792e-03 (3.497e-03) mae/f_comp: 3.198e-02 (3.227e-02) rmse/f_comp: 6.962e-02 (7.351e-02) Time(mcs/at): 44 (10)
+2025-11-10 21:02:05,632 I - Iteration #12/62 TRAIN(TEST): total_loss: 6.735e-05 (6.883e-05) mae/depa: 1.521e-03 (1.451e-03) rmse/depa: 3.789e-03 (3.491e-03) mae/f_comp: 3.199e-02 (3.227e-02) rmse/f_comp: 6.963e-02 (7.352e-02) Time(mcs/at): 44 (10)
+2025-11-10 21:02:05,647 I - New best test loss found (6.88272e-05), checkpointing
+2025-11-10 21:02:06,256 I - Sharding callback duration: 384 microseconds
+2025-11-10 21:52:09,158 I - Iteration #13/62 TRAIN(TEST): total_loss: 6.735e-05 (6.882e-05) mae/depa: 1.519e-03 (1.450e-03) rmse/depa: 3.785e-03 (3.491e-03) mae/f_comp: 3.199e-02 (3.227e-02) rmse/f_comp: 6.963e-02 (7.352e-02) Time(mcs/at): 44 (10)
+2025-11-10 21:52:09,174 I - New best test loss found (6.88194e-05), checkpointing
+2025-11-10 21:52:09,778 I - Sharding callback duration: 382 microseconds
+2025-11-10 22:41:57,346 I - Iteration #14/62 TRAIN(TEST): total_loss: 6.735e-05 (6.881e-05) mae/depa: 1.517e-03 (1.445e-03) rmse/depa: 3.785e-03 (3.486e-03) mae/f_comp: 3.199e-02 (3.227e-02) rmse/f_comp: 6.963e-02 (7.352e-02) Time(mcs/at): 44 (10)
+2025-11-10 22:41:57,362 I - New best test loss found (6.88101e-05), checkpointing
+2025-11-10 22:41:57,721 I - Sharding callback duration: 372 microseconds
+2025-11-10 23:31:54,782 I - Iteration #15/62 TRAIN(TEST): total_loss: 6.733e-05 (6.882e-05) mae/depa: 1.513e-03 (1.445e-03) rmse/depa: 3.785e-03 (3.489e-03) mae/f_comp: 3.200e-02 (3.228e-02) rmse/f_comp: 6.964e-02 (7.354e-02) Time(mcs/at): 44 (10)
+2025-11-11 00:21:38,260 I - Iteration #16/62 TRAIN(TEST): total_loss: 6.733e-05 (6.880e-05) mae/depa: 1.510e-03 (1.441e-03) rmse/depa: 3.780e-03 (3.475e-03) mae/f_comp: 3.200e-02 (3.228e-02) rmse/f_comp: 6.964e-02 (7.353e-02) Time(mcs/at): 44 (10)
+2025-11-11 00:21:38,282 I - New best test loss found (6.88015e-05), checkpointing
+2025-11-11 00:21:38,662 I - Sharding callback duration: 356 microseconds
+2025-11-11 01:11:05,983 I - Iteration #17/62 TRAIN(TEST): total_loss: 6.733e-05 (6.880e-05) mae/depa: 1.510e-03 (1.444e-03) rmse/depa: 3.776e-03 (3.482e-03) mae/f_comp: 3.200e-02 (3.228e-02) rmse/f_comp: 6.965e-02 (7.352e-02) Time(mcs/at): 43 (10)
+2025-11-11 01:11:05,998 I - New best test loss found (6.88013e-05), checkpointing
+2025-11-11 01:11:06,409 I - Sharding callback duration: 360 microseconds
+2025-11-11 02:00:47,990 I - Iteration #18/62 TRAIN(TEST): total_loss: 6.731e-05 (6.879e-05) mae/depa: 1.506e-03 (1.437e-03) rmse/depa: 3.777e-03 (3.487e-03) mae/f_comp: 3.200e-02 (3.228e-02) rmse/f_comp: 6.965e-02 (7.353e-02) Time(mcs/at): 44 (10)
+2025-11-11 02:00:48,006 I - New best test loss found (6.87891e-05), checkpointing
+2025-11-11 02:00:48,402 I - Sharding callback duration: 362 microseconds
+2025-11-11 02:50:51,057 I - Iteration #19/62 TRAIN(TEST): total_loss: 6.730e-05 (6.877e-05) mae/depa: 1.503e-03 (1.429e-03) rmse/depa: 3.776e-03 (3.473e-03) mae/f_comp: 3.200e-02 (3.229e-02) rmse/f_comp: 6.965e-02 (7.354e-02) Time(mcs/at): 44 (10)
+2025-11-11 02:50:51,071 I - New best test loss found (6.87718e-05), checkpointing
+2025-11-11 02:50:57,133 I - Sharding callback duration: 68 microseconds
+2025-11-11 03:40:39,982 I - Iteration #20/62 TRAIN(TEST): total_loss: 6.730e-05 (6.877e-05) mae/depa: 1.500e-03 (1.430e-03) rmse/depa: 3.774e-03 (3.461e-03) mae/f_comp: 3.201e-02 (3.229e-02) rmse/f_comp: 6.966e-02 (7.353e-02) Time(mcs/at): 44 (10)
+2025-11-11 04:30:51,312 I - Iteration #21/62 TRAIN(TEST): total_loss: 6.729e-05 (6.877e-05) mae/depa: 1.498e-03 (1.431e-03) rmse/depa: 3.773e-03 (3.471e-03) mae/f_comp: 3.201e-02 (3.229e-02) rmse/f_comp: 6.966e-02 (7.354e-02) Time(mcs/at): 44 (10)
+2025-11-11 05:20:58,227 I - Iteration #22/62 TRAIN(TEST): total_loss: 6.728e-05 (6.879e-05) mae/depa: 1.496e-03 (1.435e-03) rmse/depa: 3.771e-03 (3.471e-03) mae/f_comp: 3.201e-02 (3.229e-02) rmse/f_comp: 6.966e-02 (7.355e-02) Time(mcs/at): 44 (10)
+2025-11-11 06:10:43,054 I - Iteration #23/62 TRAIN(TEST): total_loss: 6.728e-05 (6.877e-05) mae/depa: 1.494e-03 (1.430e-03) rmse/depa: 3.768e-03 (3.468e-03) mae/f_comp: 3.201e-02 (3.229e-02) rmse/f_comp: 6.966e-02 (7.354e-02) Time(mcs/at): 44 (10)
+2025-11-11 06:10:43,068 I - New best test loss found (6.87673e-05), checkpointing
+2025-11-11 06:10:43,466 I - Sharding callback duration: 311 microseconds
+2025-11-11 07:00:52,524 I - Iteration #24/62 TRAIN(TEST): total_loss: 6.728e-05 (6.875e-05) mae/depa: 1.494e-03 (1.424e-03) rmse/depa: 3.768e-03 (3.472e-03) mae/f_comp: 3.201e-02 (3.229e-02) rmse/f_comp: 6.967e-02 (7.354e-02) Time(mcs/at): 44 (10)
+2025-11-11 07:00:52,535 I - New best test loss found (6.87496e-05), checkpointing
+2025-11-11 07:00:52,858 I - Sharding callback duration: 278 microseconds
+2025-11-11 07:51:27,720 I - Iteration #25/62 TRAIN(TEST): total_loss: 6.727e-05 (6.875e-05) mae/depa: 1.490e-03 (1.423e-03) rmse/depa: 3.768e-03 (3.462e-03) mae/f_comp: 3.201e-02 (3.229e-02) rmse/f_comp: 6.967e-02 (7.354e-02) Time(mcs/at): 44 (10)
+2025-11-11 07:51:27,731 I - New best test loss found (6.87456e-05), checkpointing
+2025-11-11 07:51:28,105 I - Sharding callback duration: 278 microseconds
+2025-11-11 08:41:56,586 I - Iteration #26/62 TRAIN(TEST): total_loss: 6.726e-05 (6.877e-05) mae/depa: 1.489e-03 (1.424e-03) rmse/depa: 3.765e-03 (3.450e-03) mae/f_comp: 3.202e-02 (3.230e-02) rmse/f_comp: 6.967e-02 (7.354e-02) Time(mcs/at): 44 (10)
+2025-11-11 09:31:38,253 I - Iteration #27/62 TRAIN(TEST): total_loss: 6.725e-05 (6.879e-05) mae/depa: 1.486e-03 (1.433e-03) rmse/depa: 3.762e-03 (3.461e-03) mae/f_comp: 3.202e-02 (3.229e-02) rmse/f_comp: 6.967e-02 (7.356e-02) Time(mcs/at): 44 (10)
+2025-11-11 10:21:25,312 I - Iteration #28/62 TRAIN(TEST): total_loss: 6.725e-05 (6.876e-05) mae/depa: 1.485e-03 (1.422e-03) rmse/depa: 3.762e-03 (3.464e-03) mae/f_comp: 3.202e-02 (3.230e-02) rmse/f_comp: 6.968e-02 (7.355e-02) Time(mcs/at): 44 (10)
+2025-11-11 11:10:46,561 I - Iteration #29/62 TRAIN(TEST): total_loss: 6.725e-05 (6.873e-05) mae/depa: 1.483e-03 (1.415e-03) rmse/depa: 3.760e-03 (3.456e-03) mae/f_comp: 3.202e-02 (3.230e-02) rmse/f_comp: 6.967e-02 (7.358e-02) Time(mcs/at): 43 (10)
+2025-11-11 11:10:46,573 I - New best test loss found (6.87273e-05), checkpointing
+2025-11-11 11:10:47,187 I - Sharding callback duration: 58 microseconds
+2025-11-11 12:00:33,209 I - Iteration #30/62 TRAIN(TEST): total_loss: 6.724e-05 (6.876e-05) mae/depa: 1.482e-03 (1.426e-03) rmse/depa: 3.761e-03 (3.449e-03) mae/f_comp: 3.202e-02 (3.230e-02) rmse/f_comp: 6.968e-02 (7.355e-02) Time(mcs/at): 44 (10)
+2025-11-11 12:50:36,866 I - Iteration #31/62 TRAIN(TEST): total_loss: 6.724e-05 (6.872e-05) mae/depa: 1.480e-03 (1.414e-03) rmse/depa: 3.758e-03 (3.457e-03) mae/f_comp: 3.202e-02 (3.230e-02) rmse/f_comp: 6.968e-02 (7.355e-02) Time(mcs/at): 44 (10)
+2025-11-11 12:50:36,877 I - New best test loss found (6.87230e-05), checkpointing
+2025-11-11 12:50:37,281 I - Sharding callback duration: 304 microseconds
+2025-11-11 13:40:38,717 I - Iteration #32/62 TRAIN(TEST): total_loss: 6.723e-05 (6.876e-05) mae/depa: 1.478e-03 (1.423e-03) rmse/depa: 3.758e-03 (3.448e-03) mae/f_comp: 3.202e-02 (3.230e-02) rmse/f_comp: 6.968e-02 (7.356e-02) Time(mcs/at): 44 (10)
+2025-11-11 14:30:51,612 I - Iteration #33/62 TRAIN(TEST): total_loss: 6.723e-05 (6.872e-05) mae/depa: 1.477e-03 (1.413e-03) rmse/depa: 3.756e-03 (3.463e-03) mae/f_comp: 3.203e-02 (3.230e-02) rmse/f_comp: 6.968e-02 (7.356e-02) Time(mcs/at): 44 (10)
+2025-11-11 14:30:51,627 I - New best test loss found (6.87159e-05), checkpointing
+2025-11-11 14:30:52,019 I - Sharding callback duration: 272 microseconds
+2025-11-11 15:20:42,888 I - Iteration #34/62 TRAIN(TEST): total_loss: 6.722e-05 (6.871e-05) mae/depa: 1.476e-03 (1.410e-03) rmse/depa: 3.759e-03 (3.448e-03) mae/f_comp: 3.203e-02 (3.231e-02) rmse/f_comp: 6.969e-02 (7.356e-02) Time(mcs/at): 44 (10)
+2025-11-11 15:20:42,900 I - New best test loss found (6.87143e-05), checkpointing
+2025-11-11 15:20:43,361 I - Sharding callback duration: 1068 microseconds
+2025-11-11 16:10:08,528 I - Iteration #35/62 TRAIN(TEST): total_loss: 6.722e-05 (6.871e-05) mae/depa: 1.474e-03 (1.407e-03) rmse/depa: 3.756e-03 (3.446e-03) mae/f_comp: 3.203e-02 (3.231e-02) rmse/f_comp: 6.969e-02 (7.358e-02) Time(mcs/at): 43 (10)
+2025-11-11 16:10:08,541 I - New best test loss found (6.87055e-05), checkpointing
+2025-11-11 16:10:08,915 I - Sharding callback duration: 269 microseconds
+2025-11-11 16:59:00,445 I - Iteration #36/62 TRAIN(TEST): total_loss: 6.721e-05 (6.870e-05) mae/depa: 1.473e-03 (1.406e-03) rmse/depa: 3.753e-03 (3.451e-03) mae/f_comp: 3.203e-02 (3.231e-02) rmse/f_comp: 6.969e-02 (7.355e-02) Time(mcs/at): 43 (10)
+2025-11-11 16:59:00,467 I - New best test loss found (6.87000e-05), checkpointing
+2025-11-11 16:59:01,015 I - Sharding callback duration: 1495 microseconds
+2025-11-11 17:47:14,473 I - Iteration #37/62 TRAIN(TEST): total_loss: 6.721e-05 (6.869e-05) mae/depa: 1.471e-03 (1.404e-03) rmse/depa: 3.750e-03 (3.450e-03) mae/f_comp: 3.203e-02 (3.231e-02) rmse/f_comp: 6.969e-02 (7.357e-02) Time(mcs/at): 42 (10)
+2025-11-11 17:47:14,485 I - New best test loss found (6.86916e-05), checkpointing
+2025-11-11 17:47:14,993 I - Sharding callback duration: 284 microseconds
+2025-11-11 18:35:16,795 I - Iteration #38/62 TRAIN(TEST): total_loss: 6.720e-05 (6.869e-05) mae/depa: 1.468e-03 (1.403e-03) rmse/depa: 3.748e-03 (3.453e-03) mae/f_comp: 3.203e-02 (3.231e-02) rmse/f_comp: 6.969e-02 (7.358e-02) Time(mcs/at): 42 (10)
+2025-11-11 18:35:16,808 I - New best test loss found (6.86906e-05), checkpointing
+2025-11-11 18:35:17,309 I - Sharding callback duration: 312 microseconds
+2025-11-11 19:23:30,014 I - Iteration #39/62 TRAIN(TEST): total_loss: 6.720e-05 (6.869e-05) mae/depa: 1.468e-03 (1.404e-03) rmse/depa: 3.752e-03 (3.450e-03) mae/f_comp: 3.203e-02 (3.231e-02) rmse/f_comp: 6.969e-02 (7.358e-02) Time(mcs/at): 42 (10)
+2025-11-11 20:11:46,689 I - Iteration #40/62 TRAIN(TEST): total_loss: 6.720e-05 (6.870e-05) mae/depa: 1.468e-03 (1.408e-03) rmse/depa: 3.751e-03 (3.443e-03) mae/f_comp: 3.203e-02 (3.231e-02) rmse/f_comp: 6.970e-02 (7.356e-02) Time(mcs/at): 42 (10)
+2025-11-11 21:00:21,172 I - Iteration #41/62 TRAIN(TEST): total_loss: 6.719e-05 (6.871e-05) mae/depa: 1.466e-03 (1.407e-03) rmse/depa: 3.747e-03 (3.451e-03) mae/f_comp: 3.203e-02 (3.231e-02) rmse/f_comp: 6.970e-02 (7.358e-02) Time(mcs/at): 43 (10)
+2025-11-11 21:49:10,341 I - Iteration #42/62 TRAIN(TEST): total_loss: 6.718e-05 (6.868e-05) mae/depa: 1.465e-03 (1.400e-03) rmse/depa: 3.745e-03 (3.436e-03) mae/f_comp: 3.203e-02 (3.231e-02) rmse/f_comp: 6.970e-02 (7.358e-02) Time(mcs/at): 43 (10)
+2025-11-11 21:49:10,351 I - New best test loss found (6.86846e-05), checkpointing
+2025-11-11 21:49:13,682 I - Sharding callback duration: 616 microseconds
+2025-11-11 22:38:45,754 I - Iteration #43/62 TRAIN(TEST): total_loss: 6.719e-05 (6.867e-05) mae/depa: 1.464e-03 (1.397e-03) rmse/depa: 3.746e-03 (3.453e-03) mae/f_comp: 3.204e-02 (3.231e-02) rmse/f_comp: 6.970e-02 (7.357e-02) Time(mcs/at): 44 (10)
+2025-11-11 22:38:45,769 I - New best test loss found (6.86728e-05), checkpointing
+2025-11-11 22:38:46,378 I - Sharding callback duration: 900 microseconds
+2025-11-11 23:27:29,512 I - Iteration #44/62 TRAIN(TEST): total_loss: 6.717e-05 (6.868e-05) mae/depa: 1.461e-03 (1.399e-03) rmse/depa: 3.743e-03 (3.436e-03) mae/f_comp: 3.204e-02 (3.232e-02) rmse/f_comp: 6.970e-02 (7.359e-02) Time(mcs/at): 43 (10)
+2025-11-12 00:16:00,240 I - Iteration #45/62 TRAIN(TEST): total_loss: 6.717e-05 (6.867e-05) mae/depa: 1.461e-03 (1.393e-03) rmse/depa: 3.746e-03 (3.443e-03) mae/f_comp: 3.204e-02 (3.232e-02) rmse/f_comp: 6.970e-02 (7.359e-02) Time(mcs/at): 43 (10)
+2025-11-12 00:16:00,256 I - New best test loss found (6.86666e-05), checkpointing
+2025-11-12 00:16:00,978 I - Sharding callback duration: 394 microseconds
+2025-11-12 01:05:04,242 I - Iteration #46/62 TRAIN(TEST): total_loss: 6.717e-05 (6.867e-05) mae/depa: 1.460e-03 (1.395e-03) rmse/depa: 3.739e-03 (3.437e-03) mae/f_comp: 3.204e-02 (3.232e-02) rmse/f_comp: 6.971e-02 (7.357e-02) Time(mcs/at): 43 (10)
+2025-11-12 01:05:04,256 I - New best test loss found (6.86658e-05), checkpointing
+2025-11-12 01:05:04,626 I - Sharding callback duration: 379 microseconds
+2025-11-12 01:53:43,532 I - Iteration #47/62 TRAIN(TEST): total_loss: 6.716e-05 (6.871e-05) mae/depa: 1.458e-03 (1.405e-03) rmse/depa: 3.744e-03 (3.430e-03) mae/f_comp: 3.204e-02 (3.232e-02) rmse/f_comp: 6.970e-02 (7.359e-02) Time(mcs/at): 43 (10)
+2025-11-12 02:41:33,570 I - Iteration #48/62 TRAIN(TEST): total_loss: 6.717e-05 (6.866e-05) mae/depa: 1.459e-03 (1.393e-03) rmse/depa: 3.742e-03 (3.450e-03) mae/f_comp: 3.204e-02 (3.232e-02) rmse/f_comp: 6.971e-02 (7.358e-02) Time(mcs/at): 42 (10)
+2025-11-12 02:41:33,586 I - New best test loss found (6.86581e-05), checkpointing
+2025-11-12 02:41:34,266 I - Sharding callback duration: 383 microseconds
+2025-11-12 03:29:28,848 I - Iteration #49/62 TRAIN(TEST): total_loss: 6.716e-05 (6.865e-05) mae/depa: 1.457e-03 (1.390e-03) rmse/depa: 3.740e-03 (3.432e-03) mae/f_comp: 3.204e-02 (3.232e-02) rmse/f_comp: 6.971e-02 (7.358e-02) Time(mcs/at): 42 (10)
+2025-11-12 03:29:28,867 I - New best test loss found (6.86452e-05), checkpointing
+2025-11-12 03:29:29,322 I - Sharding callback duration: 361 microseconds
+2025-11-12 04:17:56,997 I - Iteration #50/62 TRAIN(TEST): total_loss: 6.715e-05 (6.867e-05) mae/depa: 1.455e-03 (1.396e-03) rmse/depa: 3.739e-03 (3.431e-03) mae/f_comp: 3.204e-02 (3.232e-02) rmse/f_comp: 6.971e-02 (7.358e-02) Time(mcs/at): 43 (10)
+2025-11-12 04:17:57,009 I - Regular checkpointing
+2025-11-12 04:17:57,356 I - Sharding callback duration: 362 microseconds
+2025-11-12 05:06:38,134 I - Iteration #51/62 TRAIN(TEST): total_loss: 6.715e-05 (6.868e-05) mae/depa: 1.455e-03 (1.395e-03) rmse/depa: 3.740e-03 (3.427e-03) mae/f_comp: 3.204e-02 (3.232e-02) rmse/f_comp: 6.971e-02 (7.358e-02) Time(mcs/at): 43 (10)
+2025-11-12 05:54:48,551 I - Iteration #52/62 TRAIN(TEST): total_loss: 6.715e-05 (6.867e-05) mae/depa: 1.454e-03 (1.396e-03) rmse/depa: 3.738e-03 (3.433e-03) mae/f_comp: 3.204e-02 (3.232e-02) rmse/f_comp: 6.971e-02 (7.357e-02) Time(mcs/at): 42 (10)
+2025-11-12 06:43:09,725 I - Iteration #53/62 TRAIN(TEST): total_loss: 6.714e-05 (6.866e-05) mae/depa: 1.452e-03 (1.387e-03) rmse/depa: 3.739e-03 (3.437e-03) mae/f_comp: 3.204e-02 (3.233e-02) rmse/f_comp: 6.971e-02 (7.358e-02) Time(mcs/at): 43 (10)
+2025-11-12 07:32:07,422 I - Iteration #54/62 TRAIN(TEST): total_loss: 6.714e-05 (6.865e-05) mae/depa: 1.452e-03 (1.388e-03) rmse/depa: 3.735e-03 (3.430e-03) mae/f_comp: 3.204e-02 (3.232e-02) rmse/f_comp: 6.971e-02 (7.359e-02) Time(mcs/at): 43 (10)
+2025-11-12 08:20:57,045 I - Iteration #55/62 TRAIN(TEST): total_loss: 6.714e-05 (6.865e-05) mae/depa: 1.451e-03 (1.391e-03) rmse/depa: 3.737e-03 (3.425e-03) mae/f_comp: 3.204e-02 (3.232e-02) rmse/f_comp: 6.972e-02 (7.357e-02) Time(mcs/at): 43 (9)
+2025-11-12 08:20:57,063 I - Reducing learning rate: 9.60400e-04 -> 9.41192e-04
+2025-11-12 09:08:56,280 I - Iteration #56/62 TRAIN(TEST): total_loss: 6.713e-05 (6.864e-05) mae/depa: 1.448e-03 (1.387e-03) rmse/depa: 3.736e-03 (3.437e-03) mae/f_comp: 3.204e-02 (3.232e-02) rmse/f_comp: 6.971e-02 (7.360e-02) Time(mcs/at): 42 (10)
+2025-11-12 09:08:56,296 I - New best test loss found (6.86403e-05), checkpointing
+2025-11-12 09:08:56,968 I - Sharding callback duration: 390 microseconds
+2025-11-12 09:57:34,011 I - Iteration #57/62 TRAIN(TEST): total_loss: 6.713e-05 (6.863e-05) mae/depa: 1.448e-03 (1.385e-03) rmse/depa: 3.734e-03 (3.437e-03) mae/f_comp: 3.204e-02 (3.232e-02) rmse/f_comp: 6.972e-02 (7.360e-02) Time(mcs/at): 43 (10)
+2025-11-12 09:57:34,028 I - New best test loss found (6.86334e-05), checkpointing
+2025-11-12 09:57:34,637 I - Sharding callback duration: 368 microseconds
+2025-11-12 10:45:27,371 I - Iteration #58/62 TRAIN(TEST): total_loss: 6.713e-05 (6.869e-05) mae/depa: 1.447e-03 (1.397e-03) rmse/depa: 3.733e-03 (3.450e-03) mae/f_comp: 3.205e-02 (3.232e-02) rmse/f_comp: 6.972e-02 (7.358e-02) Time(mcs/at): 42 (10)
+2025-11-12 11:33:43,801 I - Iteration #59/62 TRAIN(TEST): total_loss: 6.711e-05 (6.862e-05) mae/depa: 1.444e-03 (1.381e-03) rmse/depa: 3.734e-03 (3.421e-03) mae/f_comp: 3.205e-02 (3.232e-02) rmse/f_comp: 6.971e-02 (7.360e-02) Time(mcs/at): 42 (10)
+2025-11-12 11:33:43,815 I - New best test loss found (6.86222e-05), checkpointing
+2025-11-12 11:33:44,378 I - Sharding callback duration: 381 microseconds
+2025-11-12 12:21:55,126 I - Iteration #60/62 TRAIN(TEST): total_loss: 6.711e-05 (6.865e-05) mae/depa: 1.443e-03 (1.387e-03) rmse/depa: 3.732e-03 (3.429e-03) mae/f_comp: 3.205e-02 (3.233e-02) rmse/f_comp: 6.972e-02 (7.358e-02) Time(mcs/at): 42 (10)
+2025-11-12 13:10:19,126 I - Iteration #61/62 TRAIN(TEST): total_loss: 6.711e-05 (6.862e-05) mae/depa: 1.442e-03 (1.381e-03) rmse/depa: 3.730e-03 (3.429e-03) mae/f_comp: 3.205e-02 (3.233e-02) rmse/f_comp: 6.972e-02 (7.360e-02) Time(mcs/at): 43 (10)
+2025-11-12 13:10:19,141 I - New best test loss found (6.86209e-05), checkpointing
+2025-11-12 13:10:19,739 I - Sharding callback duration: 374 microseconds
+2025-11-12 13:59:09,442 I - Iteration #62/62 TRAIN(TEST): total_loss: 6.711e-05 (6.863e-05) mae/depa: 1.443e-03 (1.383e-03) rmse/depa: 3.730e-03 (3.430e-03) mae/f_comp: 3.205e-02 (3.232e-02) rmse/f_comp: 6.972e-02 (7.360e-02) Time(mcs/at): 43 (10)
+2025-11-12 13:59:10,243 I - Loading best test loss model
+2025-11-12 13:59:10,355 I - Loaded checkpoint from seed/1/checkpoints/checkpoint.best_test_loss
+2025-11-12 13:59:10,369 I - Saving model to `final_model`
+2025-11-12 13:59:25,769 I - Assets written to: seed/1/final_model/assets
+2025-11-12 13:59:49,092 I - ========================================
+2025-11-12 13:59:49,096 I -             Start GRACEmaker
+2025-11-12 13:59:49,097 I - ========================================
+2025-11-12 13:59:49,098 I - Tensorflow version: 2.19.1
+2025-11-12 13:59:49,099 I - Loaded input.yaml... 
+2025-11-12 13:59:49,100 I - Set seed to 1
+2025-11-12 13:59:49,102 I - Data distribution strategy: Single GPU
+2025-11-12 13:59:49,103 I - Number of replicas: 1
+2025-11-12 13:59:49,104 I - Replica ID in sync group: 0
+2025-11-12 13:59:49,105 I - Global TRAIN batch size (= minibatch size * num GPUS): 16, num. GPUS: 1, minibatch size: 16
+2025-11-12 13:59:49,107 I - Global TEST batch size (= minibatch size * num GPUS): 64, num. GPUS: 1, minibatch size: 64
+2025-11-12 13:59:49,108 I - Float dtype: float64
+2025-11-12 13:59:49,109 I - Loading model config from `seed/1/model.yaml`
+2025-11-12 13:59:50,184 I - Loss function: Loss(5.0*WeightedHuberEnergyPerAtomLoss(delta=0.001)(energy) + 2.0*WeightedHuberForceLoss(delta=0.001)(forces))
+2025-11-12 13:59:50,186 I - JIT compilation: True
+2025-11-12 13:59:50,187 I - Optimization options: {'learning_rate': 0.01, 'amsgrad': True, 'use_ema': True, 'ema_momentum': 0.99, 'weight_decay': None, 'clipvalue': 1.0}
+2025-11-12 13:59:50,449 I - Trying to load best test checkpoint
+2025-11-12 13:59:50,478 I - Loaded checkpoint from seed/1/checkpoints/checkpoint.best_test_loss
+2025-11-12 13:59:50,480 I - Saving model to `saved_model` and exit.
+2025-11-12 13:59:54,421 I - Assets written to: seed/1/saved_model/assets

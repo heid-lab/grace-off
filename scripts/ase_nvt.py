@@ -37,6 +37,7 @@ parser.add_argument(
     help="Single or double precision for energies.",
 )
 parser.add_argument("--sol", type=str, required=True, help="Solvent box.")
+parser.add_argument("--run", type=int, required=False, help="Run number.")
 
 args = parser.parse_args()
 
@@ -44,6 +45,7 @@ model_type = args.model_type
 model_size = args.model_size
 default_dtype = args.default_dtype
 sol = args.sol
+run = args.run if args.run is not None else 1
 
 if model_type.upper() == "GRACE":
     if default_dtype.lower() == "float64":
@@ -54,20 +56,20 @@ if model_type.upper() == "GRACE":
         model_path = (
             f"../models/{args.layer}l/{args.dataset}_{model_size}/seed/1/casted_model"
         )
-    path = f"../output/{args.layer}l_{sol}_{model_type}_{model_size}_{args.dataset}"
+    path = f"../output/{args.layer}l_{sol}_{model_type}_{model_size}_{args.dataset}_run{run}"
     print("Selected the following GRACE model:", model_path)
 elif model_type.upper() == "MACE":
     model_path = f"../models/{model_type.upper()}-OFF23_{model_size}.model"
-    path = f"../output/{sol}_{model_type}_{model_size}"
+    path = f"../output/{sol}_{model_type}_{model_size}_run{run}"
 
 os.makedirs(path, exist_ok=True)
 
 # Constants for NVT dynamics
-timestep = 1 * units.fs  # fs
+timestep = 0.5 * units.fs  # fs
 log_interval = 100
 temperature = 300
 
-mol = read("../data/mace_nvt_equil.pdb")
+mol = read(f"../data/liquids/{sol}.pdb")
 
 if model_type.upper() == "GRACE":
     mol.calc = TPCalculator(
@@ -141,5 +143,5 @@ def log_density_csv():
 
 dyn.attach(log_density_csv, interval=log_interval)
 
-n_steps = 1_200_000
+n_steps = 2_200_000
 dyn.run(n_steps)
