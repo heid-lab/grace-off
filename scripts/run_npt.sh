@@ -14,6 +14,8 @@ echo "Node(s): $SLURM_JOB_NODELIST"
 echo "CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
 nvidia-smi --query-gpu=index,name,uuid --format=csv,noheader
 
+model_size="large"
+WE NEEED TO CHANGE THE TEMPERATURE BACK TO 300 K WHEN NMA FINISHED TESTING
 model_size=$1
 model_type=$2
 default_dtype=$3
@@ -22,5 +24,5 @@ dataset=$5
 sol=$6
 run=$7
 
-echo "Running NPT with model_size=$model_size, model_type=$model_type, default_dtype=$default_dtype, layer=$layer, dataset=$dataset , run=$run"
+echo "Running NPT with model_size=$model_size, model_type=$model_type, default_dtype=$default_dtype, layer=$layer, dataset=$dataset ,sol=$sol, run=$run"
 python ase_npt.py --model_size $model_size --model_type $model_type --sol $sol --default_dtype $default_dtype --layer $layer --dataset $dataset --run $run
