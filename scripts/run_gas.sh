@@ -10,17 +10,33 @@
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate ai-fennel
 
-model_size=$1
-model_type=$2
-default_dtype=$3
-layer=$4
-dataset=$5
-sol=$6
-run=$7
+# model_size=$1
+# model_type=$2
+# default_dtype=$3
+# layer=$4
+# dataset=$5
+# sol=$6
+# run=$7
 
+model_size="medium"
+model_type="grace"
+default_dtype="float32"
+layer="2"
+dataset="b_off"
+run="1"
+
+sol="hexane"
 echo "Running Gas phase simulation with model_size=$model_size, model_type=$model_type, default_dtype=$default_dtype, layer=$layer, dataset=$dataset , run=$run"
 python ase_gas.py --model_size $model_size --model_type $model_type --sol $sol --default_dtype $default_dtype --layer $layer --dataset $dataset --run $run
 
+# sol="benzene"
+# echo "Running Gas phase simulation with model_size=$model_size, model_type=$model_type, default_dtype=$default_dtype, layer=$layer, dataset=$dataset , run=$run"
+# python ase_gas.py --model_size $model_size --model_type $model_type --sol $sol --default_dtype $default_dtype --layer $layer --dataset $dataset --run $run
 
-# for using a MACE model
-# python ase_gas.py --model_size small --model_type mace --sol $sol --default_dtype float32
+# sol="hexane"
+# echo "Running Gas phase simulation with model_size=$model_size, model_type=$model_type, default_dtype=$default_dtype, layer=$layer, dataset=$dataset , run=$run"
+# python ase_gas.py --model_size $model_size --model_type $model_type --sol $sol --default_dtype $default_dtype --layer $layer --dataset $dataset --run $run
+
+# sol="methanol"
+# echo "Running Gas phase simulation with model_size=$model_size, model_type=$model_type, default_dtype=$default_dtype, layer=$layer, dataset=$dataset , run=$run"
+# python ase_gas.py --model_size $model_size --model_type $model_type --sol $sol --default_dtype $default_dtype --layer $layer --dataset $dataset --run $run
