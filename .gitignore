@@ -2,3 +2,9 @@ analysis/traj
 output
 *png
 slurm*
+*pdf
+*pdb
+*xyz
+*traj
+./biomolecules/crambin/openmm/
+./biomolecules/ala15_gas/figure/
