@@ -6,7 +6,7 @@ import random
 from ase import Atoms, units
 from ase.io import read, write, Trajectory
 from ase import units
-from mace.calculators import MACECalculator
+# from mace.calculators import MACECalculator
 from ase.data import chemical_symbols
 
 from tensorpotential.calculator import TPCalculator
@@ -136,6 +136,7 @@ def get_mace_torsion_energies(size: str):
         model_name=f"MACE-OFF23_{size}.model"
     # model_paths=f"{model_path}/{model_name}"
     # print(model_paths)
+    from mace.calculators import MACECalculator
     calc_mace = MACECalculator(
         model_paths=f"{model_path}/{model_name}", device="cuda"
     )
@@ -372,22 +373,26 @@ if __name__ == "__main__":
         builtins.tqdm = tqdm_log
 
         # comp_models_grace = [
-        #     ['a_wpS', '1l', 'small'],
-        #     ['a_wpS', '1l', 'medium'],
-        #     ['a_wpS', '2l', 'small'],
-        #     ['a_wpS', '2l', 'medium'],
+        #     # ['a_wpS', '1l', 'small'],
+        #     # ['a_wpS', '1l', 'medium'],
+        #     # ['a_wpS', '1l', 'large'],
+        #     # ['a_wpS', '2l', 'small'],
+        #     # ['a_wpS', '2l', 'medium'],
+        #     # ['a_wpS', '2l', 'large'],
         #     ['b_off', '1l', 'small'],
         #     ['b_off', '1l', 'medium'],
+        #     ['b_off', '1l', 'large'],
         #     ['b_off', '2l', 'small'],
         #     ['b_off', '2l', 'medium'],
+        #     ['b_off', '2l', 'large'],
         #     ]
         # for model in comp_models_grace:
         #     get_AUC_HB_grace(model[0], model[1], model[2])
 
-        comp_models_mace = ['small', 'medium', 'large']
-        for model in comp_models_mace:
-            get_AUC_HB_mace(model)
+        # comp_models_mace = ['small', 'medium', 'large']
+        # for model in comp_models_mace:
+        #     get_AUC_HB_mace(model)
         
 
         # save_mace_errors(True, True, True) # small / medium /large
-        # save_single_torsion_scan(0, True, True, False, True, True, False) # mol_index / small_1l / medium_1l /large_1l / small_2l / medium_2l / large_2l
+        save_single_torsion_scan(0, True, True, True, True, True, True) # mol_index / small_1l / medium_1l /large_1l / small_2l / medium_2l / large_2l
