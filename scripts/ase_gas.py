@@ -9,8 +9,6 @@ from ase.constraints import FixCom
 import argparse
 import os
 
-from mace.calculators import MACECalculator
-from tensorpotential.calculator import TPCalculator
 
 parser = argparse.ArgumentParser(description="Run an ASE simulation with MLPotential.")
 parser.add_argument(
@@ -46,19 +44,27 @@ sol = args.sol
 run = args.run if args.run is not None else 1
 
 if model_type.upper() == "GRACE":
+    from tensorpotential.calculator import TPCalculator
     if default_dtype.lower() == "float64":
         model_path = (
-            f"../models/{args.layer}l/{args.dataset}_{model_size}/seed/1/saved_model"
+            f"../models/{args.layer}/{args.dataset}_{model_size}/seed/1/saved_model"
         )
     else:
         model_path = (
-            f"../models/{args.layer}l/{args.dataset}_{model_size}/seed/1/casted_model"
+            f"../models/{args.layer}/{args.dataset}_{model_size}/seed/1/casted_model"
         )
-    path = f"../output/{args.layer}l_{sol}_{model_type}_{model_size}_{args.dataset}_run{run}"
+    path = f"../output/{args.layer}_{sol}_{model_type}_{model_size}_{args.dataset}_run{run}"
     print("Selected the following GRACE model:", model_path)
 elif model_type.upper() == "MACE":
-    model_path = f"../models/{model_type.upper()}-OFF23_{model_size}.model"
+    from mace.calculators import MACECalculator
+    if model_size == "medium":
+        model_path = f"../models/{model_type.upper()}-OFF24_{model_size}.model"
+    else:
+        model_path = f"../models/{model_type.upper()}-OFF23_{model_size}.model"
     path = f"../output/{sol}_{model_type}_{model_size}_run{run}"
+elif model_type.upper() == "UMA":
+    model_path = "uma-s-1p1"  # pretrained UMA model identifier
+    path = f"../output/{sol}_{model_type}_run{run}"
 
 os.makedirs(path, exist_ok=True)
 
@@ -82,6 +88,10 @@ elif model_type.upper() == "MACE":
     mol.calc = MACECalculator(
         model_paths=model_path, device="cuda", default_dtype=default_dtype
     )
+elif model_type.upper() == "UMA":
+    from fairchem.core import pretrained_mlip, FAIRChemCalculator
+    predictor = pretrained_mlip.load_predict_unit("../models/uma-s-1p1.pt", device="cuda")
+    mol.calc = FAIRChemCalculator(predictor, task_name="omol")
 
 # mol.set_cell([100.0, 100.0, 100.0])
 mol.set_pbc([False, False, False])
