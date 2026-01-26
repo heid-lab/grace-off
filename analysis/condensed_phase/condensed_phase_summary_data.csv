@@ -23,15 +23,15 @@ Methanol,experiment,38.3,0.61,0.31,0.15,0.79
 Acetone,experiment,31.9,0.52,1.41,0.15,0.78
 Hexane,experiment,31.52,0.54,1.67,0.14,0.66
 Nma,experiment,53.5,Nan,Nan,Nan,0.92
-NMA,MACE (S) - OpenMM,58.83,1.27,0.48,0.11,1.07
-NMA,MACE (M) - OpenMM,46.82,1.11,1.87,0.14,0.87
-Water,MACE (S) - OpenMM,47.8,1.71,0.29,0.1,1.12
-Water,MACE (M) - OpenMM,48.9,1.57,0.23,0.06,1.18
-Methanol,MACE (S) - OpenMM,36.29,1.43,1.52,0.21,0.91
-Methanol,MACE (M) - OpenMM,34.98,1.4,2.3,0.2,0.81
-Acetone,MACE (S) - OpenMM,29.93,1.25,1.24,0.17,0.88
-Acetone,MACE (M) - OpenMM,20.05,1.23,29.09,1.1,0.64
-Benzene,MACE (S) - OpenMM,36.19,1.18,0.72,0.15,1.02
-Benzene,MACE (M) - OpenMM,28.11,1.24,1.97,0.27,0.89
-Hexane,MACE (S) - OpenMM,33.1,2.19,3.79,0.53,0.79
-Hexane,MACE (M) - OpenMM,15.77,2.12,327.35,3.44,0.39
+NMA,MACE-OFF23 (S),58.83,1.27,0.48,0.11,1.07
+NMA,MACE-OFF23 (M),46.82,1.11,1.87,0.14,0.87
+Water,MACE-OFF23 (S),47.8,1.71,0.29,0.1,1.12
+Water,MACE-OFF23 (M),48.9,1.57,0.23,0.06,1.18
+Methanol,MACE-OFF23 (S),36.29,1.43,1.52,0.21,0.91
+Methanol,MACE-OFF23 (M),34.98,1.4,2.3,0.2,0.81
+Acetone,MACE-OFF23 (S),29.93,1.25,1.24,0.17,0.88
+Acetone,MACE-OFF23 (M),20.05,1.23,29.09,1.1,0.64
+Benzene,MACE-OFF23 (S),36.19,1.18,0.72,0.15,1.02
+Benzene,MACE-OFF23 (M),28.11,1.24,1.97,0.27,0.89
+Hexane,MACE-OFF23 (S),33.1,2.19,3.79,0.53,0.79
+Hexane,MACE-OFF23 (M),15.77,2.12,327.35,3.44,0.39
