@@ -94,7 +94,7 @@ for model_type, g in grids.items():
 
                 model_path = "uma-s-1p1"  # pretrained UMA model identifier
 
-            mol = read(f"../data/liquids/{sol}.pdb")
+            mol = read(f"../../data/liquids/{sol}.pdb")
 
             if model_type.upper() == "GRACE":
                 mol.calc = TPCalculator(
