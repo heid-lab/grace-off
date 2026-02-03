@@ -1,19 +1,20 @@
 #!/bin/bash
 
-model_type='mace'
-default_dtype='float32'
+model_type='grace' # 'grace' or 'mace'
+default_dtype='float32' # 'float32' or 'float64'
 layer='2'
 dataset='b_off'
 sol="wat"
+model_sizes=("large")
 
-for model_size in medium; do
+for model_size in "${model_sizes[@]}"; do
   for temp in 280 290 300 310 320 330; do
 
     job_name="job_${model_type}_${model_size}_${temp}.slurm"
 
     cat > $job_name <<EOF
 #!/bin/bash
-#SBATCH -p ADA
+#SBATCH -p ADA,4090
 #SBATCH --job-name=${model_type}_${model_size}_${temp}
 #SBATCH --output=out_${model_type}_${model_size}_${temp}.txt
 

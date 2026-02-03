@@ -21,8 +21,8 @@ if args.arch == "mace":
     grids = {
         # "grace": {"dtypes": ["float32", "float64"], "sizes": ["small", "medium", "large"]},
         "mace": {
-            "dtypes": ["float32", "float64"],
-            "sizes": ["small", "medium", "large"],
+            "dtypes": ["float64"], #["float32", "float64"]
+            "sizes": ["small", "medium"],#, "large"],
         },
         # "uma":   {"dtypes": ["float32"],                 "sizes": ["small"]},
     }
@@ -65,11 +65,11 @@ for model_type, g in grids.items():
                 )
                 if default_dtype.lower() == "float64":
                     model_path = (
-                        f"../models/{layer}l/b_off_{model_size}/seed/1/saved_model"
+                        f"../../models/{layer}l/b_off_{model_size}/seed/1/saved_model"
                     )
                 else:
                     model_path = (
-                        f"../models/{layer}l/b_off_{model_size}/seed/1/casted_model"
+                        f"../../models/{layer}l/b_off_{model_size}/seed/1/casted_model"
                     )
                 print("Selected the following GRACE model:", model_path)
             elif model_type.upper() == "MACE":
@@ -80,11 +80,11 @@ for model_type, g in grids.items():
 
                 if model_size == "medium":
                     model_path = (
-                        f"../models/{model_type.upper()}-OFF24_{model_size}.model"
+                        f"../../models/{model_type.upper()}-OFF24_{model_size}.model"
                     )
                 else:
                     model_path = (
-                        f"../models/{model_type.upper()}-OFF23_{model_size}.model"
+                        f"../../models/{model_type.upper()}-OFF23_{model_size}.model"
                     )
             elif model_type.upper() == "UMA":
                 from fairchem.core import pretrained_mlip, FAIRChemCalculator
@@ -106,7 +106,7 @@ for model_type, g in grids.items():
                 )
             elif model_type.upper() == "UMA":
                 predictor = pretrained_mlip.load_predict_unit(
-                    "../models/uma-s-1p1.pt", device="cuda"
+                    model_path, device="cuda"
                 )
                 mol.calc = FAIRChemCalculator(predictor, task_name="omol")
 

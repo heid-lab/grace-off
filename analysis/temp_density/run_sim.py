@@ -73,6 +73,9 @@ elif model_type.upper() == "MACE":
     elif model_size.lower() == "medium":
         model_path = f"../../models/{model_type.upper()}-OFF24_{model_size}.model"
         path = f"output/{sol}_{model_type}_{model_size}"
+    elif model_size.lower() == "large":
+        model_path = f"../../models/{model_type.upper()}-OFF23_{model_size}.model"
+        path = f"output/{sol}_{model_type}_{model_size}"
 
 os.makedirs(path, exist_ok=True)
 
@@ -81,7 +84,7 @@ temperature = temp  # K
 timestep = 1 * units.fs  # fs
 log_interval = 100
 
-mol = read("../../data/mace_nvt_equil.pdb")
+mol = read("../../data/liquids/mace_nvt_equil.pdb")
 
 if model_type.upper() == "GRACE":
     mol.calc = TPCalculator(
