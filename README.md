@@ -6,12 +6,22 @@
 </p>
 
 
-| Model | Name   | Content                         | # elements | # Structures           |
-|:-----:|:-------|:--------------------------------|------------|------------------------|
-| A     | a_wpS  | water + pubSolv                 |    10 (H,C, N, O, F, P, S, Cl, Br, I)      | 14,934                 |
-| B     | b_off  | SPICE (w/o ions, charged)       |    10 (H,C, N, O, F, P, S, Cl, Br, I)      | —                      |
-| C     | c_all  | all                             |    17 (H, Li, B, C, N, O, F, Na, Mg, Si, P, S, Cl, K, Ca, Br, I)     |1,998,126 / 2,008,126 |
+### Models
 
+The GRACE-OFF models are available in the `models` folder.  
+The 1-layer models are stored in `models/1l`, and the 2-layer models are stored in `models/2l`.
+
+To run an MD simulation using the ASE calculator, you can use the following code snippet:
+
+```python
+from tensorpotential.calculator import TPCalculator
+
+mol.calc = TPCalculator(
+    model=f"{model_path}",
+    device="cuda",
+    float_dtype=default_dtype,
+)
+```
 #### Different model sizes for the **1LAYER** and **2LAYER** models
 
 | # Layers | Model  | # Parameters | l_max   | max_order | n_rad_max   | n_mlp_dens |
@@ -28,5 +38,4 @@
 > - **max_order**, maximum product order for B-functions
 > - **n_rad_max**, per-layer max number of radial functions
 > - **n_mlp_dens**, number of non-linear readout densities
-
 
