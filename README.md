@@ -6,6 +6,10 @@
 </p>
 
 
+### Installation
+For a detailed instruction on how to set up an environment to use GRACE models, please see the [documentation](https://gracemaker.readthedocs.io/en/latest/#features) from [gracemaker](https://gracemaker.readthedocs.io/en/latest/).
+
+
 ### Models
 
 The GRACE-OFF models are available in the `models` folder.  
