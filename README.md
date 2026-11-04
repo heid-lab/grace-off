@@ -7,7 +7,21 @@
 
 
 ### Installation
-For a detailed instruction on how to set up an environment to use GRACE models, please see the [documentation](https://gracemaker.readthedocs.io/en/latest/#features) from [gracemaker](https://gracemaker.readthedocs.io/en/latest/).
+
+You can create an environment like this:
+```
+# Create environment
+conda create -n grace python=3.11 -y
+conda activate grace
+
+# Update pip
+python -m pip install --upgrade pip
+
+# Install tensorpotential
+pip install tensorpotential==0.5.6
+```
+
+For more details on the GRACE models and gracemaker, please see the [gracemaker documentation](https://gracemaker.readthedocs.io/en/latest/).
 
 
 ### Models
