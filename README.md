@@ -14,6 +14,9 @@ You can create an environment like this:
 conda create -n grace python=3.11 -y
 conda activate grace
 
+# Required if your system CUDA version is 13.x; adjust or skip if not needed
+conda install -c conda-forge cuda-nvcc=12.8 -y
+
 # Update pip
 python -m pip install --upgrade pip
 
